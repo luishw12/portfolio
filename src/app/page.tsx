@@ -1,8 +1,8 @@
 import Header from "@/components/Header";
 import Profile from "@/components/Profile";
 import AboutMe from "@/components/AboutMe";
-import Degrees from "@/components/Degrees";
 import Footer from "@/components/Footer";
+import Projects from "@/components/Degrees";
 
 export default function Home() {
   return (
@@ -10,7 +10,7 @@ export default function Home() {
       <Header />
       <Profile />
       <AboutMe />
-      <Degrees />
+      <Projects />
       <Footer />
     </main>
   );

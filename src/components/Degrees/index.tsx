@@ -4,7 +4,7 @@ import CsInvestImg from "@/img/cs-invest-logo.png";
 import DesignSystemImg from "@/img/design-system-logo.png";
 import Link from "next/link";
 
-export default function Degrees() {
+export default function Projects() {
   return (
     <div className={"px-60 bg-orange-700"}>
       <div className={"bg-white rounded-[40px] flex flex-col gap-16 justify-center p-16"}>
