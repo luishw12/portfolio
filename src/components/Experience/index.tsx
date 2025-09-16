@@ -53,8 +53,8 @@ const experiences = [
     company: "Tricon",
     role: "Desenvolvedor Full Stack",
     period: "2023 - 2024",
-    location: "Remoto",
-    companyUrl: "https://tricon.inf.br",
+    location: "Lajeado, RS, Brasil",
+    companyUrl: "https://tricon.com.br",
     description: "Desenvolvimento de sistemas corporativos e soluções de automação para diversos setores.",
     achievements: [
       "Desenvolvimento de sistemas de gestão empresarial",
@@ -67,21 +67,22 @@ const experiences = [
     type: "CLT"
   },
   {
-    company: "Freelancer",
+    company: "Toshyro Inovação e Tecnologia",
     role: "Desenvolvedor Full Stack",
     period: "2022 - 2023",
-    location: "Remoto",
-    companyUrl: "#",
-    description: "Prestação de serviços de desenvolvimento para diversos clientes, focando em soluções personalizadas.",
+    location: "Lajeado, RS, Brasil",
+    companyUrl: "https://www.toshyro.com.br/",
+    description: "Desenvolvimento de soluções inovadoras e tecnológicas, focando em parcerias estratégicas para grandes descobertas no setor de tecnologia.",
     achievements: [
-      "Desenvolvimento de sites institucionais e e-commerces",
-      "Criação de sistemas de gestão personalizados",
-      "Implementação de integrações com APIs terceiras",
-      "Consultoria em arquitetura de software"
+      "Desenvolvimento de sistemas inovadores com foco em tecnologia",
+      "Implementação de soluções personalizadas para diversos clientes",
+      "Criação de aplicações web modernas e responsivas",
+      "Colaboração em projetos de inovação tecnológica",
+      "Desenvolvimento de integrações com APIs terceiras"
     ],
-    technologies: ["React", "Node.js", "JavaScript", "MySQL", "MongoDB", "AWS", "Docker"],
+    technologies: ["React", "Node.js", "JavaScript", "TypeScript", "MySQL", "PostgreSQL", "Docker", "Git"],
     icon: Zap,
-    type: "Freelance"
+    type: "CLT"
   }
 ];
 
