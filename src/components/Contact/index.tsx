@@ -81,7 +81,7 @@ const socialLinks = [
 
 export default function Contact() {
   return (
-    <section className="py-20 relative overflow-hidden">
+    <section id="contato" className="py-20 relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 bg-grid-white/[0.02] bg-grid-16"></div>
       <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-primary/5"></div>

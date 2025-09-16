@@ -35,7 +35,7 @@ const skills = [
 
 export default function AboutMe() {
   return (
-    <section className="py-20 bg-muted/30">
+    <section id="sobre" className="py-20 bg-muted/30">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           <motion.div 

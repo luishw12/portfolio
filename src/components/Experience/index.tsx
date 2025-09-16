@@ -102,7 +102,7 @@ const getTypeColor = (type: string) => {
 
 export default function Experience() {
   return (
-    <section className="py-20">
+    <section id="experiencia" className="py-20">
       <div className="container mx-auto px-6">
         <div className="max-w-6xl mx-auto">
           <motion.div 

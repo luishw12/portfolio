@@ -74,7 +74,7 @@ const methodologies = [
 
 export default function Skills() {
   return (
-    <section className="py-20">
+    <section id="habilidades" className="py-20">
       <div className="container mx-auto px-6">
         <div className="max-w-4xl mx-auto">
           {/* Header */}

@@ -23,7 +23,42 @@ export default function Header() {
               LHW
             </Link>
           </motion.div>
-          <nav className="flex items-center gap-4">
+          <nav className="hidden md:flex items-center gap-6">
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="#sobre" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Sobre
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="#experiencia" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Experiência
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="#projetos" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Projetos
+              </Link>
+            </motion.div>
+            <motion.div
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
+            >
+              <Link href="#contato" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+                Contato
+              </Link>
+            </motion.div>
+          </nav>
+          
+          <div className="flex items-center gap-2">
             <motion.div
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
@@ -51,11 +86,11 @@ export default function Header() {
               <Button size="sm" asChild>
                 <Link href="/curriculo.pdf" target="_blank">
                   <FileText className="h-4 w-4 mr-2" />
-                  Currículo
+                  <span className="hidden sm:inline">Currículo</span>
                 </Link>
               </Button>
             </motion.div>
-          </nav>
+          </div>
         </div>
       </div>
     </motion.header>
