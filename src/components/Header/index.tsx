@@ -6,6 +6,21 @@ import { Github, Linkedin, FileText } from "lucide-react";
 import { motion } from "framer-motion";
 
 export default function Header() {
+  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    
+    const targetElement = document.querySelector(targetId);
+    if (targetElement) {
+      const headerHeight = 80; // Altura aproximada do header fixo
+      const elementPosition = targetElement.getBoundingClientRect().top;
+      const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
   return (
     <motion.header 
       initial={{ y: -100, opacity: 0 }}
@@ -28,33 +43,49 @@ export default function Header() {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="#sobre" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="#sobre" 
+                onClick={(e) => handleSmoothScroll(e, "#sobre")}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              >
                 Sobre
-              </Link>
+              </a>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="#experiencia" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="#experiencia" 
+                onClick={(e) => handleSmoothScroll(e, "#experiencia")}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              >
                 Experiência
-              </Link>
+              </a>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="#projetos" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="#projetos" 
+                onClick={(e) => handleSmoothScroll(e, "#projetos")}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              >
                 Projetos
-              </Link>
+              </a>
             </motion.div>
             <motion.div
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <Link href="#contato" className="text-sm text-muted-foreground hover:text-primary transition-colors">
+              <a 
+                href="#contato" 
+                onClick={(e) => handleSmoothScroll(e, "#contato")}
+                className="text-sm text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+              >
                 Contato
-              </Link>
+              </a>
             </motion.div>
           </nav>
           
