@@ -52,7 +52,7 @@ const experiences = [
   {
     company: "Tricon",
     role: "Desenvolvedor Full Stack",
-    period: "2023 - Presente",
+    period: "2024 - Presente",
     location: "Lajeado, RS, Brasil",
     companyUrl: "https://tricon.com.br",
     description: "Desenvolvimento de sistemas corporativos e soluções de automação utilizando principalmente Java e Spring Boot.",
