@@ -55,7 +55,7 @@ const experiences = [
       role: "Desenvolvedor Full Stack",
       period: "2024 - Presente",
       location: "Lajeado, RS, Brasil",
-      companyUrl: "https://tricon.com.br",
+      companyUrl: "https://tricon.inf.br",
       description: "Condução da migração de sistemas legados, projetando microsserviços escaláveis na AWS e implementando pipelines de CI/CD para otimizar o ciclo de desenvolvimento.",
       achievements: [
           "Conduzi a migração de sistemas legados em Delphi para uma arquitetura moderna com Java Spring Boot, utilizando Thymeleaf e JasperReports.",
