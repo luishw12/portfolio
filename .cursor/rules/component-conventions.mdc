@@ -20,10 +20,14 @@ description: Component architecture and naming conventions
 - **Header**: Fixed navigation with minimal logo, social links, and resume button (animated entrance and hover effects)
 - **Profile**: Hero section with developer info, skills badges, and profile photo (staggered animations, floating effects)
 - **AboutMe**: About section with skills grid, professional background, and icons (hover animations, scroll-triggered entrance)
+- **Experience**: Professional experience with detailed company information, achievements, and technologies (staggered animations, hover effects)
 - **GitHubStats**: Dynamic GitHub statistics via API integration (loading animations, hover effects on stats cards)
 - **RecentActivity**: Recent commits and activity from GitHub API (smooth data loading animations)
+- **Skills**: Technical skills organized by categories with methodologies (minimalist design, clean layout)
 - **Projects** (in Degrees folder): Project showcase with modern card design and badges (staggered grid, hover effects, featured badge animations)
-- **Footer**: Minimal footer with social links, description, and copyright (icon rotation effects, staggered entrance)
+- **Education**: Academic background and educational achievements (cards with hover effects, scroll-triggered animations)
+- **Contact**: Contact information with multiple communication methods (cards with hover effects, action buttons)
+- **Footer**: Minimal footer with social links, description, and copyright 2025 (icon rotation effects, staggered entrance)
 
 ## shadcn/ui Integration
 - Use shadcn/ui components as base: `Button`, `Card`, `CardContent`, `Badge`

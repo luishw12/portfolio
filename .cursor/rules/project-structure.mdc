@@ -10,7 +10,7 @@ This is a Next.js 14 portfolio website for Luís Henrique Wendt, a Full Stack De
 ## Project Architecture
 
 ### Main Entry Points
-- Main page: [src/app/page.tsx](mdc:src/app/page.tsx) - Portfolio layout with Header, Profile, AboutMe, Projects, and Footer components
+- Main page: [src/app/page.tsx](mdc:src/app/page.tsx) - Portfolio layout with Header, Profile, AboutMe, Experience, GitHubStats, RecentActivity, Skills, Projects, Education, Contact, and Footer components
 - Layout: [src/app/layout.tsx](mdc:src/app/layout.tsx) - Root layout with Lexend font, Portuguese language, and dark theme
 - Global styles: [src/app/globals.css](mdc:src/app/globals.css) - Tailwind CSS with shadcn/ui theme variables
 
@@ -19,10 +19,14 @@ All components are located in [src/components/](mdc:src/components/) with indivi
 - [Header/](mdc:src/components/Header/) - Fixed navigation with minimal logo and social links
 - [Profile/](mdc:src/components/Profile/) - Hero section with developer info and skills badges
 - [AboutMe/](mdc:src/components/AboutMe/) - About section with skills grid and professional background
+- [Experience/](mdc:src/components/Experience/) - Professional experience with detailed company information
 - [GitHubStats/](mdc:src/components/GitHubStats/) - Dynamic GitHub statistics via API integration
 - [RecentActivity/](mdc:src/components/RecentActivity/) - Recent commits and activity from GitHub API
+- [Skills/](mdc:src/components/Skills/) - Technical skills organized by categories with methodologies
 - [Degrees/](mdc:src/components/Degrees/) - Projects showcase with modern card design
-- [Footer/](mdc:src/components/Footer/) - Minimal footer with social links and copyright
+- [Education/](mdc:src/components/Education/) - Academic background and educational achievements
+- [Contact/](mdc:src/components/Contact/) - Contact information with multiple communication methods
+- [Footer/](mdc:src/components/Footer/) - Minimal footer with social links and copyright (2025)
 - [ui/](mdc:src/components/ui/) - shadcn/ui components (Button, Card, Badge)
 
 ### Assets

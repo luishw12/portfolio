@@ -102,7 +102,8 @@ const cardVariants = {
 <motion.div
   variants={containerVariants}
   initial="hidden"
-  animate="visible"
+  whileInView="visible"
+  viewport={{ once: true }}
 >
   {items.map((item) => (
     <motion.div key={item.id} variants={itemVariants}>
@@ -119,6 +120,39 @@ const cardVariants = {
   whileTap={{ scale: 0.95 }}
   transition={{ duration: 0.2 }}
 >
+```
+
+### Skills Section (Minimalist)
+```typescript
+// Clean, simple animations for skills
+<motion.div
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+  className="text-center"
+>
+  <motion.div
+    whileHover={{ scale: 1.05, rotate: 5 }}
+    transition={{ duration: 0.3 }}
+  >
+    {/* Icon */}
+  </motion.div>
+</motion.div>
+```
+
+### Contact Section (Modern Cards)
+```typescript
+// Card-based contact methods
+<motion.div
+  whileHover={{ scale: 1.05 }}
+  whileTap={{ scale: 0.95 }}
+>
+  <motion.a
+    whileHover={{ scale: 1.05 }}
+    whileTap={{ scale: 0.95 }}
+  >
+    {/* Contact card */}
+  </motion.a>
+</motion.div>
 ```
 
 ## Best Practices

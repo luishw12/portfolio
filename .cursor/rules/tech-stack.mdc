@@ -1,0 +1,83 @@
+---
+globs: src/components/**/*.tsx
+description: Current technology stack and professional experience details
+---
+
+# Technology Stack & Professional Experience
+
+## Current Professional Experience
+
+### Refatorize (2024 - Presente)
+- **Role**: Desenvolvedor Full Stack
+- **Location**: Remoto
+- **Type**: CLT
+- **Stack**: React, Next.js, TypeScript, Java, Spring Boot, PostgreSQL, Docker, AWS
+- **Focus**: Soluções modernas e migração de sistemas legados
+
+### Tricon (2023 - Presente)
+- **Role**: Desenvolvedor Full Stack
+- **Location**: Lajeado, RS, Brasil
+- **Type**: CLT
+- **Stack**: Java, Spring Boot, Spring Framework, React, PostgreSQL, Delphi, Git, Docker
+- **Focus**: Sistemas corporativos e APIs REST com Java
+
+### Toshyro Inovação e Tecnologia (2022 - 2023)
+- **Role**: Desenvolvedor Full Stack
+- **Location**: Lajeado, RS, Brasil
+- **Type**: CLT
+- **Stack**: React, Next.js, JavaScript, TypeScript, .NET, PostgreSQL, Docker, Git
+- **Focus**: Soluções inovadoras e tecnológicas
+
+## Technology Categories
+
+### Frontend Technologies
+- **Primary**: React, Next.js, TypeScript, JavaScript
+- **Styling**: Tailwind CSS, CSS3, HTML5
+- **UI Components**: shadcn/ui components
+- **Icons**: Lucide React
+
+### Backend Technologies
+- **Primary**: Java, Spring Boot, Spring Framework
+- **Secondary**: .NET, Node.js
+- **APIs**: REST APIs, GraphQL (basic)
+
+### Database Technologies
+- **Primary**: PostgreSQL, MySQL
+- **Secondary**: MongoDB, Redis, SQLite
+
+### DevOps & Cloud
+- **Containerization**: Docker
+- **Version Control**: Git, GitHub Actions, GitLab CI
+- **Cloud**: AWS
+- **OS**: Linux
+
+### Development Tools
+- **IDEs**: VS Code, IntelliJ IDEA
+- **Testing**: Postman
+- **Design**: Figma
+- **Project Management**: Jira, Slack, Notion
+
+### Mobile Development
+- **Frameworks**: React Native, Expo
+- **Secondary**: Flutter, Android Studio
+
+### Legacy Technologies
+- **Delphi**: Used at Tricon for legacy system maintenance
+
+## Methodologies & Practices
+- Agile/Scrum
+- Clean Code
+- SOLID Principles
+- TDD (Test-Driven Development)
+- CI/CD
+- Microservices Architecture
+
+## Key Skills & Expertise
+- Full Stack Development (2+ years)
+- Java & Spring Boot (Primary backend stack)
+- React & Next.js (Primary frontend stack)
+- API Development & Integration
+- Database Design & Optimization
+- Legacy System Migration
+- Cloud Architecture (AWS)
+- DevOps Practices
