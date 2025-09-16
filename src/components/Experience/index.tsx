@@ -70,7 +70,7 @@ const experiences = [
   {
     company: "Toshyro Inovação e Tecnologia",
     role: "Desenvolvedor Full Stack",
-    period: "2022 - 2023",
+    period: "2022 - 2024",
     location: "Lajeado, RS, Brasil",
     companyUrl: "https://www.toshyro.com.br/",
     description: "Desenvolvimento de soluções inovadoras e tecnológicas, focando em parcerias estratégicas para grandes descobertas no setor de tecnologia.",
