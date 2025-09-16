@@ -52,17 +52,18 @@ const experiences = [
   {
     company: "Tricon",
     role: "Desenvolvedor Full Stack",
-    period: "2023 - 2024",
+    period: "2023 - Presente",
     location: "Lajeado, RS, Brasil",
     companyUrl: "https://tricon.com.br",
-    description: "Desenvolvimento de sistemas corporativos e soluções de automação para diversos setores.",
+    description: "Desenvolvimento de sistemas corporativos e soluções de automação utilizando principalmente Java e Spring Boot.",
     achievements: [
-      "Desenvolvimento de sistemas de gestão empresarial",
-      "Criação de dashboards interativos e relatórios automatizados",
+      "Desenvolvimento de sistemas de gestão empresarial com Java e Spring Boot",
+      "Criação de APIs REST robustas e escaláveis",
       "Implementação de soluções de automação de processos",
-      "Manutenção e evolução de sistemas legados"
+      "Manutenção e evolução de sistemas legados",
+      "Desenvolvimento de aplicações web com React e integração com backend Java"
     ],
-    technologies: [".NET Core", "C#", "React", "SQL Server", "Azure", "Git"],
+    technologies: ["Java", "Spring Boot", "Spring Framework", "React", "PostgreSQL", "Delphi", "Git", "Docker"],
     icon: Users,
     type: "CLT"
   },
@@ -80,7 +81,7 @@ const experiences = [
       "Colaboração em projetos de inovação tecnológica",
       "Desenvolvimento de integrações com APIs terceiras"
     ],
-    technologies: ["React", "Node.js", "JavaScript", "TypeScript", "MySQL", "PostgreSQL", "Docker", "Git"],
+    technologies: ["React", "Next.js", "JavaScript", "TypeScript", ".NET", "PostgreSQL", "Docker", "Git"],
     icon: Zap,
     type: "CLT"
   }
