@@ -139,12 +139,13 @@ export default function Skills() {
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.4 }}
           >
-            <h3 className="text-xl font-semibold text-foreground mb-6 flex items-center justify-center gap-2">
+            <h3 className="text-xl font-semibold text-foreground mb-8 flex items-center justify-center gap-2">
               <Sparkles className="h-5 w-5 text-primary" />
               Metodologias e Práticas
             </h3>
             
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 max-w-3xl mx-auto">
+            {/* Horizontal Flow Layout */}
+            <div className="flex flex-wrap justify-center items-center gap-3 max-w-4xl mx-auto">
               {methodologies.map((method, index) => (
                 <motion.div
                   key={method.name}
@@ -154,18 +155,23 @@ export default function Skills() {
                   transition={{ duration: 0.3, delay: index * 0.1 }}
                   className="group"
                 >
-                  <div className="bg-muted/30 hover:bg-muted/50 rounded-xl p-4 text-center transition-all duration-300 cursor-pointer">
+                  <motion.div 
+                    className="flex items-center gap-2 bg-muted/20 hover:bg-muted/40 rounded-full px-4 py-2 transition-all duration-300 cursor-pointer border border-muted/30 hover:border-primary/30"
+                    whileHover={{ scale: 1.05, y: -2 }}
+                    whileTap={{ scale: 0.95 }}
+                    transition={{ duration: 0.2 }}
+                  >
                     <motion.div
-                      className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center mx-auto mb-2"
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
+                      className="w-6 h-6 bg-primary/10 rounded-full flex items-center justify-center"
+                      whileHover={{ rotate: 360 }}
+                      transition={{ duration: 0.5 }}
                     >
-                      <method.icon className="h-4 w-4 text-primary" />
+                      <method.icon className="h-3 w-3 text-primary" />
                     </motion.div>
-                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors">
+                    <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors whitespace-nowrap">
                       {method.name}
                     </span>
-                  </div>
+                  </motion.div>
                 </motion.div>
               ))}
             </div>

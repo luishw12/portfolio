@@ -33,57 +33,57 @@ const itemVariants = {
 
 const experiences = [
   {
-    company: "Refatorize",
-    role: "Desenvolvedor Full Stack",
-    period: "2024 - Presente",
-    location: "Remoto",
-    companyUrl: "https://refatorize.com.br",
-    description: "Desenvolvimento de soluções completas utilizando tecnologias modernas para clientes diversos.",
-    achievements: [
-      "Desenvolvimento de aplicações web responsivas com React e Next.js",
-      "Implementação de APIs robustas com Java e Spring Boot",
-      "Migração de sistemas legados para arquiteturas modernas",
-      "Colaboração em projetos de grande escala com metodologias ágeis"
-    ],
-    technologies: ["React", "Next.js", "TypeScript", "Java", "Spring Boot", "PostgreSQL", "Docker", "AWS"],
-    icon: Code,
-    type: "CLT"
+      company: "Refatorize",
+      role: "Desenvolvedor Full Stack",
+      period: "2025 - Presente",
+      location: "Remoto",
+      companyUrl: "https://refatorize.com.br",
+      description: "Desenvolvi e mantive uma plataforma SaaS de pagamentos, com foco em segurança e automação fiscal, além de criar dashboards analíticos e pipelines de CI/CD.",
+      achievements: [
+          "Desenvolvi uma plataforma SaaS de pagamentos com arquitetura escalável, integrando Pix e automatizando a emissão de NF-e.",
+          "Criei um dashboard analítico interativo e responsivo com Next.js para visualizações de métricas financeiras em tempo real.",
+          "Construí um backend robusto com Spring Boot hospedado na AWS, garantindo alta resiliência e segurança.",
+          "Automatizei fluxos de CI/CD com GitHub Actions, assegurando entregas contínuas e versionamento confiável.",
+          "Configurei o disparo automático de e-mails transacionais usando AWS SES, garantindo alta confiabilidade na comunicação com usuários."
+      ],
+      technologies: ["React", "Next.js", "Spring Boot", "AWS", "GitHub Actions", "AWS SES", "Pix", "TypeScript", "PostgreSQL", "Docker"],
+      icon: Code,
+      type: "Autônomo"
   },
   {
-    company: "Tricon",
-    role: "Desenvolvedor Full Stack",
-    period: "2024 - Presente",
-    location: "Lajeado, RS, Brasil",
-    companyUrl: "https://tricon.com.br",
-    description: "Desenvolvimento de sistemas corporativos e soluções de automação utilizando principalmente Java e Spring Boot.",
-    achievements: [
-      "Desenvolvimento de sistemas de gestão empresarial com Java e Spring Boot",
-      "Criação de APIs REST robustas e escaláveis",
-      "Implementação de soluções de automação de processos",
-      "Manutenção e evolução de sistemas legados",
-      "Desenvolvimento de aplicações web com React e integração com backend Java"
-    ],
-    technologies: ["Java", "Spring Boot", "Spring Framework", "React", "PostgreSQL", "Delphi", "Git", "Docker"],
-    icon: Users,
-    type: "CLT"
+      company: "Tricon",
+      role: "Desenvolvedor Full Stack",
+      period: "2024 - Presente",
+      location: "Lajeado, RS, Brasil",
+      companyUrl: "https://tricon.com.br",
+      description: "Condução da migração de sistemas legados, projetando microsserviços escaláveis na AWS e implementando pipelines de CI/CD para otimizar o ciclo de desenvolvimento.",
+      achievements: [
+          "Conduzi a migração de sistemas legados em Delphi para uma arquitetura moderna com Java Spring Boot, utilizando Thymeleaf e JasperReports.",
+          "Projetei e implementei microsserviços distribuídos e escaláveis na AWS (EC2 e RDS) para garantir resiliência e segurança.",
+          "Gerenciei containers com Docker, padronizando ambientes entre desenvolvimento, homologação e produção.",
+          "Implementei pipelines CI/CD automatizados com GitHub Actions e GitLab CI, reduzindo o tempo de entrega em 30%.",
+          "Desenvolvi APIs RESTful seguras com Spring Boot, aplicando autenticação JWT e boas práticas de arquitetura limpa."
+      ],
+      technologies: ["Java", "Spring Boot", "Thymeleaf", "JasperReports", "AWS", "Docker", "Git", "GitHub Actions", "GitLab CI", "Delphi", "PostgreSQL"],
+      icon: Users,
+      type: "CLT"
   },
   {
-    company: "Toshyro Inovação e Tecnologia",
-    role: "Desenvolvedor Full Stack",
-    period: "2022 - 2024",
-    location: "Lajeado, RS, Brasil",
-    companyUrl: "https://www.toshyro.com.br/",
-    description: "Desenvolvimento de soluções inovadoras e tecnológicas, focando em parcerias estratégicas para grandes descobertas no setor de tecnologia.",
-    achievements: [
-      "Desenvolvimento de sistemas inovadores com foco em tecnologia",
-      "Implementação de soluções personalizadas para diversos clientes",
-      "Criação de aplicações web modernas e responsivas",
-      "Colaboração em projetos de inovação tecnológica",
-      "Desenvolvimento de integrações com APIs terceiras"
-    ],
-    technologies: ["React", "Next.js", "JavaScript", "TypeScript", ".NET", "PostgreSQL", "Docker", "Git"],
-    icon: Zap,
-    type: "CLT"
+      company: "Toshyro Inovação e Tecnologia",
+      role: "Desenvolvedor Front-end",
+      period: "2022 - 2024",
+      location: "Lajeado, RS, Brasil",
+      companyUrl: "https://www.toshyro.com.br/",
+      description: "Desenvolvimento de interfaces modernas e responsivas com React.js e Next.js, focando em usabilidade, acessibilidade e integração com APIs.",
+      achievements: [
+          "Desenvolvi interfaces modernas e responsivas com React.js, TailwindCSS e Next.js, garantindo usabilidade e acessibilidade.",
+          "Atuei na construção de aplicações Next.js escaláveis, promovendo integração eficiente com APIs REST em .NET e otimizando o carregamento.",
+          "Implementei documentação interativa de APIs com Swagger e padronização visual com Storybook para acelerar o desenvolvimento.",
+          "Participei de sprints semanais, entregando funcionalidades críticas como autenticação com JWT, dashboards dinâmicos e componentes reutilizáveis."
+      ],
+      technologies: ["React.js", "Next.js", "TailwindCSS", "JavaScript", "TypeScript", "HTML", "CSS", ".NET", "Swagger", "Storybook", "JWT"],
+      icon: Zap,
+      type: "CLT"
   }
 ];
 
