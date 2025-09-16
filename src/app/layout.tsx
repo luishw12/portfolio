@@ -6,7 +6,7 @@ import {ReactNode} from "react";
 const inter = Lexend({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Luis H. Wendt | Desenvolvedor Web",
+  title: "Luís Henrique Wendt | Desenvolvedor Full Stack",
 };
 
 export default function RootLayout({
@@ -15,7 +15,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="pt-br">
+    <html lang="pt-br" className="dark">
       <body className={inter.className}>{children}</body>
     </html>
   );
