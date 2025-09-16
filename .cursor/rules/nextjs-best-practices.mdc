@@ -1,0 +1,64 @@
+---
+globs: src/app/**/*.tsx,next.config.mjs
+description: Next.js specific best practices and configurations
+---
+
+# Next.js Best Practices
+
+## App Router Structure
+- Using Next.js 14 App Router with `src/app/` directory
+- Main layout in [src/app/layout.tsx](mdc:src/app/layout.tsx) with Lexend font, Portuguese locale, and dark theme
+- Home page in [src/app/page.tsx](mdc:src/app/page.tsx) with component composition and min-height
+
+## Font Optimization
+- Using Google Fonts with Next.js font optimization
+- Lexend font imported in layout for consistent typography
+- Font applied globally via className in body element
+
+## Image Optimization
+- Always use Next.js `Image` component instead of `<img>` tags
+- Import images from `src/img/` directory using `@/img/` alias
+- Set appropriate width, height, and alt attributes for accessibility
+- Use Sharp package for production image optimization
+- Profile images use `rounded-full` with border and shadow effects
+
+## Metadata Configuration
+- Set proper metadata in layout.tsx: title, language (pt-br)
+- SEO-friendly title: "Luís Henrique Wendt | Desenvolvedor Full Stack"
+- Dark theme applied via `className="dark"` on html element
+
+## Static Assets
+- Resume PDF stored in [public/curriculo.pdf](mdc:public/curriculo.pdf)
+- Static images and icons in [public/](mdc:public/) directory
+- Use proper file naming conventions
+
+## Performance Considerations
+- Components are properly structured for optimal rendering
+- Use of Lucide React icons for scalable vector icons
+- shadcn/ui components for consistent and optimized UI
+- Framer Motion animations optimized for 60fps performance
+- Efficient component composition without unnecessary re-renders
+- Dark theme with CSS variables for optimal performance
+- Animation variants defined outside components to prevent re-creation
+
+## Configuration Files
+- [next.config.mjs](mdc:next.config.mjs) - Next.js configuration
+- [tailwind.config.ts](mdc:tailwind.config.ts) - Tailwind CSS with shadcn/ui theme, dark mode, and custom container
+- [tsconfig.json](mdc:tsconfig.json) - TypeScript configuration with path aliases
+- [components.json](mdc:components.json) - shadcn/ui configuration
+- [src/lib/utils.ts](mdc:src/lib/utils.ts) - Utility functions for shadcn/ui
+
+## Dependencies
+- Next.js 14.2.5 with App Router
+- React 18 with TypeScript
+- shadcn/ui components for consistent UI
+- Lucide React for modern icons
+- Framer Motion for animations and transitions
+- Sharp for image optimization
+- Tailwind CSS with dark theme support
+
+## Development Scripts
+- `npm run dev` - Development server
+- `npm run build` - Production build
+- `npm run start` - Production server
+- `npm run lint` - ESLint checking

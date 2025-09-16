@@ -1,0 +1,64 @@
+---
+globs: src/components/**/*.tsx
+description: Component architecture and naming conventions
+---
+
+# Component Conventions
+
+## File Structure
+- Each component has its own directory under `src/components/`
+- Main component file is always named `index.tsx`
+- Import components using the directory path: `import Header from "@/components/Header"`
+- shadcn/ui components are in `src/components/ui/` directory
+
+## Component Naming
+- Use PascalCase for component names
+- Use descriptive names that match their purpose
+- Note: `Degrees` component actually contains `Projects` - consider renaming for clarity
+
+## Component Responsibilities
+- **Header**: Fixed navigation with minimal logo, social links, and resume button (animated entrance and hover effects)
+- **Profile**: Hero section with developer info, skills badges, and profile photo (staggered animations, floating effects)
+- **AboutMe**: About section with skills grid, professional background, and icons (hover animations, scroll-triggered entrance)
+- **GitHubStats**: Dynamic GitHub statistics via API integration (loading animations, hover effects on stats cards)
+- **RecentActivity**: Recent commits and activity from GitHub API (smooth data loading animations)
+- **Projects** (in Degrees folder): Project showcase with modern card design and badges (staggered grid, hover effects, featured badge animations)
+- **Footer**: Minimal footer with social links, description, and copyright (icon rotation effects, staggered entrance)
+
+## shadcn/ui Integration
+- Use shadcn/ui components as base: `Button`, `Card`, `CardContent`, `Badge`
+- Import with proper paths: `import { Button } from "@/components/ui/button"`
+- Use component variants: `variant="ghost"`, `variant="outline"`, `size="sm"`
+- Use `asChild` prop for Next.js Link integration: `<Button asChild><Link>...</Link></Button>`
+- Wrap shadcn/ui components with motion for animations: `<motion.div><Button /></motion.div>`
+
+## Image Handling
+- Import images from `@/img/` directory
+- Use Next.js `Image` component with proper width, height, and alt attributes
+- Profile photos use `rounded-full` with border and shadow effects
+- Project images use responsive sizing and hover effects
+
+## Interactive Elements
+- Use shadcn/ui Button component for all buttons
+- Use Next.js `Link` component with `asChild` prop for navigation
+- External links should have `target="_blank"` and `rel="noopener noreferrer"`
+- Use Lucide React icons: `import { Github, Linkedin } from "lucide-react"`
+- Apply consistent hover effects and transitions with Framer Motion
+- Use `whileHover` and `whileTap` for interactive feedback
+- Add icon rotation effects: `whileHover={{ rotate: 360 }}`
+- Implement scale effects: `whileHover={{ scale: 1.05 }}`
+
+## Layout Patterns
+- Use semantic HTML: `<section>`, `<header>`, `<footer>`, `<main>`
+- Apply container classes: `container mx-auto px-6`
+- Use consistent spacing: `py-20` for sections, `space-y-4` for elements
+- Implement responsive design with proper breakpoints
+- Use motion components for animated sections: `<motion.section>`
+- Apply scroll-triggered animations: `whileInView` with `viewport={{ once: true }}`
+- Implement staggered animations for lists and grids
+
+## Content Structure
+- Portuguese language content (pt-br)
+- Professional tone appropriate for portfolio
+- Consistent spacing and typography hierarchy using shadcn/ui theme
+- Dark theme optimized design with proper contrast

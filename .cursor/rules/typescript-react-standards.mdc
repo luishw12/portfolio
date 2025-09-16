@@ -1,0 +1,81 @@
+---
+globs: *.ts,*.tsx
+description: TypeScript and React coding standards for the portfolio
+---
+
+# TypeScript & React Standards
+
+## TypeScript Guidelines
+- Always use explicit types for component props
+- Use `ReactNode` for children props
+- Prefer `Readonly<>` for props interfaces
+- Use proper TypeScript imports: `import type { Metadata } from "next"`
+- Use shadcn/ui component types when extending components
+
+## React Component Patterns
+- Use default exports for components
+- Component files should be named `index.tsx` within their directories
+- Use functional components with proper TypeScript typing
+- Always destructure props in function parameters
+- Use shadcn/ui components as base components
+- Add `"use client"` directive for components using React hooks (useState, useEffect) or animations
+- Use proper TypeScript interfaces for API responses and component props
+- Define animation variants outside component for performance
+- Use motion components for animated elements
+
+## Import Conventions
+- Use `@/` alias for src directory imports
+- Group imports: external libraries, shadcn/ui components, Framer Motion, then internal components
+- Use named imports for React types: `import {ReactNode} from "react"`
+- Import shadcn/ui components: `import { Button } from "@/components/ui/button"`
+- Import Lucide icons: `import { Github, Linkedin } from "lucide-react"`
+- Import Framer Motion: `import { motion } from "framer-motion"`
+- Import images from `@/img/` directory
+
+## Component Structure
+```typescript
+"use client";
+
+import { Button } from "@/components/ui/button";
+import { Github } from "lucide-react";
+import { motion } from "framer-motion";
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1
+    }
+  }
+};
+
+export default function ComponentName({
+  prop1,
+  prop2,
+}: Readonly<{
+  prop1: string;
+  prop2: ReactNode;
+}>) {
+  return (
+    <motion.div 
+      className="container mx-auto px-6"
+      variants={containerVariants}
+      initial="hidden"
+      animate="visible"
+    >
+      {/* JSX content with shadcn/ui components and animations */}
+    </motion.div>
+  );
+}
+```
+
+## Next.js Specific
+- Use Next.js `Image` component for all images with proper sizing
+- Use Next.js `Link` component for navigation with `asChild` prop for shadcn/ui components
+- Set proper `alt` attributes for accessibility
+- Use `target="_blank"` and `rel="noopener noreferrer"` for external links
+- Apply dark theme with `className="dark"` on html element
+- Use `"use client"` directive for client-side components with hooks
+- Implement proper error handling and loading states for API calls
+- Use TypeScript interfaces for API response typing

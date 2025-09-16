@@ -1,0 +1,53 @@
+---
+globs: *.tsx,*.css
+description: Tailwind CSS styling guidelines and design patterns
+---
+
+# Tailwind CSS & Styling Guidelines
+
+## Design System Colors (shadcn/ui Dark Theme)
+- Background: `bg-background` for main backgrounds
+- Foreground: `text-foreground` for primary text
+- Muted: `bg-muted/30` for subtle backgrounds, `text-muted-foreground` for secondary text
+- Primary: `bg-primary`, `text-primary` for accent colors
+- Secondary: `bg-secondary`, `text-secondary` for secondary elements
+- Border: `border-border` for consistent borders
+- Card: `bg-card`, `text-card-foreground` for card backgrounds
+
+## Layout Patterns
+- Container: Use `container mx-auto px-6` for consistent spacing
+- Sections: Use `py-20` for section spacing
+- Flexbox layouts: `flex`, `flex-col`, `items-center`, `justify-center`
+- Grid layouts: `grid md:grid-cols-2 lg:grid-cols-3 gap-8` for responsive grids
+- Spacing: Use `space-y-4`, `space-y-6`, `space-y-8` for consistent vertical spacing
+
+## Component Styling Patterns (shadcn/ui)
+- Cards: Use `Card` and `CardContent` components with `border-0 shadow-lg`
+- Buttons: Use shadcn/ui `Button` with variants: `default`, `ghost`, `outline`, `secondary`
+- Badges: Use shadcn/ui `Badge` with variants: `default`, `secondary`, `outline`
+- Hover effects: Use `hover:shadow-lg transition-all duration-300`
+- Group effects: Use `group` and `group-hover:` for interactive elements
+
+## Typography
+- Font weights: `font-bold` for main headings, `font-semibold` for section headings, `font-medium` for subheadings
+- Text sizes: `text-4xl lg:text-6xl` for hero titles, `text-3xl lg:text-4xl` for section titles, `text-lg` for descriptions
+- Text colors: `text-foreground` for primary, `text-muted-foreground` for secondary
+- Line height: Use `leading-tight`, `leading-relaxed` for better readability
+
+## Interactive Elements
+- Use shadcn/ui Button component with proper variants
+- Hover states: Built into shadcn/ui components with `hover:` utilities
+- Focus states: Automatically handled by shadcn/ui components
+- Transitions: Use `transition-all duration-300` for smooth animations
+
+## Responsive Design
+- Mobile-first approach with responsive prefixes: `sm:`, `md:`, `lg:`, `xl:`, `2xl:`
+- Use `max-w-4xl`, `max-w-6xl` for content containers
+- Responsive text: `text-4xl lg:text-6xl` for scalable typography
+- Responsive grids: `grid-cols-1 md:grid-cols-2 lg:grid-cols-3`
+
+## Dark Theme Specific
+- Use semantic color classes instead of hardcoded colors
+- Ensure proper contrast with `text-foreground` and `text-muted-foreground`
+- Use `bg-muted/30` for subtle background variations
+- Apply `border-border` for consistent border colors

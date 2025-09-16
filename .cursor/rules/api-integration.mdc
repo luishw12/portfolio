@@ -1,0 +1,57 @@
+---
+globs: src/components/GitHubStats/**/*.tsx,src/components/RecentActivity/**/*.tsx
+description: API integration patterns and best practices for GitHub API usage
+---
+
+# API Integration Guidelines
+
+## GitHub API Integration
+- Use GitHub REST API v3 for fetching user and repository data
+- Implement proper error handling with try-catch blocks
+- Use loading states with skeleton components during API calls
+- Cache API responses appropriately to avoid rate limiting
+- Use proper TypeScript interfaces for API response types
+
+## API Patterns
+```typescript
+interface ApiResponse {
+  // Define proper interface structure
+}
+
+const fetchData = async (): Promise<ApiResponse[]> => {
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error("Failed to fetch data");
+    }
+    return await response.json();
+  } catch (error) {
+    console.error("API Error:", error);
+    throw error;
+  }
+};
+```
+
+## Component Structure for API Integration
+- Use `"use client"` directive for components with useEffect/useState
+- Implement loading, error, and success states
+- Use Promise.all for parallel API calls when possible
+- Provide fallback UI for error states
+- Use proper loading indicators (skeleton components)
+
+## GitHub API Endpoints Used
+- `https://api.github.com/users/{username}` - User profile data
+- `https://api.github.com/users/{username}/repos` - Repository list
+- `https://api.github.com/users/{username}/events/public` - Recent activity
+
+## Error Handling
+- Display user-friendly error messages
+- Implement retry mechanisms where appropriate
+- Log errors for debugging purposes
+- Provide fallback content when APIs are unavailable
+
+## Performance Considerations
+- Use React.memo for components that don't need frequent re-renders
+- Implement proper cleanup in useEffect hooks
+- Consider implementing caching strategies for frequently accessed data
+- Use loading states to improve perceived performance

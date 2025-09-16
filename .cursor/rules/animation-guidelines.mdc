@@ -1,0 +1,144 @@
+---
+globs: src/components/**/*.tsx
+description: Animation guidelines and patterns using Framer Motion
+---
+
+# Animation Guidelines
+
+## Framer Motion Integration
+- Use Framer Motion for all animations and transitions
+- Import motion components: `import { motion } from "framer-motion"`
+- Add `"use client"` directive to animated components
+- Use variants for consistent animation patterns
+
+## Animation Patterns
+
+### Container Variants
+```typescript
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1, // Delay between children
+      delayChildren: 0.2    // Initial delay
+    }
+  }
+};
+```
+
+### Item Variants
+```typescript
+const itemVariants = {
+  hidden: { y: 30, opacity: 0 },
+  visible: { y: 0, opacity: 1 }
+};
+```
+
+### Card Variants
+```typescript
+const cardVariants = {
+  hidden: { scale: 0.9, opacity: 0 },
+  visible: { scale: 1, opacity: 1 }
+};
+```
+
+## Animation Types
+
+### Initial Animations
+- **Fade In**: `opacity: 0 → 1`
+- **Slide Up**: `y: 30 → 0`
+- **Scale In**: `scale: 0.8 → 1`
+- **Stagger**: Use `staggerChildren` for sequential animations
+
+### Hover Interactions
+- **Scale**: `whileHover={{ scale: 1.05 }}`
+- **Rotation**: `whileHover={{ rotate: 360 }}`
+- **Elevation**: `whileHover={{ y: -5 }}`
+- **Color**: Combine with CSS transitions
+
+### Tap Interactions
+- **Scale Down**: `whileTap={{ scale: 0.95 }}`
+- **Quick Feedback**: Short duration (0.1-0.2s)
+
+### Scroll Animations
+- **In View**: `whileInView={{ opacity: 1 }}`
+- **Once**: `viewport={{ once: true }}`
+- **Threshold**: `viewport={{ once: true, margin: "-100px" }}`
+
+## Animation Principles
+
+### Performance
+- Use `transform` and `opacity` properties
+- Avoid animating layout properties (width, height)
+- Use `will-change` CSS property when needed
+- Keep animations under 60fps
+
+### Accessibility
+- Respect `prefers-reduced-motion`
+- Provide alternative feedback for motion-sensitive users
+- Ensure animations don't cause seizures (avoid rapid flashing)
+
+### Timing
+- **Fast**: 0.1-0.3s for micro-interactions
+- **Medium**: 0.4-0.6s for standard transitions
+- **Slow**: 0.8-1.2s for major state changes
+- Use easing functions: `ease`, `easeIn`, `easeOut`
+
+## Component Patterns
+
+### Animated Sections
+```typescript
+<motion.section
+  initial={{ y: 30, opacity: 0 }}
+  whileInView={{ y: 0, opacity: 1 }}
+  viewport={{ once: true }}
+  transition={{ duration: 0.6 }}
+>
+```
+
+### Staggered Lists
+```typescript
+<motion.div
+  variants={containerVariants}
+  initial="hidden"
+  animate="visible"
+>
+  {items.map((item) => (
+    <motion.div key={item.id} variants={itemVariants}>
+      {/* content */}
+    </motion.div>
+  ))}
+</motion.div>
+```
+
+### Interactive Elements
+```typescript
+<motion.div
+  whileHover={{ scale: 1.05, y: -2 }}
+  whileTap={{ scale: 0.95 }}
+  transition={{ duration: 0.2 }}
+>
+```
+
+## Best Practices
+
+### Consistency
+- Use consistent animation durations across similar elements
+- Apply same easing functions for related animations
+- Maintain consistent stagger delays
+
+### Subtlety
+- Keep animations subtle and purposeful
+- Avoid over-animation that distracts from content
+- Use animations to guide user attention
+
+### Loading States
+- Provide animated loading indicators
+- Use skeleton screens for better perceived performance
+- Animate content appearance after loading
+
+### Error Handling
+- Gracefully handle animation errors
+- Provide fallbacks for unsupported browsers
+- Test animations across different devices
