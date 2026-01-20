@@ -12,6 +12,7 @@ import Footer from "@/components/Footer";
 import Highlights from "@/components/Highlights";
 import { FloatingOrbs, GridPattern } from "@/components/ui/animated-background";
 import ScrollProgress from "@/components/ui/scroll-progress";
+import { DevMetricsWrapper } from "@/components/DevMode";
 
 export default function Home() {
   return (
@@ -29,16 +30,36 @@ export default function Home() {
       {/* Main content */}
       <div className="relative z-10">
         <Header />
-        <Profile />
-        <AboutMe />
-        <Highlights />
-        <Experience />
-        <Projects />
-        <Skills />
-        <GitHubStats />
-        <RecentActivity />
-        <Education />
-        <Contact />
+        <DevMetricsWrapper name="Profile">
+          <Profile />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="AboutMe">
+          <AboutMe />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Highlights">
+          <Highlights />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Experience">
+          <Experience />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Projects">
+          <Projects />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Skills">
+          <Skills />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="GitHubStats">
+          <GitHubStats />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="RecentActivity">
+          <RecentActivity />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Education">
+          <Education />
+        </DevMetricsWrapper>
+        <DevMetricsWrapper name="Contact">
+          <Contact />
+        </DevMetricsWrapper>
         <Footer />
       </div>
     </main>

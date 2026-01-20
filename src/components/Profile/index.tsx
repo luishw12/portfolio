@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowDown, Download, Mail, Sparkles, Code, Rocket, Zap } from "lucide-react";
 import { useRef, useEffect, useState } from "react";
+import TerminalChallenge from "@/components/TerminalChallenge";
 
 const containerVariants = {
   hidden: { opacity: 0 },
@@ -73,6 +74,8 @@ const useTypingEffect = (texts: string[], typingSpeed = 100, deletingSpeed = 50,
 
 export default function Profile() {
   const containerRef = useRef<HTMLElement>(null);
+  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+
   const { scrollYProgress } = useScroll({
     target: containerRef,
     offset: ["start start", "end start"]
@@ -220,12 +223,10 @@ export default function Profile() {
                     size="lg"
                     variant="outline"
                     className="group border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
-                    asChild
+                    onClick={() => setIsTerminalOpen(true)}
                   >
-                    <a href="/curriculo.pdf" target="_blank">
-                      <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
-                      Download CV
-                    </a>
+                    <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                    Download CV
                   </Button>
                 </motion.div>
               </motion.div>
@@ -351,6 +352,12 @@ export default function Profile() {
           <ArrowDown className="w-5 h-5" />
         </motion.div>
       </motion.div>
+
+      {/* Terminal Challenge Modal */}
+      <TerminalChallenge
+        isOpen={isTerminalOpen}
+        onClose={() => setIsTerminalOpen(false)}
+      />
     </section>
   );
 }

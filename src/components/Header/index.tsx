@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { Github, Linkedin, FileText, Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useState } from "react";
+import { DevModeToggle } from "@/components/DevMode";
 
 const navLinks = [
   { href: "#sobre", label: "Sobre" },
@@ -93,6 +94,9 @@ export default function Header() {
 
             {/* Actions */}
             <div className="hidden md:flex items-center gap-3">
+              {/* Dev Mode Toggle */}
+              <DevModeToggle />
+
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -227,6 +231,16 @@ export default function Header() {
                     Download CV
                   </Link>
                 </Button>
+              </motion.div>
+
+              {/* Dev Mode Toggle - Mobile */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+                className="mt-6"
+              >
+                <DevModeToggle />
               </motion.div>
             </motion.nav>
           </motion.div>

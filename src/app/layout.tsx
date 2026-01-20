@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import {ReactNode} from "react";
+import { DevModeProvider } from "@/contexts/DevModeContext";
+import { DevModeOverlay, WebVitalsReporter } from "@/components/DevMode";
 
 const inter = Lexend({ subsets: ["latin"] });
 
@@ -146,7 +148,11 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} overflow-x-hidden`}>
-        {children}
+        <DevModeProvider>
+          {children}
+          <DevModeOverlay />
+          <WebVitalsReporter />
+        </DevModeProvider>
       </body>
     </html>
   );
