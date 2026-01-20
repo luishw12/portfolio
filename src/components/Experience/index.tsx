@@ -13,7 +13,9 @@ import {
   Zap,
   Shield,
   Database,
-  Globe
+  Globe,
+  ChevronRight,
+  Building2
 } from "lucide-react";
 
 const containerVariants = {
@@ -48,7 +50,8 @@ const experiences = [
       ],
       technologies: ["React", "Next.js", "Spring Boot", "AWS", "GitHub Actions", "AWS SES", "Pix", "TypeScript", "PostgreSQL", "Docker"],
       icon: Code,
-      type: "Autônomo"
+      type: "Autônomo",
+      color: "from-blue-500 to-cyan-500"
   },
   {
       company: "Tricon",
@@ -66,7 +69,8 @@ const experiences = [
       ],
       technologies: ["Java", "Spring Boot", "Thymeleaf", "JasperReports", "AWS", "Docker", "Git", "GitHub Actions", "GitLab CI", "Delphi", "PostgreSQL"],
       icon: Users,
-      type: "CLT"
+      type: "CLT",
+      color: "from-green-500 to-emerald-500"
   },
   {
       company: "Toshyro Inovação e Tecnologia",
@@ -83,147 +87,171 @@ const experiences = [
       ],
       technologies: ["React.js", "Next.js", "TailwindCSS", "JavaScript", "TypeScript", "HTML", "CSS", ".NET", "Swagger", "Storybook", "JWT"],
       icon: Zap,
-      type: "CLT"
+      type: "CLT",
+      color: "from-purple-500 to-pink-500"
   }
 ];
 
 const getTypeColor = (type: string) => {
   switch (type) {
     case "CLT":
-      return "bg-green-500/10 text-green-600 border-green-500/20";
+      return "bg-green-500/10 text-green-500 border-green-500/20";
     case "Freelance":
-      return "bg-blue-500/10 text-blue-600 border-blue-500/20";
-    case "Estágio":
-      return "bg-purple-500/10 text-purple-600 border-purple-500/20";
+      return "bg-blue-500/10 text-blue-500 border-blue-500/20";
+    case "Autônomo":
+      return "bg-amber-500/10 text-amber-500 border-amber-500/20";
     default:
-      return "bg-gray-500/10 text-gray-600 border-gray-500/20";
+      return "bg-gray-500/10 text-gray-500 border-gray-500/20";
   }
 };
 
 export default function Experience() {
   return (
-    <section id="experiencia" className="py-20">
-      <div className="container mx-auto px-6">
+    <section id="experiencia" className="py-24 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
+
+      <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto">
-          <motion.div 
+          {/* Header */}
+          <motion.div
             className="text-center mb-16"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-4">
-              Experiência Profissional
+            <Badge variant="outline" className="mb-4 px-4 py-1">
+              <Briefcase className="w-3 h-3 mr-2" />
+              Carreira
+            </Badge>
+            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+              Experiência{" "}
+              <span className="text-gradient bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
+                Profissional
+              </span>
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              Minha jornada profissional desenvolvendo soluções inovadoras e escaláveis
+              Minha jornada desenvolvendo soluções inovadoras e escaláveis
             </p>
           </motion.div>
 
-          <motion.div 
-            className="space-y-8"
+          {/* Timeline */}
+          <motion.div
+            className="relative"
             variants={containerVariants}
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true }}
           >
+            {/* Timeline line */}
+            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent transform md:-translate-x-1/2 hidden md:block" />
+
             {experiences.map((exp, index) => (
-              <motion.div key={index} variants={itemVariants}>
-                <Card className="border-0 shadow-lg hover:shadow-xl transition-all duration-300 group">
-                  <CardContent className="p-8">
-                    <div className="flex flex-col lg:flex-row gap-6">
-                      {/* Ícone da Empresa */}
-                      <div className="flex-shrink-0">
-                        <motion.div
-                          className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center"
-                          whileHover={{ scale: 1.1, rotate: 5 }}
-                          transition={{ duration: 0.3 }}
-                        >
-                          <exp.icon className="h-8 w-8 text-primary" />
-                        </motion.div>
-                      </div>
-                      
-                      {/* Conteúdo Principal */}
-                      <div className="flex-1">
-                        {/* Header da Experiência */}
-                        <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-4 mb-6">
-                          <div>
-                            <div className="flex items-center gap-3 mb-2">
-                              <h3 className="text-xl font-semibold text-foreground">
-                                {exp.role}
-                              </h3>
-                              <Badge 
-                                className={`${getTypeColor(exp.type)} border`}
-                                variant="outline"
-                              >
-                                {exp.type}
-                              </Badge>
-                            </div>
-                            
-                            <div className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-4">
-                              <div className="flex items-center gap-2 text-primary font-medium">
-                                <Briefcase className="h-4 w-4" />
+              <motion.div
+                key={index}
+                variants={itemVariants}
+                className={`relative flex flex-col md:flex-row gap-8 mb-12 ${
+                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
+                }`}
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full transform md:-translate-x-1/2 -translate-y-1 hidden md:block shadow-lg shadow-primary/50 z-10" />
+
+                {/* Card */}
+                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
+                  <Card className="group border-0 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
+                    {/* Gradient top border */}
+                    <div className={`h-1 bg-gradient-to-r ${exp.color}`} />
+
+                    <CardContent className="p-8">
+                      <div className="flex flex-col gap-6">
+                        {/* Header */}
+                        <div className="flex items-start justify-between gap-4">
+                          <div className="flex items-start gap-4">
+                            <motion.div
+                              className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-lg flex-shrink-0`}
+                              whileHover={{ scale: 1.1, rotate: 5 }}
+                              transition={{ duration: 0.3 }}
+                            >
+                              <exp.icon className="h-7 w-7 text-white" />
+                            </motion.div>
+
+                            <div>
+                              <div className="flex items-center gap-2 flex-wrap mb-1">
+                                <h3 className="text-xl font-bold text-foreground">
+                                  {exp.role}
+                                </h3>
+                                <Badge className={`${getTypeColor(exp.type)} border`} variant="outline">
+                                  {exp.type}
+                                </Badge>
+                              </div>
+
+                              <div className="flex items-center gap-2 text-primary">
+                                <Building2 className="h-4 w-4" />
                                 {exp.companyUrl !== "#" ? (
                                   <a 
                                     href={exp.companyUrl}
                                     target="_blank"
                                     rel="noopener noreferrer"
-                                    className="hover:underline flex items-center gap-1"
+                                    className="font-semibold hover:underline flex items-center gap-1"
                                   >
                                     {exp.company}
                                     <ExternalLink className="h-3 w-3" />
                                   </a>
                                 ) : (
-                                  exp.company
+                                  <span className="font-semibold">{exp.company}</span>
                                 )}
-                              </div>
-                              
-                              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                                <Calendar className="h-4 w-4" />
-                                {exp.period}
-                              </div>
-                              
-                              <div className="flex items-center gap-2 text-muted-foreground text-sm">
-                                <MapPin className="h-4 w-4" />
-                                {exp.location}
                               </div>
                             </div>
                           </div>
                         </div>
+
+                        {/* Meta info */}
+                        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
+                          <div className="flex items-center gap-2">
+                            <Calendar className="h-4 w-4" />
+                            <span>{exp.period}</span>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <MapPin className="h-4 w-4" />
+                            <span>{exp.location}</span>
+                          </div>
+                        </div>
                         
-                        {/* Descrição */}
-                        <p className="text-muted-foreground mb-6 leading-relaxed">
+                        {/* Description */}
+                        <p className="text-muted-foreground leading-relaxed">
                           {exp.description}
                         </p>
                         
-                        {/* Conquistas */}
-                        <div className="mb-6">
+                        {/* Achievements */}
+                        <div>
                           <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                             <Shield className="h-5 w-5 text-primary" />
                             Principais Conquistas
                           </h4>
                           <ul className="space-y-2">
-                            {exp.achievements.map((achievement, achievementIndex) => (
-                              <motion.li 
+                            {exp.achievements.slice(0, 3).map((achievement, achievementIndex) => (
+                              <motion.li
                                 key={achievementIndex}
                                 initial={{ opacity: 0, x: -20 }}
                                 whileInView={{ opacity: 1, x: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.3, delay: achievementIndex * 0.1 }}
-                                className="text-sm text-muted-foreground flex items-start gap-3"
+                                className="text-sm text-muted-foreground flex items-start gap-3 group/item"
                               >
-                                <span className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></span>
+                                <ChevronRight className="w-4 h-4 text-primary mt-0.5 flex-shrink-0 group-hover/item:translate-x-1 transition-transform" />
                                 {achievement}
                               </motion.li>
                             ))}
                           </ul>
                         </div>
-                        
-                        {/* Tecnologias */}
+
+                        {/* Technologies */}
                         <div>
                           <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
                             <Database className="h-5 w-5 text-primary" />
-                            Tecnologias Utilizadas
+                            Stack Tecnológico
                           </h4>
                           <div className="flex flex-wrap gap-2">
                             {exp.technologies.map((tech, techIndex) => (
@@ -232,11 +260,12 @@ export default function Experience() {
                                 initial={{ scale: 0, opacity: 0 }}
                                 whileInView={{ scale: 1, opacity: 1 }}
                                 viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: techIndex * 0.05 }}
+                                transition={{ duration: 0.2, delay: techIndex * 0.03 }}
+                                whileHover={{ scale: 1.1, y: -2 }}
                               >
-                                <Badge 
-                                  variant="secondary" 
-                                  className="px-3 py-1 text-xs hover:bg-primary/10 transition-colors"
+                                <Badge
+                                  variant="secondary"
+                                  className="px-3 py-1 text-xs hover:bg-primary/10 transition-colors cursor-default"
                                 >
                                   {tech}
                                 </Badge>
@@ -245,50 +274,52 @@ export default function Experience() {
                           </div>
                         </div>
                       </div>
-                    </div>
-                  </CardContent>
-                </Card>
+                    </CardContent>
+                  </Card>
+                </div>
+
+                {/* Spacer for alternating layout */}
+                <div className="hidden md:block flex-1" />
               </motion.div>
             ))}
           </motion.div>
 
-          {/* Estatísticas de Carreira */}
-          <motion.div 
-            className="mt-16 grid md:grid-cols-3 gap-6"
+          {/* Stats */}
+          <motion.div
+            className="mt-20 grid md:grid-cols-3 gap-6"
             initial={{ y: 30, opacity: 0 }}
             whileInView={{ y: 0, opacity: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.3 }}
           >
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-primary/5 to-primary/10">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Calendar className="h-6 w-6 text-primary" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">2+</h3>
-                <p className="text-muted-foreground">Anos de Experiência</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-green-500/5 to-green-500/10">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Globe className="h-6 w-6 text-green-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">15+</h3>
-                <p className="text-muted-foreground">Projetos Desenvolvidos</p>
-              </CardContent>
-            </Card>
-            
-            <Card className="border-0 shadow-lg bg-gradient-to-br from-blue-500/5 to-blue-500/10">
-              <CardContent className="p-6 text-center">
-                <div className="w-12 h-12 bg-blue-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
-                  <Users className="h-6 w-6 text-blue-600" />
-                </div>
-                <h3 className="text-2xl font-bold text-foreground mb-2">3</h3>
-                <p className="text-muted-foreground">Empresas Trabalhadas</p>
-              </CardContent>
-            </Card>
+            {[
+              { icon: Calendar, value: "2+", label: "Anos de Experiência", color: "from-blue-500 to-cyan-500" },
+              { icon: Globe, value: "15+", label: "Projetos Desenvolvidos", color: "from-green-500 to-emerald-500" },
+              { icon: Users, value: "3", label: "Empresas Trabalhadas", color: "from-purple-500 to-pink-500" },
+            ].map((stat, index) => (
+              <motion.div
+                key={stat.label}
+                initial={{ scale: 0.9, opacity: 0 }}
+                whileInView={{ scale: 1, opacity: 1 }}
+                viewport={{ once: true }}
+                transition={{ delay: 0.1 * index }}
+                whileHover={{ y: -5 }}
+              >
+                <Card className="border-0 shadow-xl overflow-hidden group">
+                  <div className={`h-1 bg-gradient-to-r ${stat.color}`} />
+                  <CardContent className="p-6 text-center">
+                    <motion.div
+                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mx-auto mb-4 shadow-lg`}
+                      whileHover={{ scale: 1.1, rotate: 5 }}
+                    >
+                      <stat.icon className="h-8 w-8 text-white" />
+                    </motion.div>
+                    <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
+                    <p className="text-muted-foreground">{stat.label}</p>
+                  </CardContent>
+                </Card>
+              </motion.div>
+            ))}
           </motion.div>
         </div>
       </div>

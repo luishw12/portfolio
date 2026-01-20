@@ -18,7 +18,9 @@ const config: Config = {
   	extend: {
   		backgroundImage: {
   			'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
-  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))'
+  			'gradient-conic': 'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
+        'hero-gradient': 'linear-gradient(135deg, hsl(var(--background)) 0%, hsl(222 47% 8%) 50%, hsl(var(--background)) 100%)',
+        'card-gradient': 'linear-gradient(135deg, hsl(var(--card)) 0%, hsl(var(--accent)) 100%)',
   		},
   		borderRadius: {
   			lg: 'var(--radius)',
@@ -66,7 +68,56 @@ const config: Config = {
   				'4': 'hsl(var(--chart-4))',
   				'5': 'hsl(var(--chart-5))'
   			}
-  		}
+  		},
+      animation: {
+        'float': 'float 6s ease-in-out infinite',
+        'float-delayed': 'float 6s ease-in-out 2s infinite',
+        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+        'gradient': 'gradient 8s ease infinite',
+        'shimmer': 'shimmer 2s linear infinite',
+        'spin-slow': 'spin 8s linear infinite',
+        'bounce-slow': 'bounce 3s infinite',
+        'wiggle': 'wiggle 1s ease-in-out infinite',
+        'scale-in': 'scale-in 0.5s ease-out',
+        'slide-up': 'slide-up 0.5s ease-out',
+        'slide-down': 'slide-down 0.5s ease-out',
+        'glow-pulse': 'glow-pulse 2s ease-in-out infinite',
+      },
+      keyframes: {
+        float: {
+          '0%, 100%': { transform: 'translateY(0)' },
+          '50%': { transform: 'translateY(-20px)' },
+        },
+        gradient: {
+          '0%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' },
+          '100%': { backgroundPosition: '0% 50%' },
+        },
+        shimmer: {
+          '0%': { backgroundPosition: '-200% 0' },
+          '100%': { backgroundPosition: '200% 0' },
+        },
+        wiggle: {
+          '0%, 100%': { transform: 'rotate(-3deg)' },
+          '50%': { transform: 'rotate(3deg)' },
+        },
+        'scale-in': {
+          '0%': { transform: 'scale(0.9)', opacity: '0' },
+          '100%': { transform: 'scale(1)', opacity: '1' },
+        },
+        'slide-up': {
+          '0%': { transform: 'translateY(20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'slide-down': {
+          '0%': { transform: 'translateY(-20px)', opacity: '0' },
+          '100%': { transform: 'translateY(0)', opacity: '1' },
+        },
+        'glow-pulse': {
+          '0%, 100%': { boxShadow: '0 0 20px -5px hsl(var(--primary))' },
+          '50%': { boxShadow: '0 0 40px -5px hsl(var(--primary))' },
+        },
+      },
   	}
   },
   plugins: [require("tailwindcss-animate")],

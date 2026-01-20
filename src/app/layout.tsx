@@ -81,14 +81,14 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="pt-br" className="dark">
+    <html lang="pt-br" className="dark" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
         <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
-        <meta name="theme-color" content="#0f172a" />
+        <meta name="theme-color" content="#030712" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <script
           type="application/ld+json"
@@ -103,7 +103,7 @@ export default function RootLayout({
               "image": "https://luishw.dev/og-image.jpg",
               "sameAs": [
                 "https://www.linkedin.com/in/luishw/",
-                "https://github.com/luishw"
+                "https://github.com/luishw12"
               ],
               "knowsAbout": [
                 "React",
@@ -133,7 +133,7 @@ export default function RootLayout({
               ],
               "alumniOf": {
                 "@type": "EducationalOrganization",
-                "name": "Universidade do Vale do Taquari - UNIVATES"
+                "name": "Anhanguera"
               },
               "address": {
                 "@type": "PostalAddress",
@@ -145,7 +145,9 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body className={`${inter.className} overflow-x-hidden`}>
+        {children}
+      </body>
     </html>
   );
 }
