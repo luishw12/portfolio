@@ -2,32 +2,30 @@ import type { Metadata } from "next";
 import { Lexend } from "next/font/google";
 import "./globals.css";
 import {ReactNode} from "react";
-import { DevModeProvider } from "@/contexts/DevModeContext";
-import { DevModeOverlay, WebVitalsReporter } from "@/components/DevMode";
-
 const inter = Lexend({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Luís Henrique Wendt - Desenvolvedor Full Stack | React, Next.js, Java, Spring Boot",
-  description: "Desenvolvedor Full Stack especializado em migração de sistemas legados para tecnologias modernas. Experiência com React, Next.js, Java, Spring Boot, PostgreSQL e AWS. Disponível para projetos remotos.",
+  title: "Luís Henrique Wendt - Desenvolvedor Full Stack | C# · .NET · React · Next.js · AWS",
+  description: "Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e produtos SaaS. Experiência com .NET, C#, Java, Spring Boot, React, Next.js, TypeScript, PostgreSQL, Docker e AWS. Lajeado, RS.",
   keywords: [
     "desenvolvedor full stack",
     "react developer",
-    "next.js developer", 
+    "next.js developer",
+    "dotnet developer",
+    "csharp developer",
     "java developer",
     "spring boot developer",
     "typescript developer",
     "postgresql developer",
     "aws developer",
+    "docker",
     "desenvolvedor remoto",
-    "migração de sistemas legados",
+    "produtos saas",
     "arquitetura de software",
     "desenvolvimento web",
     "desenvolvimento backend",
     "desenvolvimento frontend",
     "portfólio desenvolvedor",
-    "freelancer desenvolvedor",
-    "consultor de tecnologia"
   ],
   authors: [{ name: "Luís Henrique Wendt" }],
   creator: "Luís Henrique Wendt",
@@ -43,7 +41,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: "Luís Henrique Wendt - Desenvolvedor Full Stack",
-    description: "Desenvolvedor Full Stack especializado em migração de sistemas legados para tecnologias modernas. Experiência com React, Next.js, Java, Spring Boot, PostgreSQL e AWS.",
+    description: "Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e produtos SaaS com .NET, React, Next.js, TypeScript, PostgreSQL e AWS.",
     url: "https://luishw.dev",
     siteName: "Luís Henrique Wendt - Portfólio",
     images: [
@@ -60,7 +58,7 @@ export const metadata: Metadata = {
   twitter: {
     card: "summary_large_image",
     title: "Luís Henrique Wendt - Desenvolvedor Full Stack",
-    description: "Desenvolvedor Full Stack especializado em migração de sistemas legados para tecnologias modernas. React, Next.js, Java, Spring Boot.",
+    description: "Desenvolvedor Full Stack — .NET, C#, React, Next.js, AWS e Docker. Aplicações web, sistemas corporativos e produtos SaaS.",
     images: ["/og-image.jpg"],
     creator: "@luishw",
   },
@@ -100,7 +98,7 @@ export default function RootLayout({
               "@type": "Person",
               "name": "Luís Henrique Wendt",
               "jobTitle": "Desenvolvedor Full Stack",
-              "description": "Desenvolvedor Full Stack especializado em migração de sistemas legados para tecnologias modernas",
+              "description": "Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e produtos SaaS com .NET, React, Next.js, TypeScript, PostgreSQL e AWS",
               "url": "https://luishw.dev",
               "image": "https://luishw.dev/og-image.jpg",
               "sameAs": [
@@ -109,33 +107,37 @@ export default function RootLayout({
               ],
               "knowsAbout": [
                 "React",
-                "Next.js", 
+                "Next.js",
                 "TypeScript",
                 "JavaScript",
+                "C#",
+                ".NET",
                 "Java",
                 "Spring Boot",
+                "Node.js",
+                "Python",
                 "PostgreSQL",
                 "AWS",
                 "Docker",
+                "Linux",
                 "Desenvolvimento Web",
                 "Arquitetura de Software",
-                "Migração de Sistemas Legados"
+                "Produtos SaaS"
               ],
               "worksFor": [
                 {
                   "@type": "Organization",
-                  "name": "Refatorize",
-                  "url": "https://refatorize.com.br"
+                  "name": "Q2F Sistemas de Gestão"
                 },
                 {
-                  "@type": "Organization", 
-                  "name": "Tricon",
-                  "url": "https://tricon.com.br"
+                  "@type": "Organization",
+                  "name": "Refatorize",
+                  "url": "https://refatorize.com.br"
                 }
               ],
               "alumniOf": {
                 "@type": "EducationalOrganization",
-                "name": "Anhanguera"
+                "name": "Anhanguera Educacional"
               },
               "address": {
                 "@type": "PostalAddress",
@@ -148,11 +150,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.className} overflow-x-hidden`}>
-        <DevModeProvider>
-          {children}
-          <DevModeOverlay />
-          <WebVitalsReporter />
-        </DevModeProvider>
+        {children}
       </body>
     </html>
   );

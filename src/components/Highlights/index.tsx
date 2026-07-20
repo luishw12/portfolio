@@ -1,94 +1,87 @@
 "use client";
 
-import { motion, useInView } from "framer-motion";
-import { useRef } from "react";
 import { Quote, Rocket, Target, Zap } from "lucide-react";
+import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { MagicCard } from "@/components/ui/magic-card";
+import { SparklesText } from "@/components/ui/sparkles-text";
+import { Highlighter } from "@/components/ui/highlighter";
 
 const highlights = [
   {
     icon: Rocket,
-    title: "Inovação Constante",
-    description: "Sempre buscando as melhores tecnologias e práticas para entregar soluções de ponta.",
-    color: "from-blue-500 to-cyan-500",
+    title: "Produtos Digitais",
+    description:
+      "Do problema à produção — arquitetura, implementação e impacto real para empresas e usuários.",
+    from: "#3b82f6",
+    to: "#22d3ee",
   },
   {
     icon: Target,
-    title: "Foco em Resultados",
-    description: "Comprometido com a entrega de valor real, superando expectativas a cada projeto.",
-    color: "from-purple-500 to-pink-500",
+    title: "Entender Antes",
+    description:
+      "Gosto de entender o problema antes da tecnologia e propor melhorias que geram valor.",
+    from: "#a855f7",
+    to: "#ec4899",
   },
   {
     icon: Zap,
-    title: "Performance Máxima",
-    description: "Código otimizado e eficiente, garantindo a melhor experiência para os usuários.",
-    color: "from-amber-500 to-orange-500",
+    title: "Código Sustentável",
+    description:
+      "Aplicações simples de manter, intuitivas para o usuário e escaláveis com o negócio.",
+    from: "#f59e0b",
+    to: "#f97316",
   },
 ];
 
 export default function Highlights() {
-  const ref = useRef<HTMLDivElement>(null);
-  const isInView = useInView(ref, { once: true });
-
   return (
     <section className="py-24 relative overflow-hidden">
-      {/* Background */}
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
-      <div className="container mx-auto px-6 relative" ref={ref}>
-        <div className="max-w-6xl mx-auto">
-          {/* Quote section */}
-          <motion.div
-            className="text-center mb-20"
-            initial={{ opacity: 0, y: 30 }}
-            animate={isInView ? { opacity: 1, y: 0 } : {}}
-            transition={{ duration: 0.6 }}
-          >
-            <Quote className="w-12 h-12 mx-auto mb-6 text-primary/30" />
+      <div className="container mx-auto px-6 relative">
+        <div className="max-w-6xl mx-auto flex flex-col gap-16">
+          <BlurFade delay={0.1} inView className="text-center">
+            <Quote className="size-12 mx-auto mb-6 text-primary/30" />
             <blockquote className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground leading-relaxed max-w-4xl mx-auto">
-              &ldquo;O código é poesia que{" "}
-              <span className="text-gradient bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                transforma ideias em realidade
-              </span>
-              . Cada linha escrita é uma oportunidade de criar algo extraordinário.&rdquo;
+              &ldquo;Entender o problema antes da tecnologia — e criar soluções que{" "}
+              <Highlighter action="underline" color="#a855f7" isView>
+                <BrandTextReveal text="gerem impacto real" />
+              </Highlighter>{" "}
+              para empresas e usuários.&rdquo;
             </blockquote>
-            <p className="mt-6 text-muted-foreground">— Minha filosofia de desenvolvimento</p>
-          </motion.div>
+            <p className="mt-6 text-muted-foreground flex items-center justify-center gap-2">
+              — Minha{" "}
+              <SparklesText className="text-base font-medium" sparklesCount={4}>
+                filosofia
+              </SparklesText>{" "}
+              de desenvolvimento
+            </p>
+          </BlurFade>
 
-          {/* Highlights grid */}
-          <div className="grid md:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-3 gap-6">
             {highlights.map((highlight, index) => (
-              <motion.div
-                key={highlight.title}
-                className="group relative"
-                initial={{ opacity: 0, y: 50 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              >
-                <div className="relative p-8 rounded-3xl border border-border bg-card/50 backdrop-blur-sm hover:shadow-2xl transition-all duration-500 h-full">
-                  {/* Gradient border effect on hover */}
-                  <div className={`absolute inset-0 rounded-3xl bg-gradient-to-r ${highlight.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
-                  <div className="absolute inset-[1px] rounded-3xl bg-card" />
-
-                  <div className="relative">
-                    {/* Icon */}
-                    <motion.div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${highlight.color} flex items-center justify-center mb-6 shadow-lg`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                      transition={{ duration: 0.3 }}
+              <BlurFade key={highlight.title} delay={0.15 + index * 0.1} inView>
+                <MagicCard
+                  className="rounded-3xl h-full"
+                  gradientFrom={highlight.from}
+                  gradientTo={highlight.to}
+                  gradientColor="#0f172a"
+                >
+                  <div className="relative p-8 h-full flex flex-col gap-4">
+                    <div
+                      className="size-16 rounded-2xl flex items-center justify-center shadow-lg"
+                      style={{
+                        background: `linear-gradient(135deg, ${highlight.from}, ${highlight.to})`,
+                      }}
                     >
-                      <highlight.icon className="w-8 h-8 text-white" />
-                    </motion.div>
-
-                    <h3 className="text-xl font-bold text-foreground mb-3">
-                      {highlight.title}
-                    </h3>
-
-                    <p className="text-muted-foreground leading-relaxed">
-                      {highlight.description}
-                    </p>
+                      <highlight.icon className="size-8 text-white" />
+                    </div>
+                    <h3 className="text-xl font-bold text-foreground">{highlight.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed">{highlight.description}</p>
                   </div>
-                </div>
-              </motion.div>
+                </MagicCard>
+              </BlurFade>
             ))}
           </div>
         </div>

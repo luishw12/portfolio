@@ -2,64 +2,50 @@ import Header from "@/components/Header";
 import Profile from "@/components/Profile";
 import AboutMe from "@/components/AboutMe";
 import Experience from "@/components/Experience";
-import GitHubStats from "@/components/GitHubStats";
-import RecentActivity from "@/components/RecentActivity";
 import Skills from "@/components/Skills";
 import Projects from "@/components/Degrees";
 import Education from "@/components/Education";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 import Highlights from "@/components/Highlights";
-import { FloatingOrbs, GridPattern } from "@/components/ui/animated-background";
-import ScrollProgress from "@/components/ui/scroll-progress";
-import { DevMetricsWrapper } from "@/components/DevMode";
+import { ScrollProgress } from "@/components/ui/scroll-progress";
+import { AnimatedGridPattern } from "@/components/ui/animated-grid-pattern";
+import { Meteors } from "@/components/ui/meteors";
+import { cn } from "@/lib/utils";
 
 export default function Home() {
   return (
     <main className="min-h-screen relative overflow-hidden">
-      {/* Scroll progress indicator */}
-      <ScrollProgress />
+      <ScrollProgress className="h-1" />
 
-      {/* Animated background elements */}
-      <FloatingOrbs />
-      <GridPattern />
+      {/* Global ambient background */}
+      <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden">
+        <AnimatedGridPattern
+          numSquares={40}
+          maxOpacity={0.12}
+          duration={4}
+          repeatDelay={1}
+          className={cn(
+            "[mask-image:radial-gradient(ellipse_at_center,white,transparent_70%)]",
+            "fill-primary/10 stroke-primary/10 inset-0 h-full w-full"
+          )}
+        />
+        <Meteors number={12} />
+        <div className="absolute inset-0 bg-gradient-to-b from-background via-transparent to-background" />
+      </div>
 
-      {/* Noise texture overlay */}
       <div className="fixed inset-0 pointer-events-none z-0 opacity-20 noise" />
 
-      {/* Main content */}
       <div className="relative z-10">
         <Header />
-        <DevMetricsWrapper name="Profile">
-          <Profile />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="AboutMe">
-          <AboutMe />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Highlights">
-          <Highlights />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Experience">
-          <Experience />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Projects">
-          <Projects />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Skills">
-          <Skills />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="GitHubStats">
-          <GitHubStats />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="RecentActivity">
-          <RecentActivity />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Education">
-          <Education />
-        </DevMetricsWrapper>
-        <DevMetricsWrapper name="Contact">
-          <Contact />
-        </DevMetricsWrapper>
+        <Profile />
+        <AboutMe />
+        <Highlights />
+        <Experience />
+        <Projects />
+        <Skills />
+        <Education />
+        <Contact />
         <Footer />
       </div>
     </main>

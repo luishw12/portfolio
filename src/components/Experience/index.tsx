@@ -1,326 +1,420 @@
 "use client";
 
-import { Card, CardContent } from "@/components/ui/card";
+import { useState } from "react";
+import Image, { type StaticImageData } from "next/image";
 import { Badge } from "@/components/ui/badge";
-import { motion } from "framer-motion";
-import { 
-  Briefcase, 
-  Calendar, 
-  MapPin, 
+import { AnimatePresence, motion } from "motion/react";
+import {
+  Briefcase,
+  Calendar,
+  MapPin,
   ExternalLink,
-  Code,
-  Users,
-  Zap,
-  Shield,
-  Database,
-  Globe,
+  ChevronDown,
   ChevronRight,
-  Building2
 } from "lucide-react";
+import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { MagicCard } from "@/components/ui/magic-card";
+import { BorderBeam } from "@/components/ui/border-beam";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { getYearsOfExperience, cn } from "@/lib/utils";
+import toshyroLogo from "@/img/companies/toshyro.png";
+import triconLogo from "@/img/companies/tricon.png";
+import q2fLogo from "@/img/companies/q2f.png";
+import refatorizeLogo from "@/img/companies/refatorize.png";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2
-    }
-  }
+type Role = {
+  title: string;
+  period: string;
+  achievements: string[];
 };
 
-const itemVariants = {
-  hidden: { y: 30, opacity: 0 },
-  visible: { y: 0, opacity: 1 }
+type Experience = {
+  company: string;
+  period: string;
+  location: string;
+  companyUrl: string;
+  type: string;
+  description: string;
+  roles: Role[];
+  technologies: string[];
+  logo: StaticImageData;
+  logoBg: string;
+  gradientFrom: string;
+  gradientTo: string;
+  current?: boolean;
 };
 
-const experiences = [
+const experiences: Experience[] = [
   {
-      company: "Refatorize",
-      role: "Desenvolvedor Full Stack",
-      period: "2025 - Presente",
-      location: "Remoto",
-      companyUrl: "https://refatorize.com.br",
-      description: "Desenvolvi e mantive uma plataforma SaaS de pagamentos, com foco em segurança e automação fiscal, além de criar dashboards analíticos e pipelines de CI/CD.",
-      achievements: [
-          "Desenvolvi uma plataforma SaaS de pagamentos com arquitetura escalável, integrando Pix e automatizando a emissão de NF-e.",
-          "Criei um dashboard analítico interativo e responsivo com Next.js para visualizações de métricas financeiras em tempo real.",
-          "Construí um backend robusto com Spring Boot hospedado na AWS, garantindo alta resiliência e segurança.",
-          "Automatizei fluxos de CI/CD com GitHub Actions, assegurando entregas contínuas e versionamento confiável.",
-          "Configurei o disparo automático de e-mails transacionais usando AWS SES, garantindo alta confiabilidade na comunicação com usuários."
-      ],
-      technologies: ["React", "Next.js", "Spring Boot", "AWS", "GitHub Actions", "AWS SES", "Pix", "TypeScript", "PostgreSQL", "Docker"],
-      icon: Code,
-      type: "Autônomo",
-      color: "from-blue-500 to-cyan-500"
+    company: "Q2F Sistemas de Gestão",
+    period: "fev 2026 - Presente",
+    location: "Lajeado, RS",
+    companyUrl: "#",
+    type: "CLT",
+    description:
+      "Plataforma SaaS para food service — operação, compras, custos, produção, indicadores e fidelidade.",
+    roles: [
+      {
+        title: "Desenvolvedor Full Stack Pleno II",
+        period: "mai 2026 - Presente",
+        achievements: [
+          "Participação ativa nas decisões técnicas da equipe, colaborando na definição de soluções de arquitetura e evolução contínua dos produtos junto ao Tech Lead.",
+          "Desenvolvimento e evolução de módulos de Operação, Gerência, Suprimentos, Custos e Fidelidade, modernizando a plataforma baseada em Next.js e .NET.",
+          "Contato frequente com usuários finais e clientes, transformando feedbacks operacionais em melhorias de produto e experiência.",
+          "Desenvolvimento de padrões reutilizáveis no frontend, aumentando consistência visual, manutenibilidade e produtividade da equipe.",
+          "Investigação de problemas em produção com AWS, análise de logs, consultas em banco e reprodução local dos cenários.",
+        ],
+      },
+      {
+        title: "Desenvolvedor Full Stack Pleno",
+        period: "fev 2026 - mai 2026",
+        achievements: [
+          "Participação na modernização do ecossistema web, contribuindo para a migração gradual de React para Next.js.",
+          "Desenvolvimento de funcionalidades para redes de franquias e restaurantes: pedidos, checklists, controle sanitário, etiquetas e fidelidade.",
+          "Funcionalidade de descoberta automática de impressoras na rede local, eliminando praticamente todos os chamados de configuração manual.",
+        ],
+      },
+    ],
+    technologies: [".NET", "Next.js", "React", "TypeScript", "PostgreSQL", "AWS"],
+    logo: q2fLogo,
+    logoBg: "bg-[#1e2b58]",
+    gradientFrom: "#f97316",
+    gradientTo: "#f59e0b",
+    current: true,
   },
   {
-      company: "Tricon",
-      role: "Desenvolvedor Full Stack",
-      period: "2024 - Presente",
-      location: "Lajeado, RS, Brasil",
-      companyUrl: "https://tricon.inf.br",
-      description: "Condução da migração de sistemas legados, projetando microsserviços escaláveis na AWS e implementando pipelines de CI/CD para otimizar o ciclo de desenvolvimento.",
-      achievements: [
-          "Conduzi a migração de sistemas legados em Delphi para uma arquitetura moderna com Java Spring Boot, utilizando Thymeleaf e JasperReports.",
-          "Projetei e implementei microsserviços distribuídos e escaláveis na AWS (EC2 e RDS) para garantir resiliência e segurança.",
-          "Gerenciei containers com Docker, padronizando ambientes entre desenvolvimento, homologação e produção.",
-          "Implementei pipelines CI/CD automatizados com GitHub Actions e GitLab CI, reduzindo o tempo de entrega em 30%.",
-          "Desenvolvi APIs RESTful seguras com Spring Boot, aplicando autenticação JWT e boas práticas de arquitetura limpa."
-      ],
-      technologies: ["Java", "Spring Boot", "Thymeleaf", "JasperReports", "AWS", "Docker", "Git", "GitHub Actions", "GitLab CI", "Delphi", "PostgreSQL"],
-      icon: Users,
-      type: "CLT",
-      color: "from-green-500 to-emerald-500"
+    company: "Refatorize",
+    period: "mar 2025 - Presente",
+    location: "Remoto",
+    companyUrl: "https://refatorize.com.br",
+    type: "Fundador",
+    description:
+      "Produtos próprios e experimentos SaaS — da modelagem do negócio à aplicação completa em produção.",
+    roles: [
+      {
+        title: "Fundador",
+        period: "mar 2025 - Presente",
+        achievements: [
+          "Atuação em todas as etapas do desenvolvimento Full Stack: arquitetura, backend, frontend, banco, autenticação, infraestrutura e deploy.",
+          "Desenvolvimento de aplicações com Java, Spring Boot, React, Next.js, TypeScript e PostgreSQL.",
+          "Gerenciamento de infraestrutura com Linux, Docker, VPS, AWS e Vercel.",
+          "Uso contínuo de ferramentas de IA para acelerar o desenvolvimento, mantendo qualidade e legibilidade.",
+        ],
+      },
+    ],
+    technologies: ["Java", "Spring Boot", ".NET", "Next.js", "PostgreSQL", "Docker"],
+    logo: refatorizeLogo,
+    logoBg: "bg-white",
+    gradientFrom: "#3b82f6",
+    gradientTo: "#22d3ee",
+    current: true,
   },
   {
-      company: "Toshyro Inovação e Tecnologia",
-      role: "Desenvolvedor Front-end",
-      period: "2022 - 2024",
-      location: "Lajeado, RS, Brasil",
-      companyUrl: "https://www.toshyro.com.br/",
-      description: "Desenvolvimento de interfaces modernas e responsivas com React.js e Next.js, focando em usabilidade, acessibilidade e integração com APIs.",
-      achievements: [
-          "Desenvolvi interfaces modernas e responsivas com React.js, TailwindCSS e Next.js, garantindo usabilidade e acessibilidade.",
-          "Atuei na construção de aplicações Next.js escaláveis, promovendo integração eficiente com APIs REST em .NET e otimizando o carregamento.",
-          "Implementei documentação interativa de APIs com Swagger e padronização visual com Storybook para acelerar o desenvolvimento.",
-          "Participei de sprints semanais, entregando funcionalidades críticas como autenticação com JWT, dashboards dinâmicos e componentes reutilizáveis."
-      ],
-      technologies: ["React.js", "Next.js", "TailwindCSS", "JavaScript", "TypeScript", "HTML", "CSS", ".NET", "Swagger", "Storybook", "JWT"],
-      icon: Zap,
-      type: "CLT",
-      color: "from-purple-500 to-pink-500"
-  }
+    company: "Tricon - Softwares de Gestão",
+    period: "nov 2024 - fev 2026",
+    location: "Lajeado, RS",
+    companyUrl: "https://tricon.inf.br",
+    type: "CLT",
+    description:
+      "Evolução do ERP web, migração do legado Delphi para Java Spring Boot e soluções de importação fiscal.",
+    roles: [
+      {
+        title: "Desenvolvedor Full Stack Pleno",
+        period: "ago 2025 - fev 2026",
+        achievements: [
+          "Uma das principais referências técnicas da equipe: prioridades, padronização, apoio aos desenvolvedores e arquitetura do novo ERP web.",
+          "Desenvolvimento completo de solução comercializada para importação automatizada de documentos fiscais.",
+          "Mecanismos de sincronização incremental entre o legado Delphi e o ERP web em Java.",
+          "Otimização de consultas SQL e relatórios JasperReports, reduzindo significativamente o tempo médio de processamento.",
+        ],
+      },
+      {
+        title: "Desenvolvedor Full Stack Júnior",
+        period: "nov 2024 - ago 2025",
+        achievements: [
+          "Evolução do ERP web em Java Spring Boot, participando da migração gradual do sistema legado em Delphi.",
+          "Componentização de telas e padronização de elementos reutilizáveis.",
+          "Integração entre Firebird e PostgreSQL para migração de dados entre legado e novo ERP.",
+        ],
+      },
+    ],
+    technologies: ["Java", "Spring Boot", "Delphi", "PostgreSQL", "Docker", "AWS"],
+    logo: triconLogo,
+    logoBg: "bg-[#0a1628]",
+    gradientFrom: "#22c55e",
+    gradientTo: "#10b981",
+  },
+  {
+    company: "Toshyro Inovação e Tecnologia",
+    period: "abr 2022 - nov 2024",
+    location: "Lajeado, RS",
+    companyUrl: "https://www.toshyro.com.br/",
+    type: "CLT",
+    description:
+      "Início da trajetória em produtos corporativos, evoluindo de assistente a Full Stack Júnior.",
+    roles: [
+      {
+        title: "Desenvolvedor Full Stack Júnior",
+        period: "dez 2023 - nov 2024",
+        achievements: [
+          "Desenvolvimento de aplicações web com React, Next.js, TypeScript e .NET para produtos corporativos.",
+          "Criação e evolução de Design System interno com ~15 componentes reutilizáveis via npm e Storybook.",
+          "Participação na migração de partes do ERP de PHP para Next.js e .NET.",
+        ],
+      },
+      {
+        title: "Assistente de Desenvolvimento Full Stack",
+        period: "abr 2022 - dez 2023",
+        achievements: [
+          "Início da carreira em meio período enquanto concluía o ensino médio.",
+          "Correções e novas funcionalidades em aplicações web com React e Next.js.",
+          "Primeiros contatos com .NET, PostgreSQL, Docker e Git.",
+        ],
+      },
+    ],
+    technologies: ["React", "Next.js", "TypeScript", ".NET", "PostgreSQL", "Storybook"],
+    logo: toshyroLogo,
+    logoBg: "bg-white",
+    gradientFrom: "#a855f7",
+    gradientTo: "#ec4899",
+  },
 ];
 
 const getTypeColor = (type: string) => {
   switch (type) {
     case "CLT":
       return "bg-green-500/10 text-green-500 border-green-500/20";
-    case "Freelance":
-      return "bg-blue-500/10 text-blue-500 border-blue-500/20";
-    case "Autônomo":
+    case "Fundador":
       return "bg-amber-500/10 text-amber-500 border-amber-500/20";
     default:
-      return "bg-gray-500/10 text-gray-500 border-gray-500/20";
+      return "bg-muted text-muted-foreground border-border";
   }
 };
 
-export default function Experience() {
+function ExperienceCard({
+  exp,
+  index,
+}: {
+  exp: Experience;
+  index: number;
+}) {
+  const [open, setOpen] = useState(false);
+  const currentRole = exp.roles[0];
+
   return (
-    <section id="experiencia" className="py-24 relative overflow-hidden">
-      {/* Background */}
+    <BlurFade delay={0.1 + index * 0.08} inView className="relative pl-8 md:pl-10">
+      <div className="absolute left-0 top-6 size-3 rounded-full bg-primary ring-4 ring-background shadow-lg shadow-primary/40 z-10" />
+
+      <MagicCard
+        className="relative rounded-2xl overflow-hidden"
+        gradientFrom={exp.gradientFrom}
+        gradientTo={exp.gradientTo}
+        gradientColor="#0f172a"
+      >
+        {exp.current && (
+          <BorderBeam
+            size={80}
+            duration={8}
+            colorFrom={exp.gradientFrom}
+            colorTo={exp.gradientTo}
+            borderWidth={1.5}
+          />
+        )}
+
+        <div className="p-4 sm:p-5 flex flex-col gap-3">
+          <div className="flex items-start gap-3">
+            <div
+              className={cn(
+                "size-12 sm:size-14 rounded-xl overflow-hidden flex-shrink-0 border border-border/50 flex items-center justify-center",
+                exp.logoBg
+              )}
+            >
+              <Image
+                src={exp.logo}
+                alt={`Logo ${exp.company}`}
+                width={56}
+                height={56}
+                className="size-full object-contain p-1"
+              />
+            </div>
+
+            <div className="flex-1 min-w-0 flex flex-col gap-1">
+              <div className="flex items-center gap-2 flex-wrap">
+                {exp.companyUrl !== "#" ? (
+                  <a
+                    href={exp.companyUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="font-bold text-foreground hover:text-primary transition-colors flex items-center gap-1 text-base sm:text-lg truncate"
+                  >
+                    {exp.company}
+                    <ExternalLink className="size-3.5 flex-shrink-0 opacity-60" />
+                  </a>
+                ) : (
+                  <span className="font-bold text-foreground text-base sm:text-lg truncate">
+                    {exp.company}
+                  </span>
+                )}
+                <Badge
+                  className={cn(getTypeColor(exp.type), "border text-[10px] px-1.5 py-0")}
+                  variant="outline"
+                >
+                  {exp.type}
+                </Badge>
+              </div>
+
+              <p className="text-sm font-medium text-foreground/90">
+                {currentRole.title}
+                {exp.roles.length > 1 && (
+                  <span className="text-muted-foreground font-normal">
+                    {" "}
+                    · {exp.roles.length} cargos
+                  </span>
+                )}
+              </p>
+
+              <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-muted-foreground">
+                <span className="flex items-center gap-1">
+                  <Calendar className="size-3" />
+                  {exp.period}
+                </span>
+                <span className="flex items-center gap-1">
+                  <MapPin className="size-3" />
+                  {exp.location}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            {exp.description}
+          </p>
+
+          <div className="flex flex-wrap gap-1.5">
+            {exp.technologies.map((tech) => (
+              <Badge
+                key={tech}
+                variant="secondary"
+                className="px-2 py-0 text-[10px] font-normal"
+              >
+                {tech}
+              </Badge>
+            ))}
+          </div>
+
+          <button
+            type="button"
+            onClick={() => setOpen((v) => !v)}
+            className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors self-start mt-0.5"
+            aria-expanded={open}
+          >
+            <ChevronDown
+              className={cn(
+                "size-3.5 transition-transform duration-200",
+                open && "rotate-180"
+              )}
+            />
+            {open ? "Ocultar conquistas" : "Ver conquistas"}
+          </button>
+
+          <AnimatePresence initial={false}>
+            {open && (
+              <motion.div
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ duration: 0.25, ease: "easeOut" }}
+                className="overflow-hidden"
+              >
+                <div className="flex flex-col gap-4 pt-1 pb-1">
+                  {exp.roles.map((role) => (
+                    <div key={role.title} className="flex flex-col gap-2">
+                      {exp.roles.length > 1 && (
+                        <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-0.5">
+                          <h4 className="text-sm font-semibold text-foreground">
+                            {role.title}
+                          </h4>
+                          <span className="text-xs text-muted-foreground">
+                            {role.period}
+                          </span>
+                        </div>
+                      )}
+                      <ul className="flex flex-col gap-1.5">
+                        {role.achievements.map((achievement) => (
+                          <li
+                            key={achievement}
+                            className="text-xs text-muted-foreground flex items-start gap-2 leading-relaxed"
+                          >
+                            <ChevronRight className="size-3 text-primary mt-0.5 flex-shrink-0" />
+                            {achievement}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  ))}
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
+      </MagicCard>
+    </BlurFade>
+  );
+}
+
+export default function Experience() {
+  const years = getYearsOfExperience();
+
+  return (
+    <section id="experiencia" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
 
       <div className="container mx-auto px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          {/* Header */}
-          <motion.div
-            className="text-center mb-16"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
+        <div className="max-w-3xl mx-auto flex flex-col gap-10">
+          <BlurFade delay={0.05} inView className="text-center">
             <Badge variant="outline" className="mb-4 px-4 py-1">
-              <Briefcase className="w-3 h-3 mr-2" />
+              <Briefcase className="size-3 mr-2" />
               Carreira
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
-              Experiência{" "}
-              <span className="text-gradient bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                Profissional
-              </span>
+            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
+              Experiência <BrandTextReveal text="Profissional" />
             </h2>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base">
               Minha jornada desenvolvendo soluções inovadoras e escaláveis
             </p>
-          </motion.div>
+          </BlurFade>
 
-          {/* Timeline */}
-          <motion.div
-            className="relative"
-            variants={containerVariants}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-          >
-            {/* Timeline line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent transform md:-translate-x-1/2 hidden md:block" />
+          <BlurFade delay={0.1} inView>
+            <div className="grid grid-cols-3 gap-3 sm:gap-4">
+              {[
+                { value: years, suffix: "+", label: "Anos" },
+                { value: 15, suffix: "+", label: "Projetos" },
+                { value: 4, suffix: "", label: "Empresas" },
+              ].map((stat) => (
+                <div
+                  key={stat.label}
+                  className="rounded-xl border border-border/50 bg-card/40 backdrop-blur-sm px-3 py-3 text-center"
+                >
+                  <div className="text-2xl sm:text-3xl font-bold text-foreground tabular-nums">
+                    <NumberTicker value={stat.value} className="text-foreground" />
+                    {stat.suffix}
+                  </div>
+                  <p className="text-[11px] sm:text-xs text-muted-foreground mt-0.5">
+                    {stat.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </BlurFade>
+
+          <div className="relative flex flex-col gap-4">
+            <div className="absolute left-[5px] top-3 bottom-3 w-px bg-gradient-to-b from-primary/50 via-primary/20 to-transparent" />
 
             {experiences.map((exp, index) => (
-              <motion.div
-                key={index}
-                variants={itemVariants}
-                className={`relative flex flex-col md:flex-row gap-8 mb-12 ${
-                  index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'
-                }`}
-              >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 w-4 h-4 bg-primary rounded-full transform md:-translate-x-1/2 -translate-y-1 hidden md:block shadow-lg shadow-primary/50 z-10" />
-
-                {/* Card */}
-                <div className={`flex-1 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                  <Card className="group border-0 shadow-xl hover:shadow-2xl transition-all duration-500 overflow-hidden">
-                    {/* Gradient top border */}
-                    <div className={`h-1 bg-gradient-to-r ${exp.color}`} />
-
-                    <CardContent className="p-8">
-                      <div className="flex flex-col gap-6">
-                        {/* Header */}
-                        <div className="flex items-start justify-between gap-4">
-                          <div className="flex items-start gap-4">
-                            <motion.div
-                              className={`w-14 h-14 rounded-2xl bg-gradient-to-br ${exp.color} flex items-center justify-center shadow-lg flex-shrink-0`}
-                              whileHover={{ scale: 1.1, rotate: 5 }}
-                              transition={{ duration: 0.3 }}
-                            >
-                              <exp.icon className="h-7 w-7 text-white" />
-                            </motion.div>
-
-                            <div>
-                              <div className="flex items-center gap-2 flex-wrap mb-1">
-                                <h3 className="text-xl font-bold text-foreground">
-                                  {exp.role}
-                                </h3>
-                                <Badge className={`${getTypeColor(exp.type)} border`} variant="outline">
-                                  {exp.type}
-                                </Badge>
-                              </div>
-
-                              <div className="flex items-center gap-2 text-primary">
-                                <Building2 className="h-4 w-4" />
-                                {exp.companyUrl !== "#" ? (
-                                  <a 
-                                    href={exp.companyUrl}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="font-semibold hover:underline flex items-center gap-1"
-                                  >
-                                    {exp.company}
-                                    <ExternalLink className="h-3 w-3" />
-                                  </a>
-                                ) : (
-                                  <span className="font-semibold">{exp.company}</span>
-                                )}
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* Meta info */}
-                        <div className="flex flex-wrap items-center gap-4 text-sm text-muted-foreground">
-                          <div className="flex items-center gap-2">
-                            <Calendar className="h-4 w-4" />
-                            <span>{exp.period}</span>
-                          </div>
-                          <div className="flex items-center gap-2">
-                            <MapPin className="h-4 w-4" />
-                            <span>{exp.location}</span>
-                          </div>
-                        </div>
-                        
-                        {/* Description */}
-                        <p className="text-muted-foreground leading-relaxed">
-                          {exp.description}
-                        </p>
-                        
-                        {/* Achievements */}
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                            <Shield className="h-5 w-5 text-primary" />
-                            Principais Conquistas
-                          </h4>
-                          <ul className="space-y-2">
-                            {exp.achievements.slice(0, 3).map((achievement, achievementIndex) => (
-                              <motion.li
-                                key={achievementIndex}
-                                initial={{ opacity: 0, x: -20 }}
-                                whileInView={{ opacity: 1, x: 0 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.3, delay: achievementIndex * 0.1 }}
-                                className="text-sm text-muted-foreground flex items-start gap-3 group/item"
-                              >
-                                <ChevronRight className="w-4 h-4 text-primary mt-0.5 flex-shrink-0 group-hover/item:translate-x-1 transition-transform" />
-                                {achievement}
-                              </motion.li>
-                            ))}
-                          </ul>
-                        </div>
-
-                        {/* Technologies */}
-                        <div>
-                          <h4 className="font-semibold text-foreground mb-3 flex items-center gap-2">
-                            <Database className="h-5 w-5 text-primary" />
-                            Stack Tecnológico
-                          </h4>
-                          <div className="flex flex-wrap gap-2">
-                            {exp.technologies.map((tech, techIndex) => (
-                              <motion.div
-                                key={tech}
-                                initial={{ scale: 0, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.2, delay: techIndex * 0.03 }}
-                                whileHover={{ scale: 1.1, y: -2 }}
-                              >
-                                <Badge
-                                  variant="secondary"
-                                  className="px-3 py-1 text-xs hover:bg-primary/10 transition-colors cursor-default"
-                                >
-                                  {tech}
-                                </Badge>
-                              </motion.div>
-                            ))}
-                          </div>
-                        </div>
-                      </div>
-                    </CardContent>
-                  </Card>
-                </div>
-
-                {/* Spacer for alternating layout */}
-                <div className="hidden md:block flex-1" />
-              </motion.div>
+              <ExperienceCard key={exp.company} exp={exp} index={index} />
             ))}
-          </motion.div>
-
-          {/* Stats */}
-          <motion.div
-            className="mt-20 grid md:grid-cols-3 gap-6"
-            initial={{ y: 30, opacity: 0 }}
-            whileInView={{ y: 0, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-          >
-            {[
-              { icon: Calendar, value: "2+", label: "Anos de Experiência", color: "from-blue-500 to-cyan-500" },
-              { icon: Globe, value: "15+", label: "Projetos Desenvolvidos", color: "from-green-500 to-emerald-500" },
-              { icon: Users, value: "3", label: "Empresas Trabalhadas", color: "from-purple-500 to-pink-500" },
-            ].map((stat, index) => (
-              <motion.div
-                key={stat.label}
-                initial={{ scale: 0.9, opacity: 0 }}
-                whileInView={{ scale: 1, opacity: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 * index }}
-                whileHover={{ y: -5 }}
-              >
-                <Card className="border-0 shadow-xl overflow-hidden group">
-                  <div className={`h-1 bg-gradient-to-r ${stat.color}`} />
-                  <CardContent className="p-6 text-center">
-                    <motion.div
-                      className={`w-16 h-16 rounded-2xl bg-gradient-to-br ${stat.color} flex items-center justify-center mx-auto mb-4 shadow-lg`}
-                      whileHover={{ scale: 1.1, rotate: 5 }}
-                    >
-                      <stat.icon className="h-8 w-8 text-white" />
-                    </motion.div>
-                    <h3 className="text-3xl font-bold text-foreground mb-2">{stat.value}</h3>
-                    <p className="text-muted-foreground">{stat.label}</p>
-                  </CardContent>
-                </Card>
-              </motion.div>
-            ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

@@ -7,26 +7,33 @@ description: Current technology stack and professional experience details
 
 ## Current Professional Experience
 
-### Refatorize (2024 - Presente)
-- **Role**: Desenvolvedor Full Stack
+### Q2F Sistemas de Gestão (fev 2026 - Presente)
+- **Roles**: Desenvolvedor Full Stack Pleno II (mai 2026–Presente); Pleno (fev–mai 2026)
+- **Location**: Lajeado, RS, Brasil
+- **Type**: CLT
+- **Stack**: .NET, Next.js, React, TypeScript, PostgreSQL, Supabase, AWS, Linux, Git
+- **Focus**: Plataforma SaaS food service — operação, suprimentos, custos e fidelidade
+
+### Refatorize (mar 2025 - Presente)
+- **Role**: Fundador
 - **Location**: Remoto
-- **Type**: CLT
-- **Stack**: React, Next.js, TypeScript, Java, Spring Boot, PostgreSQL, Docker, AWS
-- **Focus**: Soluções modernas e migração de sistemas legados
+- **Type**: Fundador / produtos próprios
+- **Stack**: Java, Spring Boot, .NET, React, Next.js, TypeScript, PostgreSQL, Docker, Linux, AWS, Vercel
+- **Focus**: Produtos SaaS próprios — arquitetura completa até produção
 
-### Tricon (2023 - Presente)
-- **Role**: Desenvolvedor Full Stack
+### Tricon - Softwares de Gestão (nov 2024 - fev 2026)
+- **Roles**: Full Stack Pleno (ago 2025–fev 2026); Full Stack Júnior (nov 2024–ago 2025)
 - **Location**: Lajeado, RS, Brasil
 - **Type**: CLT
-- **Stack**: Java, Spring Boot, Spring Framework, React, PostgreSQL, Delphi, Git, Docker
-- **Focus**: Sistemas corporativos e APIs REST com Java
+- **Stack**: Java, Spring Boot, Delphi, PostgreSQL, Firebird, JasperReports, Docker, AWS, GitLab CI
+- **Focus**: ERP web, migração de legado e importação fiscal automatizada
 
-### Toshyro Inovação e Tecnologia (2022 - 2023)
-- **Role**: Desenvolvedor Full Stack
+### Toshyro Inovação e Tecnologia (abr 2022 - nov 2024)
+- **Roles**: Full Stack Júnior (dez 2023–nov 2024); Assistente Full Stack (abr 2022–dez 2023)
 - **Location**: Lajeado, RS, Brasil
 - **Type**: CLT
-- **Stack**: React, Next.js, JavaScript, TypeScript, .NET, PostgreSQL, Docker, Git
-- **Focus**: Soluções inovadoras e tecnológicas
+- **Stack**: React, Next.js, TypeScript, JavaScript, .NET, PostgreSQL, Storybook, Docker, Git
+- **Focus**: Produtos corporativos e Design System interno
 
 ## Technology Categories
 
@@ -37,24 +44,24 @@ description: Current technology stack and professional experience details
 - **Icons**: Lucide React
 
 ### Backend Technologies
-- **Primary**: Java, Spring Boot, Spring Framework
-- **Secondary**: .NET, Node.js
-- **APIs**: REST APIs, GraphQL (basic)
+- **Primary**: .NET, C#, Java, Spring Boot
+- **Secondary**: Node.js, Python
+- **APIs**: REST APIs, JWT
 
 ### Database Technologies
 - **Primary**: PostgreSQL, MySQL
-- **Secondary**: MongoDB, Redis, SQLite
+- **Secondary**: MongoDB, Redis, SQLite, Firebird, Supabase
 
 ### DevOps & Cloud
 - **Containerization**: Docker
 - **Version Control**: Git, GitHub Actions, GitLab CI
-- **Cloud**: AWS
+- **Cloud**: AWS (EC2, S3)
 - **OS**: Linux
 
 ### Development Tools
 - **IDEs**: VS Code, IntelliJ IDEA
 - **Testing**: Postman
-- **Design**: Figma
+- **Design**: Figma, Storybook
 - **Project Management**: Jira, Slack, Notion
 
 ### Mobile Development
@@ -65,7 +72,7 @@ description: Current technology stack and professional experience details
 - **Delphi**: Used at Tricon for legacy system maintenance
 
 ## Methodologies & Practices
-- Agile/Scrum
+- Agile / Kanban
 - Clean Code
 - SOLID Principles
 - TDD (Test-Driven Development)
@@ -73,11 +80,13 @@ description: Current technology stack and professional experience details
 - Microservices Architecture
 
 ## Key Skills & Expertise
-- Full Stack Development (2+ years)
-- Java & Spring Boot (Primary backend stack)
+- Full Stack Development (desde 2022)
+- .NET & C# (backend atual na Q2F)
+- Java & Spring Boot
 - React & Next.js (Primary frontend stack)
 - API Development & Integration
 - Database Design & Optimization
 - Legacy System Migration
 - Cloud Architecture (AWS)
 - DevOps Practices
+- Produtos SaaS

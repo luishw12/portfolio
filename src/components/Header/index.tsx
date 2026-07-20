@@ -2,10 +2,10 @@
 
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Github, Linkedin, FileText, Menu, X, Download } from "lucide-react";
+import { Github, Linkedin, Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
-import { useState } from "react";
-import { DevModeToggle } from "@/components/DevMode";
+import { useEffect, useState } from "react";
+import { cn } from "@/lib/utils";
 
 const navLinks = [
   { href: "#sobre", label: "Sobre" },
@@ -18,15 +18,66 @@ const navLinks = [
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
   const { scrollY } = useScroll();
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     setIsScrolled(latest > 50);
   });
 
+  useEffect(() => {
+    const sectionIds = navLinks.map((link) => link.href.slice(1));
+    const visibleSections = new Map<string, number>();
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            visibleSections.set(entry.target.id, entry.intersectionRatio);
+          } else {
+            visibleSections.delete(entry.target.id);
+          }
+        });
+
+        if (visibleSections.size === 0) {
+          if (window.scrollY < 100) setActiveSection("");
+          return;
+        }
+
+        // Prefer the section closest to the top of the viewport
+        let topSection = "";
+        let topDistance = Infinity;
+
+        visibleSections.forEach((_, id) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          const distance = Math.abs(el.getBoundingClientRect().top - 100);
+          if (distance < topDistance) {
+            topDistance = distance;
+            topSection = `#${id}`;
+          }
+        });
+
+        if (topSection) setActiveSection(topSection);
+      },
+      {
+        rootMargin: "-100px 0px -45% 0px",
+        threshold: [0, 0.25, 0.5],
+      }
+    );
+
+    sectionIds.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+
+    return () => observer.disconnect();
+  }, []);
+
   const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     setMobileMenuOpen(false);
+    setActiveSection(targetId);
 
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
@@ -54,9 +105,10 @@ export default function Header() {
         }`}
       >
         <div className="container mx-auto px-6">
-          <div className="flex justify-between items-center h-20">
+          <div className="grid grid-cols-[1fr_auto_1fr] items-center h-20">
             {/* Logo */}
             <motion.div
+              className="justify-self-start"
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
@@ -72,31 +124,43 @@ export default function Header() {
             </motion.div>
 
             {/* Desktop Navigation */}
-            <nav className="hidden md:flex items-center gap-1">
-              {navLinks.map((link, index) => (
-                <motion.div
-                  key={link.href}
-                  initial={{ opacity: 0, y: -20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.1 * index }}
-                >
-                  <a
-                    href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
-                    className="relative px-4 py-2 text-sm text-muted-foreground hover:text-foreground transition-colors group"
+            <nav className="hidden md:flex items-center gap-1 justify-self-center">
+              {navLinks.map((link, index) => {
+                const isActive = activeSection === link.href;
+
+                return (
+                  <motion.div
+                    key={link.href}
+                    initial={{ opacity: 0, y: -20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.1 * index }}
                   >
-                    {link.label}
-                    <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-primary group-hover:w-3/4 transition-all duration-300" />
-                  </a>
-                </motion.div>
-              ))}
+                    <a
+                      href={link.href}
+                      onClick={(e) => handleSmoothScroll(e, link.href)}
+                      aria-current={isActive ? "true" : undefined}
+                      className={cn(
+                        "relative px-4 py-2 text-sm transition-colors group",
+                        isActive
+                          ? "text-foreground"
+                          : "text-muted-foreground hover:text-foreground"
+                      )}
+                    >
+                      {link.label}
+                      <span
+                        className={cn(
+                          "absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-primary transition-all duration-300",
+                          isActive ? "w-3/4" : "w-0 group-hover:w-3/4"
+                        )}
+                      />
+                    </a>
+                  </motion.div>
+                );
+              })}
             </nav>
 
             {/* Actions */}
-            <div className="hidden md:flex items-center gap-3">
-              {/* Dev Mode Toggle */}
-              <DevModeToggle />
-
+            <div className="hidden md:flex items-center gap-3 justify-self-end">
               <motion.div
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
@@ -129,7 +193,7 @@ export default function Header() {
               >
                 <Button
                   size="sm"
-                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 rounded-full px-4"
+                  className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 rounded-full px-4 relative overflow-hidden"
                   asChild
                 >
                   <Link href="/curriculo.pdf" target="_blank">
@@ -142,7 +206,7 @@ export default function Header() {
 
             {/* Mobile Menu Button */}
             <motion.div
-              className="md:hidden"
+              className="md:hidden justify-self-end col-start-3"
               whileTap={{ scale: 0.9 }}
             >
               <Button
@@ -184,19 +248,29 @@ export default function Header() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.1 }}
             >
-              {navLinks.map((link, index) => (
-                <motion.a
-                  key={link.href}
-                  href={link.href}
-                  onClick={(e) => handleSmoothScroll(e, link.href)}
-                  className="text-2xl font-medium text-muted-foreground hover:text-foreground py-3 transition-colors"
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: 0.1 + index * 0.05 }}
-                >
-                  {link.label}
-                </motion.a>
-              ))}
+              {navLinks.map((link, index) => {
+                const isActive = activeSection === link.href;
+
+                return (
+                  <motion.a
+                    key={link.href}
+                    href={link.href}
+                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    aria-current={isActive ? "true" : undefined}
+                    className={cn(
+                      "text-2xl font-medium py-3 transition-colors",
+                      isActive
+                        ? "text-foreground"
+                        : "text-muted-foreground hover:text-foreground"
+                    )}
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + index * 0.05 }}
+                  >
+                    {link.label}
+                  </motion.a>
+                );
+              })}
 
               <motion.div
                 className="flex gap-4 mt-8"
@@ -231,16 +305,6 @@ export default function Header() {
                     Download CV
                   </Link>
                 </Button>
-              </motion.div>
-
-              {/* Dev Mode Toggle - Mobile */}
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                transition={{ delay: 0.6 }}
-                className="mt-6"
-              >
-                <DevModeToggle />
               </motion.div>
             </motion.nav>
           </motion.div>

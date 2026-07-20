@@ -1,363 +1,296 @@
 "use client";
 
 import ProfilePhoto from "@/img/foto-perfil.jpg";
+import DotnetLogo from "@/img/stacks/dotnet.png";
+import ReactLogo from "@/img/stacks/react.png";
+import NextjsLogo from "@/img/stacks/nextjs.png";
+import NodejsLogo from "@/img/stacks/nodejs.png";
+import DockerLogo from "@/img/stacks/docker.png";
+import PythonLogo from "@/img/stacks/python.png";
 import Image from "next/image";
-import { Badge } from "@/components/ui/badge";
+import { motion, useScroll, useTransform } from "motion/react";
+import { ArrowDown, Download, Mail, Sparkles } from "lucide-react";
+import { useRef, useState, useEffect } from "react";
+import Particles from "@/components/ui/Particles";
+import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
+import { getYearsOfExperience } from "@/lib/utils";
+import { BlurFade } from "@/components/ui/blur-fade";
+import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
+import { Text3DFlipLoop } from "@/components/ui/text-3d-flip-loop";
+import { ShimmerButton } from "@/components/ui/shimmer-button";
+import { NumberTicker } from "@/components/ui/number-ticker";
+import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { Button } from "@/components/ui/button";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { ArrowDown, Download, Mail, Sparkles, Code, Rocket, Zap } from "lucide-react";
-import { useRef, useEffect, useState } from "react";
-import TerminalChallenge from "@/components/TerminalChallenge";
+import { cn } from "@/lib/utils";
 
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.15,
-      delayChildren: 0.2
-    }
-  }
-};
-
-const itemVariants = {
-  hidden: { y: 40, opacity: 0 },
-  visible: { y: 0, opacity: 1 }
-};
-
-const technologies = [
-  { name: "Java", color: "from-orange-500 to-red-500" },
-  { name: "React", color: "from-cyan-400 to-blue-500" },
-  { name: "Next.js", color: "from-gray-400 to-gray-600" },
-  { name: ".NET", color: "from-purple-500 to-violet-600" },
-  { name: "AWS", color: "from-amber-400 to-orange-500" },
-  { name: "PostgreSQL", color: "from-blue-400 to-indigo-500" },
+const HERO_PARTICLE_COLORS = [
+  "#60a5fa",
+  "#a855f7",
+  "#ec4899",
+  "#22d3ee",
+  "#38bdf8",
 ];
 
-const stats = [
-  { value: "2+", label: "Anos de Experiência", icon: Code },
-  { value: "15+", label: "Projetos Entregues", icon: Rocket },
-  { value: "100%", label: "Dedicação", icon: Zap },
+const orbitLogos: {
+  name: string;
+  logo: typeof DotnetLogo;
+  fill?: boolean;
+  wide?: boolean;
+}[] = [
+  { name: ".NET", logo: DotnetLogo, fill: true },
+  { name: "React", logo: ReactLogo },
+  { name: "Next.js", logo: NextjsLogo, wide: true },
+  { name: "Node.js", logo: NodejsLogo },
+  { name: "Docker", logo: DockerLogo },
+  { name: "Python", logo: PythonLogo },
 ];
-
-// Typing effect hook
-const useTypingEffect = (texts: string[], typingSpeed = 100, deletingSpeed = 50, pauseTime = 2000) => {
-  const [displayText, setDisplayText] = useState("");
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isDeleting, setIsDeleting] = useState(false);
-
-  useEffect(() => {
-    const currentText = texts[currentIndex];
-
-    const timeout = setTimeout(() => {
-      if (!isDeleting) {
-        if (displayText.length < currentText.length) {
-          setDisplayText(currentText.slice(0, displayText.length + 1));
-        } else {
-          setTimeout(() => setIsDeleting(true), pauseTime);
-        }
-      } else {
-        if (displayText.length > 0) {
-          setDisplayText(currentText.slice(0, displayText.length - 1));
-        } else {
-          setIsDeleting(false);
-          setCurrentIndex((prev) => (prev + 1) % texts.length);
-        }
-      }
-    }, isDeleting ? deletingSpeed : typingSpeed);
-
-    return () => clearTimeout(timeout);
-  }, [displayText, currentIndex, isDeleting, texts, typingSpeed, deletingSpeed, pauseTime]);
-
-  return displayText;
-};
 
 export default function Profile() {
   const containerRef = useRef<HTMLElement>(null);
-  const [isTerminalOpen, setIsTerminalOpen] = useState(false);
+  const [pixelRatio, setPixelRatio] = useState(1);
+
+  useEffect(() => {
+    setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }, []);
 
   const { scrollYProgress } = useScroll({
     target: containerRef,
-    offset: ["start start", "end start"]
+    offset: ["start start", "end start"],
   });
 
-  const y = useTransform(scrollYProgress, [0, 1], ["0%", "30%"]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
-
-  const typedText = useTypingEffect([
-    "Desenvolvedor Full Stack",
-    "Especialista em React & Next.js",
-    "Arquiteto de Software",
-    "Entusiasta de Cloud & DevOps",
-  ]);
+  // Apaga o conteúdo da hero conforme o scroll (volta ao efeito original)
+  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
+  const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.45], [1, 0.85, 0]);
+  const contentBlur = useTransform(scrollYProgress, [0, 0.45], [0, 6]);
+  const contentFilter = useTransform(contentBlur, (b) => `blur(${b}px)`);
 
   return (
     <section
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
-      {/* Animated gradient background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
-
-      {/* Grid pattern overlay */}
-      <div
-        className="absolute inset-0 opacity-[0.03]"
-        style={{
-          backgroundImage: `
-            linear-gradient(to right, hsl(var(--foreground)) 1px, transparent 1px),
-            linear-gradient(to bottom, hsl(var(--foreground)) 1px, transparent 1px)
-          `,
-          backgroundSize: "80px 80px",
-        }}
-      />
+      <div className="absolute inset-0 z-0 bg-background pointer-events-none">
+        <Particles
+          particleColors={HERO_PARTICLE_COLORS}
+          particleCount={140}
+          particleSpread={8}
+          speed={0.08}
+          particleBaseSize={80}
+          moveParticlesOnHover
+          particleHoverFactor={0.6}
+          alphaParticles
+          sizeRandomness={0.8}
+          pixelRatio={pixelRatio}
+          interactionRef={containerRef}
+        />
+        <div
+          className="absolute inset-0 pointer-events-none"
+          style={{
+            background:
+              "radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.4) 60%, hsl(var(--background) / 0.85) 100%)",
+          }}
+        />
+      </div>
 
       <motion.div
-        className="container mx-auto px-6 py-20 relative z-10"
-        style={{ y, opacity }}
+        className="container mx-auto px-6 py-20 relative z-10 pointer-events-none will-change-[opacity,transform,filter]"
+        style={{
+          y: contentY,
+          opacity: contentOpacity,
+          filter: contentFilter,
+        }}
       >
         <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          {/* Content */}
-          <motion.div
-            className="flex-1 text-center lg:text-left"
-            variants={containerVariants}
-            initial="hidden"
-            animate="visible"
-          >
-            <div className="space-y-8">
-              {/* Greeting badge */}
-              <motion.div variants={itemVariants} className="flex justify-center lg:justify-start">
-                <Badge
-                  variant="outline"
-                  className="px-4 py-2 text-sm border-primary/30 bg-primary/5 backdrop-blur-sm"
+          <div className="flex-1 text-center lg:text-left flex flex-col gap-8">
+            <BlurFade delay={0.1}>
+              <div className="flex justify-center lg:justify-start">
+                <div
+                  className={cn(
+                    "group rounded-full border border-primary/20 bg-primary/5 text-base transition-all ease-in hover:cursor-pointer hover:bg-primary/10"
+                  )}
                 >
-                  <Sparkles className="w-4 h-4 mr-2 text-primary animate-pulse" />
-                  Disponível para novos projetos
-                </Badge>
-              </motion.div>
+                  <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1.5 transition ease-out hover:text-foreground text-sm">
+                    <Sparkles className="mr-2 size-3.5 text-primary" />
+                    Disponível para novos projetos
+                  </AnimatedShinyText>
+                </div>
+              </div>
+            </BlurFade>
 
-              {/* Name */}
-              <motion.div variants={itemVariants} className="space-y-4">
-                <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
-                  <span className="text-foreground">Olá, eu sou</span>
-                  <br />
-                  <span className="text-gradient bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
-                    Luís Henrique
-                  </span>
-                </h1>
-              </motion.div>
+            <BlurFade delay={0.2}>
+              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+                <span className="text-foreground">Olá, eu sou</span>
+                <br />
+                <BrandTextReveal text="Luís Henrique" delay={0.35} duration={1.8} />
+              </h1>
+            </BlurFade>
 
-              {/* Typed role */}
-              <motion.div variants={itemVariants} className="h-12">
-                <h2 className="text-2xl lg:text-3xl font-medium text-muted-foreground">
-                  {typedText}
-                  <span className="inline-block w-0.5 h-7 ml-1 bg-primary animate-pulse" />
-                </h2>
-              </motion.div>
+            <BlurFade delay={0.35}>
+              <Text3DFlipLoop
+                className="text-2xl lg:text-3xl font-medium text-muted-foreground"
+                words={[
+                  "Desenvolvedor Full Stack",
+                  "C# · .NET · React · Next.js",
+                  "Node.js · AWS · Docker · Python",
+                  "Produtos SaaS & Arquitetura",
+                ]}
+                interval={3200}
+                staggerDuration={0.03}
+              />
+            </BlurFade>
 
-              {/* Description */}
-              <motion.p
-                variants={itemVariants}
-                className="text-lg text-muted-foreground max-w-xl leading-relaxed"
-              >
-                Transformo ideias em{" "}
-                <span className="text-foreground font-medium">experiências digitais incríveis</span>.
-                Especializado em migração de sistemas legados para tecnologias modernas,
-                criando soluções escaláveis com foco em{" "}
-                <span className="text-foreground font-medium">performance e UX</span>.
-              </motion.p>
+            <BlurFade delay={0.45}>
+              <p className="text-lg text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
+                Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e
+                produtos SaaS. Atuo do entendimento do problema até{" "}
+                <span className="text-foreground font-medium">
+                  implementação, infraestrutura e produção
+                </span>
+                , com foco em soluções simples de manter, intuitivas e escaláveis.
+              </p>
+            </BlurFade>
 
-              {/* Tech stack */}
-              <motion.div
-                variants={itemVariants}
-                className="flex flex-wrap gap-3 justify-center lg:justify-start"
-              >
-                {technologies.map((tech, index) => (
-                  <motion.div
-                    key={tech.name}
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{
-                      delay: 0.8 + index * 0.1,
-                      type: "spring",
-                      stiffness: 200,
-                      damping: 15
-                    }}
-                    whileHover={{
-                      scale: 1.1,
-                      y: -5,
-                      transition: { duration: 0.2 }
-                    }}
+            <BlurFade delay={0.55}>
+              <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2 pointer-events-auto">
+                <a href="#contato">
+                  <ShimmerButton
+                    className="shadow-lg"
+                    background="linear-gradient(135deg, #3b82f6, #9333ea)"
+                    shimmerColor="#ffffff"
                   >
-                    <Badge
-                      className={`px-4 py-2 bg-gradient-to-r ${tech.color} text-white border-0 shadow-lg hover:shadow-xl transition-shadow cursor-default`}
-                    >
-                      {tech.name}
-                    </Badge>
-                  </motion.div>
-                ))}
-              </motion.div>
+                    <span className="flex items-center gap-2 text-sm font-medium">
+                      <Mail className="size-4" />
+                      Entrar em Contato
+                    </span>
+                  </ShimmerButton>
+                </a>
 
-              {/* CTAs */}
-              <motion.div
-                variants={itemVariants}
-                className="flex flex-wrap gap-4 justify-center lg:justify-start pt-4"
-              >
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    size="lg"
-                    className="group relative overflow-hidden bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 shadow-lg hover:shadow-xl transition-all duration-300"
-                    asChild
-                  >
-                    <a href="#contato">
-                      <span className="relative z-10 flex items-center gap-2">
-                        <Mail className="w-5 h-5" />
-                        Entrar em Contato
-                      </span>
-                      <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                    </a>
-                  </Button>
-                </motion.div>
-
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button
-                    size="lg"
-                    variant="outline"
-                    className="group border-primary/30 hover:border-primary hover:bg-primary/10 transition-all duration-300"
-                    onClick={() => setIsTerminalOpen(true)}
-                  >
-                    <Download className="w-5 h-5 mr-2 group-hover:animate-bounce" />
+                <Button
+                  size="lg"
+                  variant="outline"
+                  className="group border-primary/30 hover:border-primary hover:bg-primary/10 rounded-full"
+                  asChild
+                >
+                  <a href="/curriculo.pdf" target="_blank" rel="noopener noreferrer">
+                    <Download className="size-4 mr-2 group-hover:animate-bounce" />
                     Download CV
-                  </Button>
-                </motion.div>
-              </motion.div>
+                  </a>
+                </Button>
+              </div>
+            </BlurFade>
 
-              {/* Stats */}
-              <motion.div
-                variants={itemVariants}
-                className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50"
-              >
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={stat.label}
-                    className="text-center lg:text-left"
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 1.2 + index * 0.1 }}
-                  >
-                    <div className="flex items-center gap-2 justify-center lg:justify-start mb-1">
-                      <stat.icon className="w-5 h-5 text-primary" />
-                      <span className="text-3xl font-bold text-foreground">{stat.value}</span>
-                    </div>
-                    <span className="text-sm text-muted-foreground">{stat.label}</span>
-                  </motion.div>
-                ))}
-              </motion.div>
-            </div>
-          </motion.div>
-          
-          {/* Profile Image */}
-          <motion.div
-            className="flex-shrink-0 relative"
-            initial={{ opacity: 0, scale: 0.8, rotate: -10 }}
-            animate={{ opacity: 1, scale: 1, rotate: 0 }}
-            transition={{
-              duration: 0.8,
-              delay: 0.3,
-              type: "spring",
-              stiffness: 100
-            }}
-          >
-            {/* Glow effect */}
-            <motion.div
-              className="absolute -inset-8 bg-gradient-to-r from-blue-500/20 via-purple-500/20 to-pink-500/20 rounded-full blur-3xl"
-              animate={{
-                scale: [1, 1.1, 1],
-                rotate: [0, 180, 360],
-              }}
-              transition={{
-                duration: 10,
-                repeat: Infinity,
-                ease: "linear"
-              }}
-            />
+            <BlurFade delay={0.65}>
+              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50">
+                <div className="text-center lg:text-left">
+                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
+                    <NumberTicker
+                      value={getYearsOfExperience()}
+                      className="text-3xl font-bold text-foreground"
+                    />
+                    <span className="text-3xl font-bold text-foreground">+</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">Anos de Experiência</span>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
+                    <NumberTicker value={15} className="text-3xl font-bold text-foreground" />
+                    <span className="text-3xl font-bold text-foreground">+</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">Projetos Entregues</span>
+                </div>
+                <div className="text-center lg:text-left">
+                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
+                    <NumberTicker value={100} className="text-3xl font-bold text-foreground" />
+                    <span className="text-3xl font-bold text-foreground">%</span>
+                  </div>
+                  <span className="text-sm text-muted-foreground">Dedicação</span>
+                </div>
+              </div>
+            </BlurFade>
+          </div>
 
-            {/* Decorative ring */}
-            <motion.div
-              className="absolute -inset-4 rounded-full border-2 border-dashed border-primary/30"
-              animate={{ rotate: 360 }}
-              transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-            />
-
-            {/* Image container */}
-            <motion.div
-              className="relative"
-              whileHover={{
-                scale: 1.05,
-                transition: { duration: 0.3 }
-              }}
-            >
-              <div className="relative w-80 h-80 lg:w-96 lg:h-96">
+          {/* Profile image with orbiting stacks */}
+          <BlurFade delay={0.3} className="flex-shrink-0 relative">
+            <div className="relative flex size-[320px] lg:size-[420px] items-center justify-center">
+              <div className="relative z-10 size-52 lg:size-64 rounded-full overflow-hidden border-4 border-background shadow-2xl">
                 <Image
-                  src={ProfilePhoto} 
-                  alt="Luís Henrique Wendt" 
+                  src={ProfilePhoto}
+                  alt="Luís Henrique Wendt"
                   fill
                   priority
-                  className="rounded-full object-cover border-4 border-background shadow-2xl"
+                  className="object-cover"
                 />
-
-                {/* Floating badges around image */}
-                <motion.div
-                  className="absolute -top-4 -right-4 bg-background/90 backdrop-blur-sm border border-border rounded-xl p-3 shadow-lg"
-                  animate={{ y: [0, -10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity }}
-                >
-                  <Code className="w-6 h-6 text-blue-500" />
-                </motion.div>
-
-                <motion.div
-                  className="absolute -bottom-4 -left-4 bg-background/90 backdrop-blur-sm border border-border rounded-xl p-3 shadow-lg"
-                  animate={{ y: [0, 10, 0] }}
-                  transition={{ duration: 3, repeat: Infinity, delay: 1 }}
-                >
-                  <Rocket className="w-6 h-6 text-purple-500" />
-                </motion.div>
-
-                <motion.div
-                  className="absolute top-1/2 -right-8 bg-background/90 backdrop-blur-sm border border-border rounded-xl p-3 shadow-lg"
-                  animate={{ x: [0, 10, 0] }}
-                  transition={{ duration: 4, repeat: Infinity, delay: 0.5 }}
-                >
-                  <Zap className="w-6 h-6 text-amber-500" />
-                </motion.div>
               </div>
-            </motion.div>
-          </motion.div>
+
+              <OrbitingCircles
+                radius={150}
+                iconSize={44}
+                duration={28}
+                className="hidden sm:flex border border-border/60 bg-background/90 backdrop-blur-sm shadow-lg"
+              >
+                {orbitLogos.slice(0, 3).map((stack) => (
+                  <Image
+                    key={stack.name}
+                    src={stack.logo}
+                    alt={stack.name}
+                    width={stack.fill ? 44 : stack.wide ? 40 : 28}
+                    height={stack.fill ? 44 : 28}
+                    className={
+                      stack.fill
+                        ? "size-full object-cover"
+                        : "object-contain"
+                    }
+                    title={stack.name}
+                  />
+                ))}
+              </OrbitingCircles>
+
+              <OrbitingCircles
+                radius={200}
+                iconSize={40}
+                duration={36}
+                reverse
+                className="hidden lg:flex border border-border/60 bg-background/90 backdrop-blur-sm shadow-lg"
+              >
+                {orbitLogos.slice(3).map((stack) => (
+                  <Image
+                    key={stack.name}
+                    src={stack.logo}
+                    alt={stack.name}
+                    width={28}
+                    height={28}
+                    className="object-contain"
+                    title={stack.name}
+                  />
+                ))}
+              </OrbitingCircles>
+            </div>
+          </BlurFade>
         </div>
       </motion.div>
 
-      {/* Scroll indicator */}
       <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2"
-        initial={{ opacity: 0, y: -20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 1.5 }}
+        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 pointer-events-auto will-change-[opacity]"
+        style={{ opacity: contentOpacity }}
       >
         <motion.div
-          animate={{ y: [0, 10, 0] }}
-          transition={{ duration: 2, repeat: Infinity }}
-          className="flex flex-col items-center gap-2 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
-          onClick={() => document.getElementById('sobre')?.scrollIntoView({ behavior: 'smooth' })}
+          initial={{ opacity: 0, y: -20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.5 }}
         >
-          <span className="text-sm">Scroll para explorar</span>
-          <ArrowDown className="w-5 h-5" />
+          <motion.div
+            animate={{ y: [0, 10, 0] }}
+            transition={{ duration: 2, repeat: Infinity }}
+            className="flex flex-col items-center gap-2 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
+            onClick={() =>
+              document.getElementById("sobre")?.scrollIntoView({ behavior: "smooth" })
+            }
+          >
+            <span className="text-sm">Scroll para explorar</span>
+            <ArrowDown className="size-5" />
+          </motion.div>
         </motion.div>
       </motion.div>
-
-      {/* Terminal Challenge Modal */}
-      <TerminalChallenge
-        isOpen={isTerminalOpen}
-        onClose={() => setIsTerminalOpen(false)}
-      />
     </section>
   );
 }
