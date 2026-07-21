@@ -50,7 +50,7 @@ const experiences: Experience[] = [
     company: "Q2F Sistemas de Gestão",
     period: "fev 2026 - Presente",
     location: "Lajeado, RS",
-    companyUrl: "#",
+    companyUrl: "https://q2f.com.br",
     type: "CLT",
     description:
       "Plataforma SaaS para food service — operação, compras, custos, produção, indicadores e fidelidade.",
