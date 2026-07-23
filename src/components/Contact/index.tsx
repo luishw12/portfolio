@@ -23,6 +23,12 @@ import {
   TypingAnimation,
 } from "@/components/ui/terminal";
 import { BorderBeam } from "@/components/ui/border-beam";
+import {
+  trackContactClick,
+  trackContactCopy,
+  trackResumeDownload,
+  trackSocialClick,
+} from "@/lib/analytics";
 
 const EMAIL = "luishw08@gmail.com";
 const WHATSAPP_DISPLAY = "+55 51 99560-8647";
@@ -58,13 +64,20 @@ const channels = [
   },
 ];
 
-function CopyButton({ text }: { text: string }) {
+function CopyButton({
+  text,
+  channel,
+}: {
+  text: string;
+  channel: "email" | "whatsapp" | "linkedin";
+}) {
   const [copied, setCopied] = useState(false);
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     await navigator.clipboard.writeText(text);
+    trackContactCopy(channel, "contact_section");
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -111,9 +124,10 @@ export default function Contact() {
 
               <div className="flex flex-wrap items-center gap-3">
                 <InteractiveHoverButton
-                  onClick={() =>
-                    window.open(WHATSAPP_LINK, "_blank", "noopener,noreferrer")
-                  }
+                  onClick={() => {
+                    trackContactClick("whatsapp", "contact_section");
+                    window.open(WHATSAPP_LINK, "_blank", "noopener,noreferrer");
+                  }}
                 >
                   Falar no WhatsApp
                 </InteractiveHoverButton>
@@ -123,6 +137,7 @@ export default function Contact() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
+                  onClick={() => trackResumeDownload("contact_section")}
                 >
                   <Download className="size-4" />
                   Currículo
@@ -141,6 +156,12 @@ export default function Contact() {
                         : undefined
                     }
                     className="group flex items-center gap-4 py-4 hover:bg-muted/30 -mx-2 px-2 rounded-lg transition-colors"
+                    onClick={() =>
+                      trackContactClick(
+                        channel.label.toLowerCase() as "email" | "whatsapp" | "linkedin",
+                        "contact_section"
+                      )
+                    }
                   >
                     <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/50 text-foreground">
                       <channel.icon className="size-4" />
@@ -158,7 +179,15 @@ export default function Contact() {
                         {channel.value}
                       </p>
                     </div>
-                    <CopyButton text={channel.copyValue} />
+                    <CopyButton
+                      text={channel.copyValue}
+                      channel={
+                        channel.label.toLowerCase() as
+                          | "email"
+                          | "whatsapp"
+                          | "linkedin"
+                      }
+                    />
                     <ArrowUpRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   </a>
                 ))}
@@ -180,10 +209,10 @@ export default function Contact() {
 
               <div className="flex items-center gap-4 pt-1">
                 {[
-                  { href: GITHUB, label: "GitHub", icon: Github },
-                  { href: LINKEDIN, label: "LinkedIn", icon: Linkedin },
-                  { href: INSTAGRAM, label: "Instagram", icon: Instagram },
-                  { href: `mailto:${EMAIL}`, label: "Email", icon: Mail },
+                  { href: GITHUB, label: "GitHub", icon: Github, platform: "github" as const },
+                  { href: LINKEDIN, label: "LinkedIn", icon: Linkedin, platform: "linkedin" as const },
+                  { href: INSTAGRAM, label: "Instagram", icon: Instagram, platform: "instagram" as const },
+                  { href: `mailto:${EMAIL}`, label: "Email", icon: Mail, platform: "email" as const },
                 ].map((social) => (
                   <Link
                     key={social.label}
@@ -191,6 +220,9 @@ export default function Contact() {
                     target={social.href.startsWith("http") ? "_blank" : undefined}
                     aria-label={social.label}
                     className="text-muted-foreground hover:text-foreground transition-colors"
+                    onClick={() =>
+                      trackSocialClick(social.platform, "contact_section")
+                    }
                   >
                     <social.icon className="size-5" />
                   </Link>

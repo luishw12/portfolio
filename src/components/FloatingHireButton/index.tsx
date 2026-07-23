@@ -6,6 +6,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { Briefcase } from "lucide-react";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import { trackRecruiterCta } from "@/lib/analytics";
 
 export default function FloatingHireButton() {
   const pathname = usePathname();
@@ -33,6 +34,7 @@ export default function FloatingHireButton() {
           <Link
             href="/hire"
             aria-label="Página para recrutadores — contratar Luís Henrique Wendt"
+            onClick={() => trackRecruiterCta("hire_page", "floating_button")}
             className={cn(
               "group relative flex items-center gap-2 overflow-hidden rounded-full",
               "bg-gradient-to-r from-blue-500 to-purple-600 text-white shadow-lg shadow-blue-500/25",

@@ -22,6 +22,7 @@ import { NumberTicker } from "@/components/ui/number-ticker";
 import { OrbitingCircles } from "@/components/ui/orbiting-circles";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { trackRecruiterCta, trackResumeDownload } from "@/lib/analytics";
 
 const HERO_PARTICLE_COLORS = [
   "#60a5fa",
@@ -219,7 +220,12 @@ export default function Profile() {
 
             <BlurFade delay={0.55}>
               <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2 pointer-events-auto">
-                <a href="#contato">
+                <a
+                  href="#contato"
+                  onClick={() =>
+                    trackRecruiterCta("contact", "hero_section")
+                  }
+                >
                   <ShimmerButton
                     className="shadow-lg"
                     background="linear-gradient(135deg, #3b82f6, #9333ea)"
@@ -238,7 +244,12 @@ export default function Profile() {
                   className="group border-primary/30 hover:border-primary hover:bg-primary/10 rounded-full"
                   asChild
                 >
-                  <a href="/curriculo.pdf" target="_blank" rel="noopener noreferrer">
+                  <a
+                    href="/curriculo.pdf"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackResumeDownload("hero_section")}
+                  >
                     <Download className="size-4 mr-2 group-hover:animate-bounce" />
                     Download CV
                   </a>

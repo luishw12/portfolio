@@ -8,6 +8,7 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { Highlighter } from "@/components/ui/highlighter";
 import { BorderBeam } from "@/components/ui/border-beam";
+import { trackExternalLink } from "@/lib/analytics";
 
 const yearsOfExperience = getYearsOfExperience();
 
@@ -100,6 +101,9 @@ export default function AboutMe() {
                       target="_blank"
                       rel="noopener noreferrer"
                       className="text-primary hover:underline font-medium"
+                      onClick={() =>
+                        trackExternalLink("refatorize", "about_section")
+                      }
                     >
                       Refatorize
                     </a>

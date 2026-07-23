@@ -39,6 +39,14 @@ import {
   Users,
   Zap,
 } from "lucide-react";
+import {
+  trackContactClick,
+  trackNavigation,
+  trackProjectClick,
+  trackRecruiterCta,
+  trackResumeDownload,
+  trackSocialClick,
+} from "@/lib/analytics";
 
 const WHATSAPP_LINK = "https://wa.me/5551995608647";
 
@@ -175,7 +183,10 @@ export default function Hire() {
 
               <BlurFade delay={0.35}>
                 <div className="flex flex-wrap gap-4">
-                  <a href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}>
+                  <a
+                    href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}
+                    onClick={() => trackRecruiterCta("email_proposal", "hire_page")}
+                  >
                     <ShimmerButton
                       background="linear-gradient(135deg, #3b82f6, #9333ea)"
                       shimmerColor="#ffffff"
@@ -189,14 +200,24 @@ export default function Hire() {
                   </a>
 
                   <Button size="lg" variant="outline" className="rounded-full border-primary/30" asChild>
-                    <a href={profile.linkedin} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={profile.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackSocialClick("linkedin", "hire_page")}
+                    >
                       <Linkedin className="size-4 mr-2" />
                       LinkedIn
                     </a>
                   </Button>
 
                   <Button size="lg" variant="outline" className="rounded-full" asChild>
-                    <a href={profile.resumeUrl} target="_blank" rel="noopener noreferrer">
+                    <a
+                      href={profile.resumeUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={() => trackResumeDownload("hire_page")}
+                    >
                       <Download className="size-4 mr-2" />
                       Currículo PDF
                     </a>
@@ -375,7 +396,10 @@ export default function Hire() {
               <p className="text-muted-foreground mt-2">Histórico profissional condensado.</p>
             </div>
             <Button variant="outline" className="rounded-full w-fit" asChild>
-              <Link href="/#experiencia">
+              <Link
+                href="/#experiencia"
+                onClick={() => trackNavigation("experiencia", "hire_page")}
+              >
                 Ver detalhes no portfólio
                 <ArrowRight className="size-4 ml-2" />
               </Link>
@@ -440,6 +464,9 @@ export default function Hire() {
                         rel="noopener noreferrer"
                         className="text-primary hover:text-primary/80 shrink-0"
                         aria-label={`Visitar ${project.name}`}
+                        onClick={() =>
+                          trackProjectClick("visit_site", project.name, "hire_page")
+                        }
                       >
                         <ExternalLink className="size-4" />
                       </a>
@@ -523,7 +550,10 @@ export default function Hire() {
                 Respondo em até 24h. Envie contexto da vaga, stack do time e modelo de contratação.
               </p>
               <div className="flex flex-wrap gap-4 justify-center">
-                <a href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}>
+                <a
+                  href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}
+                  onClick={() => trackRecruiterCta("email_proposal", "hire_page")}
+                >
                   <ShimmerButton background="linear-gradient(135deg, #3b82f6, #9333ea)" shimmerColor="#ffffff">
                     <span className="flex items-center gap-2 text-sm font-medium">
                       <Mail className="size-4" />
@@ -532,7 +562,12 @@ export default function Hire() {
                   </ShimmerButton>
                 </a>
                 <Button size="lg" variant="outline" className="rounded-full" asChild>
-                  <a href={WHATSAPP_LINK} target="_blank" rel="noopener noreferrer">
+                  <a
+                    href={WHATSAPP_LINK}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => trackContactClick("whatsapp", "hire_page")}
+                  >
                     <MessageCircle className="size-4 mr-2" />
                     WhatsApp
                   </a>
@@ -540,7 +575,11 @@ export default function Hire() {
               </div>
               <p className="text-xs text-muted-foreground">
                 Ou explore o{" "}
-                <Link href="/" className="text-primary hover:underline">
+                <Link
+                  href="/"
+                  className="text-primary hover:underline"
+                  onClick={() => trackNavigation("home", "hire_page")}
+                >
                   portfólio completo
                 </Link>
               </p>

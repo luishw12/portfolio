@@ -7,6 +7,12 @@ import { Github, Linkedin, Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
 import { useEffect, useState } from "react";
 import { cn } from "@/lib/utils";
+import {
+  trackMobileMenu,
+  trackNavigation,
+  trackResumeDownload,
+  trackSocialClick,
+} from "@/lib/analytics";
 
 const navLinks = [
   { href: "#sobre", label: "Sobre" },
@@ -91,10 +97,19 @@ export default function Header() {
     return () => observer.disconnect();
   }, []);
 
-  const handleSmoothScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+  const handleSmoothScroll = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    targetId: string,
+    device: "desktop" | "mobile"
+  ) => {
     e.preventDefault();
     setMobileMenuOpen(false);
     setActiveSection(targetId);
+    trackNavigation(
+      targetId.replace("#", ""),
+      device === "mobile" ? "header_mobile" : "header_desktop",
+      device
+    );
 
     const targetElement = document.querySelector(targetId);
     if (targetElement) {
@@ -132,6 +147,7 @@ export default function Header() {
               <Link
                 href="/"
                 className="relative group"
+                onClick={() => trackNavigation("home", "header_desktop")}
               >
                 <span className="text-2xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                   LHW
@@ -157,7 +173,9 @@ export default function Header() {
                       href={href}
                       onClick={(e) => {
                         if (isHashNavLink(link.href) && !isHirePage) {
-                          handleSmoothScroll(e, link.href);
+                          handleSmoothScroll(e, link.href, "desktop");
+                        } else if (link.href === "/hire") {
+                          trackNavigation("hire", "header_desktop");
                         }
                       }}
                       aria-current={isActive ? "true" : undefined}
@@ -191,7 +209,11 @@ export default function Header() {
               >
                 <motion.div whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.9 }}>
                   <Button variant="ghost" size="icon" className="rounded-full" asChild>
-                    <Link href="https://www.linkedin.com/in/luishw/" target="_blank">
+                    <Link
+                      href="https://www.linkedin.com/in/luishw/"
+                      target="_blank"
+                      onClick={() => trackSocialClick("linkedin", "header_desktop")}
+                    >
                       <Linkedin className="h-5 w-5" />
                     </Link>
                   </Button>
@@ -199,7 +221,11 @@ export default function Header() {
 
                 <motion.div whileHover={{ scale: 1.1, y: -2 }} whileTap={{ scale: 0.9 }}>
                   <Button variant="ghost" size="icon" className="rounded-full" asChild>
-                    <Link href="https://github.com/luishw12" target="_blank">
+                    <Link
+                      href="https://github.com/luishw12"
+                      target="_blank"
+                      onClick={() => trackSocialClick("github", "header_desktop")}
+                    >
                       <Github className="h-5 w-5" />
                     </Link>
                   </Button>
@@ -218,7 +244,11 @@ export default function Header() {
                   className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 rounded-full px-4 relative overflow-hidden"
                   asChild
                 >
-                  <Link href="/curriculo.pdf" target="_blank">
+                  <Link
+                    href="/curriculo.pdf"
+                    target="_blank"
+                    onClick={() => trackResumeDownload("header_desktop")}
+                  >
                     <Download className="h-4 w-4 mr-2" />
                     CV
                   </Link>
@@ -234,7 +264,11 @@ export default function Header() {
               <Button
                 variant="ghost"
                 size="icon"
-                onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                onClick={() => {
+                  const nextOpen = !mobileMenuOpen;
+                  setMobileMenuOpen(nextOpen);
+                  trackMobileMenu(nextOpen ? "open" : "close");
+                }}
                 className="rounded-full"
               >
                 {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
@@ -260,7 +294,10 @@ export default function Header() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               className="absolute inset-0 bg-background/95 backdrop-blur-xl"
-              onClick={() => setMobileMenuOpen(false)}
+              onClick={() => {
+                setMobileMenuOpen(false);
+                trackMobileMenu("close");
+              }}
             />
 
             {/* Menu Content */}
@@ -280,9 +317,12 @@ export default function Header() {
                     href={href}
                     onClick={(e) => {
                       if (isHashNavLink(link.href) && !isHirePage) {
-                        handleSmoothScroll(e, link.href);
+                        handleSmoothScroll(e, link.href, "mobile");
                       } else {
                         setMobileMenuOpen(false);
+                        if (link.href === "/hire") {
+                          trackNavigation("hire", "header_mobile", "mobile");
+                        }
                       }
                     }}
                     aria-current={isActive ? "true" : undefined}
@@ -308,12 +348,20 @@ export default function Header() {
                 transition={{ delay: 0.4 }}
               >
                 <Button variant="outline" size="icon" className="rounded-full" asChild>
-                  <Link href="https://www.linkedin.com/in/luishw/" target="_blank">
+                  <Link
+                    href="https://www.linkedin.com/in/luishw/"
+                    target="_blank"
+                    onClick={() => trackSocialClick("linkedin", "header_mobile")}
+                  >
                     <Linkedin className="h-5 w-5" />
                   </Link>
                 </Button>
                 <Button variant="outline" size="icon" className="rounded-full" asChild>
-                  <Link href="https://github.com/luishw12" target="_blank">
+                  <Link
+                    href="https://github.com/luishw12"
+                    target="_blank"
+                    onClick={() => trackSocialClick("github", "header_mobile")}
+                  >
                     <Github className="h-5 w-5" />
                   </Link>
                 </Button>
@@ -329,7 +377,11 @@ export default function Header() {
                   className="bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white border-0 rounded-full px-6"
                   asChild
                 >
-                  <Link href="/curriculo.pdf" target="_blank">
+                  <Link
+                    href="/curriculo.pdf"
+                    target="_blank"
+                    onClick={() => trackResumeDownload("header_mobile")}
+                  >
                     <Download className="h-4 w-4 mr-2" />
                     Download CV
                   </Link>

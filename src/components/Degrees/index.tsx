@@ -37,6 +37,10 @@ import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
 import { GlareHover } from "@/components/ui/glare-hover";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
+import {
+  trackProjectClick,
+  trackSocialClick,
+} from "@/lib/analytics";
 
 interface Project {
   title: string;
@@ -184,12 +188,20 @@ function ImageGallery({
   const [currentIndex, setCurrentIndex] = useState(initialIndex);
 
   const nextImage = useCallback(() => {
-    setCurrentIndex((prev) => (prev + 1) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prev) => {
+      const next = (prev + 1) % images.length;
+      trackProjectClick("gallery_nav", title);
+      return next;
+    });
+  }, [images.length, title]);
 
   const prevImage = useCallback(() => {
-    setCurrentIndex((prev) => (prev - 1 + images.length) % images.length);
-  }, [images.length]);
+    setCurrentIndex((prev) => {
+      const next = (prev - 1 + images.length) % images.length;
+      trackProjectClick("gallery_nav", title);
+      return next;
+    });
+  }, [images.length, title]);
 
   if (!isOpen) return null;
 
@@ -254,7 +266,10 @@ function ImageGallery({
               {images.map((img, idx) => (
                 <button
                   key={idx}
-                  onClick={() => setCurrentIndex(idx)}
+                  onClick={() => {
+                    setCurrentIndex(idx);
+                    trackProjectClick("gallery_nav", title);
+                  }}
                   className={`relative w-20 h-12 flex-shrink-0 rounded-lg overflow-hidden border-2 transition-all ${
                     idx === currentIndex
                       ? "border-primary scale-105"
@@ -306,7 +321,12 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
             <div className="flex h-full flex-col">
               <button
                 type="button"
-                onClick={() => hasGallery && setGalleryOpen(true)}
+                onClick={() => {
+                  if (hasGallery) {
+                    trackProjectClick("open_gallery", project.title);
+                    setGalleryOpen(true);
+                  }
+                }}
                 className={`relative aspect-video w-full overflow-hidden ${
                   hasGallery ? "cursor-zoom-in" : "cursor-default"
                 }`}
@@ -368,6 +388,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                         href={project.link}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackProjectClick("visit_site", project.title)
+                        }
                       >
                         <ExternalLink className="mr-1.5 h-3.5 w-3.5" />
                         Ver site
@@ -385,6 +408,9 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                         href={project.github}
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() =>
+                          trackProjectClick("view_code", project.title)
+                        }
                       >
                         <Github className="mr-1.5 h-3.5 w-3.5" />
                         Código
@@ -396,7 +422,10 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
                       size="sm"
                       variant="outline"
                       className="h-8 flex-1 text-xs"
-                      onClick={() => setGalleryOpen(true)}
+                      onClick={() => {
+                        trackProjectClick("open_gallery", project.title);
+                        setGalleryOpen(true);
+                      }}
                     >
                       <Maximize2 className="mr-1.5 h-3.5 w-3.5" />
                       Galeria
@@ -469,6 +498,9 @@ export default function Projects() {
               href="https://github.com/luishw12"
               target="_blank"
               rel="noopener noreferrer"
+              onClick={() =>
+                trackProjectClick("view_github_profile", "github_profile")
+              }
             >
               <ShimmerButton
                 background="linear-gradient(135deg, #1f2937, #374151)"

@@ -5,6 +5,11 @@ import { Github, Linkedin, Mail, Instagram, Heart, ArrowUp, Code2 } from "lucide
 import { motion } from "framer-motion";
 import { Dock, DockIcon } from "@/components/ui/dock";
 import { BlurFade } from "@/components/ui/blur-fade";
+import {
+  trackNavigation,
+  trackScrollToTop,
+  trackSocialClick,
+} from "@/lib/analytics";
 
 const quickLinks = [
   { label: "Sobre", href: "/#sobre" },
@@ -17,6 +22,7 @@ const quickLinks = [
 
 export default function Footer() {
   const scrollToTop = () => {
+    trackScrollToTop("footer");
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
@@ -35,7 +41,11 @@ export default function Footer() {
       <div className="container mx-auto px-6 py-16">
         <div className="grid md:grid-cols-3 gap-12">
           <BlurFade delay={0.1} inView className="flex flex-col gap-4">
-            <Link href="/" className="inline-block w-fit">
+            <Link
+              href="/"
+              className="inline-block w-fit"
+              onClick={() => trackNavigation("home", "footer")}
+            >
               <span className="text-3xl font-bold bg-gradient-to-r from-blue-400 via-purple-500 to-pink-500 bg-clip-text text-transparent">
                 LHW
               </span>
@@ -58,6 +68,12 @@ export default function Footer() {
                   key={link.label}
                   href={link.href}
                   className="text-muted-foreground hover:text-primary transition-colors w-fit"
+                  onClick={() =>
+                    trackNavigation(
+                      link.href.replace("/#", "").replace("/", "") || "home",
+                      "footer"
+                    )
+                  }
                 >
                   {link.label}
                 </Link>
@@ -74,6 +90,7 @@ export default function Footer() {
                   target="_blank"
                   aria-label="LinkedIn"
                   className="flex size-full items-center justify-center"
+                  onClick={() => trackSocialClick("linkedin", "footer")}
                 >
                   <Linkedin className="size-4" />
                 </Link>
@@ -84,6 +101,7 @@ export default function Footer() {
                   target="_blank"
                   aria-label="GitHub"
                   className="flex size-full items-center justify-center"
+                  onClick={() => trackSocialClick("github", "footer")}
                 >
                   <Github className="size-4" />
                 </Link>
@@ -94,6 +112,7 @@ export default function Footer() {
                   target="_blank"
                   aria-label="Instagram"
                   className="flex size-full items-center justify-center"
+                  onClick={() => trackSocialClick("instagram", "footer")}
                 >
                   <Instagram className="size-4" />
                 </Link>
@@ -103,6 +122,7 @@ export default function Footer() {
                   href="mailto:luishw08@gmail.com"
                   aria-label="Email"
                   className="flex size-full items-center justify-center"
+                  onClick={() => trackSocialClick("email", "footer")}
                 >
                   <Mail className="size-4" />
                 </a>

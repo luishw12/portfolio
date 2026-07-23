@@ -1,0 +1,164 @@
+---
+description: Glossário e interpretação dos eventos GA4 do portfólio. Use ao analisar métricas, tráfego, cliques ou comportamento dos usuários.
+alwaysApply: false
+---
+
+# GA4 — Interpretação dos eventos do portfólio
+
+Quando o usuário pedir para **analisar dados do site**, **métricas**, **GA4**, **Google Analytics** ou **comportamento dos visitantes**:
+
+1. Consulte esta rule para entender o significado de cada evento/parâmetro.
+2. Use o MCP `google-analytics` (`get_ga4_data`) com `GA4_PROPERTY_ID=546784060`.
+3. Código-fonte dos eventos: [src/lib/analytics.ts](mdc:src/lib/analytics.ts) e [src/components/Analytics/SiteAnalytics.tsx](mdc:src/components/Analytics/SiteAnalytics.tsx).
+
+## Consulta recomendada no GA4
+
+```text
+dimensions: eventName, customEvent:location, customEvent:target (ou channel, platform, action, section, etc.)
+metrics: eventCount, totalUsers
+dimension_filter: eventName = <evento desejado>
+date_range: 7daysAgo → yesterday (ajustar conforme pedido)
+```
+
+Parâmetros customizados aparecem no GA4 como dimensões `customEvent:<param>` (ex.: `customEvent:location`).
+
+---
+
+## Eventos de conversão (alta intenção)
+
+### `click_recruiter_cta`
+**O que é:** clique em CTA voltado a recrutadores ou contratação.
+**Interpretação:** sinal forte de interesse profissional — priorize na análise de funil.
+
+| `target` | Significado |
+|----------|-------------|
+| `contact` | CTA "Entrar em Contato" no hero |
+| `resume_download` | download do PDF do currículo |
+| `hire_page` | botão flutuante "Contratar" → `/hire` |
+| `email_proposal` | "Enviar proposta" na página `/hire` |
+| `linkedin` | LinkedIn em contexto de recrutamento (se usado) |
+
+| `location` | Onde no site |
+|------------|--------------|
+| `hero_section` | seção inicial (Profile) |
+| `header_desktop` / `header_mobile` | barra superior |
+| `contact_section` | seção de contato |
+| `floating_button` | botão fixo inferior direito |
+| `hire_page` | página `/hire` |
+
+**Como analisar:** compare `eventCount` por `target` e `location` para saber *o que* convertem e *de onde* (ex.: CV baixado no hero vs header).
+
+### `click_contact`
+**O que é:** clique em canal de contato direto.
+**Parâmetros:** `channel` (`email` | `whatsapp` | `linkedin`), `location`.
+**Interpretação:** intenção de conversa imediata. WhatsApp = urgência; email = proposta formal; LinkedIn = networking/recrutamento.
+
+### `copy_contact`
+**O que é:** usuário copiou email/WhatsApp/LinkedIn para a área de transferência.
+**Interpretação:** interesse alto, mas sem saída do site ainda — pode indicar compartilhamento interno (RH encaminhando contato).
+
+---
+
+## Eventos de navegação e engajamento
+
+### `section_view`
+**O que é:** seção entrou na viewport (≥35% visível, disparo único por sessão/página).
+**Parâmetros:** `section`, `page` (`/` ou `/hire`).
+**Interpretação:** mapa de leitura — quais blocos o visitante realmente viu.
+
+**Seções home (`page=/`):**
+
+| `section` | Conteúdo |
+|-----------|----------|
+| `inicio` | Hero / apresentação |
+| `sobre` | Sobre mim |
+| `destaques` | Filosofia / highlights |
+| `experiencia` | Histórico profissional |
+| `projetos` | Portfólio de projetos |
+| `habilidades` | Skills técnicas |
+| `formacao` | Educação |
+| `contato` | Formulário/canais de contato |
+
+**Seções hire (`page=/hire`):** `hire-hero`, `hire-facts`, `hire-roles`, `hire-stack`, `hire-experience`, `hire-projects`, `hire-process`, `hire-faq`, `hire-cta`.
+
+**Como analisar:** funil de leitura — se muitos veem `inicio` mas poucos `contato`, há abandono no meio. Se `hire-cta` é alto em `/hire`, recrutadores chegam ao final.
+
+### `scroll_depth`
+**O que é:** marcos de rolagem atingidos (25, 50, 75, 90, 100%) — uma vez por marco/página.
+**Parâmetros:** `percent`, `page`.
+**Interpretação:** profundidade de engajamento. Queda brusca entre 50%→75% indica conteúdo que não prende após o meio da página.
+
+### `click_navigation`
+**O que é:** clique em link de navegação interna (menu, footer, links da hire).
+**Parâmetros:** `target` (ex.: `sobre`, `experiencia`, `hire`, `home`), `location`, `device` (`desktop`|`mobile`).
+**Interpretação:** o que os usuários buscam ativamente. Alto `hire` no header = tráfego de recrutadores.
+
+### `scroll_to_top`
+**O que é:** botão "Voltar ao topo" no footer.
+**Interpretação:** usuário leu bastante e voltou — engajamento longo, não conversão.
+
+### `mobile_menu`
+**Parâmetros:** `action` (`open`|`close`).
+**Interpretação:** uso mobile do menu. Muitos `open` sem cliques subsequentes pode indicar dificuldade de navegação.
+
+---
+
+## Eventos sociais e externos
+
+### `click_social`
+**Parâmetros:** `platform` (`linkedin`|`github`|`instagram`|`email`|`whatsapp`), `location`.
+**Interpretação:** saída para rede social. LinkedIn/GitHub no header = exploração rápida; no `contact_section` = intenção de contato.
+
+### `click_external`
+**Parâmetros:** `target` (nome da empresa/link, ex.: `Q2F Sistemas de Gestão`, `refatorize`), `location`.
+**Interpretação:** curiosidade sobre empregadores ou projetos externos — comum em recrutadores validando background.
+
+---
+
+## Eventos de projetos e portfólio
+
+### `click_project`
+**Parâmetros:** `action`, `project`, `location`.
+
+| `action` | Significado |
+|----------|-------------|
+| `visit_site` | abriu o site do projeto em produção |
+| `view_code` | abriu repositório GitHub do projeto |
+| `open_gallery` | abriu galeria de screenshots |
+| `gallery_nav` | navegou entre imagens da galeria |
+| `view_github_profile` | clicou em "Ver mais no GitHub" |
+
+**Interpretação:** `visit_site` = interesse comercial/técnico no trabalho entregue. `view_code` = avaliação de código. Projetos com mais cliques são os que mais impressionam.
+
+### `experience_toggle`
+**Parâmetros:** `company`, `action` (`expand`|`collapse`).
+**Interpretação:** interesse em detalhes de uma empresa específica. Empresas com mais `expand` atraem mais atenção de recrutadores.
+
+---
+
+## Playbook de análise (perguntas → eventos)
+
+| Pergunta do usuário | Eventos / dimensões |
+|---------------------|---------------------|
+| Recrutadores estão convertendo? | `click_recruiter_cta`, `click_contact`, `copy_contact` por `location` |
+| De onde vêm os downloads de CV? | `click_recruiter_cta` filtrado `target=resume_download` + `location` |
+| A página `/hire` funciona? | `section_view` em `/hire` + `click_recruiter_cta` com `location=hire_page` |
+| Qual projeto mais interessa? | `click_project` agrupado por `project` e `action` |
+| Usuários leem até o fim? | `scroll_depth` (percent) + `section_view` até `contato` |
+| Mobile vs desktop? | `click_navigation` por `device` + `mobile_menu` |
+| Qual rede social mais clica? | `click_social` por `platform` |
+
+## Funil sugerido (recrutador)
+
+```text
+page_view (/) → section_view (experiencia/projetos) → click_recruiter_cta ou click_contact → resume_download / email / whatsapp
+```
+
+Funil alternativo: `click_navigation(hire)` → page_view `/hire` → `section_view(hire-cta)` → `click_recruiter_cta(email_proposal)`.
+
+## Limitações
+
+- Eventos são client-side; bloqueadores de anúncios podem subcontar.
+- `section_view` dispara uma vez por seção por visita à página.
+- Comparar períodos com volume baixo (<30 eventos) exige cautela estatística.
+- Para SEO/orgânico, cruzar com MCP `google-search-console` quando relevante.

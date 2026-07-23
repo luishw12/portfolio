@@ -18,6 +18,7 @@ import { MagicCard } from "@/components/ui/magic-card";
 import { BorderBeam } from "@/components/ui/border-beam";
 import { NumberTicker } from "@/components/ui/number-ticker";
 import { getYearsOfExperience, cn } from "@/lib/utils";
+import { trackExperienceToggle, trackExternalLink } from "@/lib/analytics";
 import toshyroLogo from "@/img/companies/toshyro.png";
 import triconLogo from "@/img/companies/tricon.png";
 import q2fLogo from "@/img/companies/q2f.png";
@@ -242,6 +243,9 @@ function ExperienceCard({
                     target="_blank"
                     rel="noopener noreferrer"
                     className="font-bold text-foreground hover:text-primary transition-colors flex items-center gap-1 text-base sm:text-lg truncate"
+                    onClick={() =>
+                      trackExternalLink(exp.company, "experience_section")
+                    }
                   >
                     {exp.company}
                     <ExternalLink className="size-3.5 flex-shrink-0 opacity-60" />
@@ -300,7 +304,11 @@ function ExperienceCard({
 
           <button
             type="button"
-            onClick={() => setOpen((v) => !v)}
+            onClick={() => {
+              const nextOpen = !open;
+              setOpen(nextOpen);
+              trackExperienceToggle(exp.company, nextOpen ? "expand" : "collapse");
+            }}
             className="flex items-center gap-1.5 text-xs font-medium text-primary hover:text-primary/80 transition-colors self-start mt-0.5"
             aria-expanded={open}
           >

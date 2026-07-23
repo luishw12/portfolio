@@ -5,6 +5,7 @@ import { ReactNode } from "react";
 import StructuredData from "@/components/StructuredData";
 import { pageMetadata, profile, recruiterKeywords, SITE_URL } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
+import SiteAnalytics from "@/components/Analytics/SiteAnalytics";
 
 const inter = Lexend({ subsets: ["latin"] });
 
@@ -105,6 +106,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} overflow-x-hidden`}>
         {children}
+        <SiteAnalytics />
         <GoogleAnalytics gaId="G-60MG1VH0EB" />
       </body>
     </html>
