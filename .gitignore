@@ -31,10 +31,9 @@ yarn-error.log*
 # Cursor MCP config (local paths and credentials)
 .cursor/mcp.json
 
-# Google Search Console MCP credentials (OAuth / service account)
-.cursor/gsc/client_secrets.json
-.cursor/gsc/service_account.json
-.cursor/gsc/credentials/
+# Google Search Console & GA4 MCP credentials (local only)
+.cursor/gsc/
+.cursor/ga4/
 
 # vercel
 .vercel
