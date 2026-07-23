@@ -139,10 +139,11 @@ export const featuredProjects = [
     technologies: ["Next.js", "Java Spring Boot", "AWS", "PostgreSQL", "TypeScript"],
   },
   {
-    name: "Design System Toshyro",
-    url: "https://www.npmjs.com/package/design-system-toshyro",
-    description: "Biblioteca NPM com ~15 componentes reutilizáveis documentados com Storybook.",
-    technologies: ["React", "Storybook", "Tailwind CSS", "TypeScript", "NPM"],
+    name: "Feriados Brasil",
+    url: "https://feriados.luishw.com.br",
+    description:
+      "Calendário interativo de feriados nacionais, estaduais e municipais em mais de 5.500 cidades brasileiras.",
+    technologies: ["Astro", "React", "TypeScript", "Tailwind CSS", "Vercel"],
   },
 ] as const;
 

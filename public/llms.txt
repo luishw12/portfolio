@@ -33,7 +33,7 @@ Agile/Kanban · Clean Code · SOLID · TDD · CI/CD · Microservices · Clean Ar
 
 - [Sobre](https://www.luishw.com.br/#sobre): background profissional e valores
 - [Experiência](https://www.luishw.com.br/#experiencia): histórico em Q2F, Refatorize, Tricon e Toshyro
-- [Projetos](https://www.luishw.com.br/#projetos): SkinsManager, BoltSkins, CS Invest, Design System
+- [Projetos](https://www.luishw.com.br/#projetos): SkinsManager, BoltSkins, CS Invest, Feriados Brasil
 - [Habilidades](https://www.luishw.com.br/#habilidades): stack com tempo de experiência
 - [Formação](https://www.luishw.com.br/#formacao): Engenharia de Software (Anhanguera)
 - [Contato](https://www.luishw.com.br/#contato): canais de comunicação

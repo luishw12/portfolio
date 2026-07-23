@@ -1,8 +1,8 @@
 "use client";
 
 import Image, { StaticImageData } from "next/image";
-import AppMoviesImg from "@/img/app-movies-logo.png";
-import DesignSystemImg from "@/img/design-system-logo.png";
+import FeriadosCalendario from "@/img/feriados-brasil-calendario.png";
+import FeriadosArtigo from "@/img/feriados-brasil-artigo.png";
 import BoltSkinsLP from "@/img/BoltSkins LP.jpeg";
 import BoltSkinsTroca from "@/img/BoltSkins Tela Troca.jpeg";
 import BoltSkinsVender from "@/img/BoltSkins Tela Vender Skin.jpeg";
@@ -143,32 +143,25 @@ const projects: Project[] = [
     gradientTo: "#06b6d4",
   },
   {
-    title: "App Movies",
-    subtitle: "Descoberta de Filmes",
+    title: "Feriados Brasil",
+    subtitle: "Calendário nacional e regional",
     description:
-      "Projeto mobile feito com React Native e Expo, consumindo API pública TMDB para descoberta e busca de filmes.",
+      "Calendário interativo com feriados nacionais, estaduais e municipais em mais de 5.500 cidades — com busca, guias e artigos.",
     longDescription:
-      "Aplicativo mobile que permite aos usuários descobrir novos filmes, ver detalhes completos, trailers e avaliações.",
-    images: [AppMoviesImg],
-    link: null,
-    github: "https://github.com/luishw12/AppMovies",
-    technologies: ["React Native", "Expo", "TMDB API", "TypeScript"],
-    gradientFrom: "#a855f7",
-    gradientTo: "#ec4899",
-  },
-  {
-    title: "Design System",
-    subtitle: "Biblioteca de Componentes",
-    description:
-      "Biblioteca NPM com ~15 componentes reutilizáveis desenvolvida com Storybook, React.js e Tailwind CSS na Toshyro.",
-    longDescription:
-      "Design System interno estruturado como biblioteca privada de componentes publicados via npm e documentados com Storybook, reduzindo inconsistências entre projetos.",
-    images: [DesignSystemImg],
-    link: "https://www.npmjs.com/package/design-system-toshyro",
-    github: null,
-    technologies: ["React", "Storybook", "Tailwind CSS", "NPM", "TypeScript"],
+      "Produto próprio em produção com foco em SEO e utilidade pública: calendário anual com filtros por tema (religioso, cívico, cultural), detecção de localização, contador regressivo para o próximo feriado, páginas de artigo por data comemorativa, guias temáticos e índice para assistentes de IA (llms.txt). Site 100% estático gerado com Astro, deploy na Vercel.",
+    images: [FeriadosCalendario, FeriadosArtigo],
+    link: "https://feriados.luishw.com.br",
+    github: "https://github.com/luishw12/feriados-app",
+    technologies: [
+      "Astro",
+      "React",
+      "TypeScript",
+      "Tailwind CSS",
+      "Vercel",
+      "SEO",
+    ],
     gradientFrom: "#22c55e",
-    gradientTo: "#10b981",
+    gradientTo: "#059669",
   },
 ];
 

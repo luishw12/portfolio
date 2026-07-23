@@ -142,13 +142,10 @@ Stack: Next.js, React, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Steam API
 Análise de rentabilidade para investimento em skins: calculadoras, dashboard, métricas em tempo real.
 Stack: Next.js, Java Spring Boot, AWS, PostgreSQL, TailwindCSS, TypeScript
 
-### App Movies — https://github.com/luishw12/AppMovies
-App mobile React Native/Expo com API TMDB para descoberta de filmes.
-Stack: React Native, Expo, TMDB API, TypeScript
-
-### Design System Toshyro — https://www.npmjs.com/package/design-system-toshyro
-Biblioteca NPM com ~15 componentes reutilizáveis documentados com Storybook.
-Stack: React, Storybook, Tailwind CSS, NPM, TypeScript
+### Feriados Brasil — https://feriados.luishw.com.br
+Calendário interativo de feriados nacionais, estaduais e municipais em mais de 5.500 cidades brasileiras. Guias, artigos por data comemorativa, busca por localização e índice para IA.
+Stack: Astro, React, TypeScript, Tailwind CSS, Vercel
+Repositório: https://github.com/luishw12/feriados-app
 
 ---
 
