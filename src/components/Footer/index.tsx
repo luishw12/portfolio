@@ -135,11 +135,21 @@ export default function Footer() {
         </div>
 
         <div className="mt-16 pt-8 border-t border-border flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-sm text-muted-foreground flex items-center gap-2">
-            © {currentYear} Luís Henrique Wendt. Feito com
-            <Heart className="size-4 text-red-500 fill-red-500 animate-pulse" />
-            no Brasil
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-sm text-muted-foreground">
+            <p className="flex items-center gap-2">
+              © {currentYear} Luís Henrique Wendt. Feito com
+              <Heart className="size-4 text-red-500 fill-red-500 animate-pulse" />
+              no Brasil
+            </p>
+            <span className="hidden sm:inline text-border">·</span>
+            <Link
+              href="/privacidade"
+              className="hover:text-primary transition-colors"
+              onClick={() => trackNavigation("privacidade", "footer")}
+            >
+              Política de Privacidade
+            </Link>
+          </div>
 
           <button
             onClick={scrollToTop}

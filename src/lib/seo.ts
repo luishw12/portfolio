@@ -213,6 +213,19 @@ export const hirePageMetadata = {
   ],
 } as const;
 
+export const privacyPageMetadata = {
+  title: "Política de Privacidade | Luís Henrique Wendt",
+  description:
+    "Como este portfólio coleta, usa e protege dados pessoais — cookies, Google Analytics 4, eventos de navegação e seus direitos sob a LGPD.",
+  keywords: [
+    "política de privacidade",
+    "LGPD",
+    "cookies",
+    "Google Analytics",
+    "portfólio desenvolvedor",
+  ],
+} as const;
+
 const skillNames = coreSkills.map((s) => s.name);
 
 export const personStructuredData = {
