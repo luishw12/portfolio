@@ -2,7 +2,7 @@
 
 > Desenvolvedor Full Stack Pleno — aplicações web, sistemas corporativos e produtos SaaS com .NET, React, Next.js, TypeScript, PostgreSQL, AWS e AI-Assisted Development.
 
-Site: https://luishw.dev
+Site: https://www.luishw.com.br
 Idioma: pt-BR
 Disponibilidade: aberto a novos projetos e oportunidades (remoto ou híbrido)
 Localização: Lajeado, RS, Brasil
@@ -18,7 +18,7 @@ Praticante ativo de AI-Assisted Development com Cursor IDE, Claude Code, Codex, 
 - Email: luishw08@gmail.com
 - LinkedIn: https://www.linkedin.com/in/luishw/
 - GitHub: https://github.com/luishw12
-- Currículo PDF: https://luishw.dev/curriculo.pdf
+- Currículo PDF: https://www.luishw.com.br/curriculo.pdf
 - WhatsApp: +55 51 99560-8647
 
 ## Stack principal
@@ -31,17 +31,17 @@ Agile/Kanban · Clean Code · SOLID · TDD · CI/CD · Microservices · Clean Ar
 
 ## Seções do site
 
-- [Sobre](https://luishw.dev/#sobre): background profissional e valores
-- [Experiência](https://luishw.dev/#experiencia): histórico em Q2F, Refatorize, Tricon e Toshyro
-- [Projetos](https://luishw.dev/#projetos): SkinsManager, BoltSkins, CS Invest, Design System
-- [Habilidades](https://luishw.dev/#habilidades): stack com tempo de experiência
-- [Formação](https://luishw.dev/#formacao): Engenharia de Software (Anhanguera)
-- [Contato](https://luishw.dev/#contato): canais de comunicação
-- [Contratar / Hire](https://luishw.dev/hire): página dedicada para recrutadores
+- [Sobre](https://www.luishw.com.br/#sobre): background profissional e valores
+- [Experiência](https://www.luishw.com.br/#experiencia): histórico em Q2F, Refatorize, Tricon e Toshyro
+- [Projetos](https://www.luishw.com.br/#projetos): SkinsManager, BoltSkins, CS Invest, Design System
+- [Habilidades](https://www.luishw.com.br/#habilidades): stack com tempo de experiência
+- [Formação](https://www.luishw.com.br/#formacao): Engenharia de Software (Anhanguera)
+- [Contato](https://www.luishw.com.br/#contato): canais de comunicação
+- [Contratar / Hire](https://www.luishw.com.br/hire): página dedicada para recrutadores
 
 ## Documentação completa para IA
 
-Versão expandida com todo o conteúdo estruturado: https://luishw.dev/llms-full.txt
+Versão expandida com todo o conteúdo estruturado: https://www.luishw.com.br/llms-full.txt
 
 ## Palavras-chave para recrutadores
 

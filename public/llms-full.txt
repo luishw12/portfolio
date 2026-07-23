@@ -2,7 +2,7 @@
 
 > Documento estruturado para crawlers de IA e sistemas de recrutamento mapearem o portfólio completo.
 
-URL: https://luishw.dev
+URL: https://www.luishw.com.br
 Última atualização: 2026-07-22
 Tipo: Portfólio profissional / currículo online
 Idioma: Português (Brasil)
@@ -34,7 +34,7 @@ Atua do entendimento do problema até implementação, infraestrutura e produç�
 | GitHub | https://github.com/luishw12 |
 | Instagram | https://www.instagram.com/luis.wendt/ |
 | WhatsApp | +55 51 99560-8647 |
-| Currículo PDF | https://luishw.dev/curriculo.pdf |
+| Currículo PDF | https://www.luishw.com.br/curriculo.pdf |
 
 ---
 
@@ -192,7 +192,7 @@ Sim — Q2F (SaaS food service), Refatorize (produtos próprios), SkinsManager, 
 Pleno II / Pleno com ~4 anos de experiência desde 2022.
 
 **Como contratar?**
-Email luishw08@gmail.com, LinkedIn /in/luishw ou currículo em https://luishw.dev/curriculo.pdf
+Email luishw08@gmail.com, LinkedIn /in/luishw ou currículo em https://www.luishw.com.br/curriculo.pdf
 
 ---
 

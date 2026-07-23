@@ -12,7 +12,7 @@
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luishw/)
 [![GitHub](https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/luishw12)
-[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://luishw.dev)
+[![Portfolio](https://img.shields.io/badge/Portfolio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.luishw.com.br)
 
 ---
 
@@ -220,7 +220,7 @@ portfolio/
 ```bash
 # .env.local (opcional)
 NEXT_PUBLIC_GITHUB_USERNAME=luishw12
-NEXT_PUBLIC_SITE_URL=https://luishw.dev
+NEXT_PUBLIC_SITE_URL=https://www.luishw.com.br
 ```
 
 ### **Personalização**
@@ -365,7 +365,7 @@ Este projeto está sob a licença MIT. Veja o arquivo [LICENSE](LICENSE) para ma
 
 **Desenvolvido com ❤️ por [Luís Henrique Wendt](https://www.linkedin.com/in/luishw/)**
 
-[![Portfolio](https://img.shields.io/badge/🌐_Visite_o_Portfólio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://luishw.dev)
+[![Portfolio](https://img.shields.io/badge/🌐_Visite_o_Portfólio-000000?style=for-the-badge&logo=vercel&logoColor=white)](https://www.luishw.com.br)
 [![LinkedIn](https://img.shields.io/badge/💼_Conecte_se_no_LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/luishw/)
 [![GitHub](https://img.shields.io/badge/💻_Veja_meu_GitHub-100000?style=for-the-badge&logo=github&logoColor=white)](https://github.com/luishw12)
 

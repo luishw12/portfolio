@@ -4,6 +4,7 @@ import "./globals.css";
 import { ReactNode } from "react";
 import StructuredData from "@/components/StructuredData";
 import { pageMetadata, profile, recruiterKeywords, SITE_URL } from "@/lib/seo";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const inter = Lexend({ subsets: ["latin"] });
 
@@ -74,6 +75,9 @@ export const metadata: Metadata = {
     "profile:last_name": profile.familyName,
     "profile:username": "luishw",
   },
+  ...(process.env.GOOGLE_SITE_VERIFICATION
+    ? { verification: { google: process.env.GOOGLE_SITE_VERIFICATION } }
+    : {}),
 };
 
 export default function RootLayout({
@@ -90,6 +94,8 @@ export default function RootLayout({
         <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
         <link rel="manifest" href="/site.webmanifest" />
         <link rel="author" href="/llms.txt" type="text/plain" title="LLM-readable profile" />
+        <link rel="me" href={profile.github} />
+        <link rel="me" href={profile.linkedin} />
         <meta name="theme-color" content="#030712" />
         <meta name="geo.region" content="BR-RS" />
         <meta name="geo.placename" content="Lajeado" />
@@ -99,6 +105,7 @@ export default function RootLayout({
       </head>
       <body className={`${inter.className} overflow-x-hidden`}>
         {children}
+        <GoogleAnalytics gaId="G-60MG1VH0EB" />
       </body>
     </html>
   );

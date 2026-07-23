@@ -44,9 +44,27 @@ const nextConfig = {
     ];
   },
   
-  // Redirecionamentos
+  // Redirecionamentos — consolida domínios legados e apex no www (canonical do Google)
   async redirects() {
     return [
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'luishw.dev' }],
+        destination: 'https://www.luishw.com.br/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'www.luishw.dev' }],
+        destination: 'https://www.luishw.com.br/:path*',
+        permanent: true,
+      },
+      {
+        source: '/:path*',
+        has: [{ type: 'host', value: 'luishw.com.br' }],
+        destination: 'https://www.luishw.com.br/:path*',
+        permanent: true,
+      },
       {
         source: '/home',
         destination: '/',

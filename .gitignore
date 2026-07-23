@@ -28,6 +28,11 @@ yarn-error.log*
 # local env files
 .env*.local
 
+# Google Search Console MCP credentials (OAuth / service account)
+.cursor/gsc/client_secrets.json
+.cursor/gsc/service_account.json
+.cursor/gsc/credentials/
+
 # vercel
 .vercel
 

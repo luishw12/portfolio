@@ -13,6 +13,7 @@ const navLinks = [
   { href: "#experiencia", label: "Experiência" },
   { href: "#projetos", label: "Projetos" },
   { href: "#habilidades", label: "Skills" },
+  { href: "/hire", label: "Contratar" },
   { href: "#contato", label: "Contato" },
 ];
 
@@ -21,6 +22,10 @@ function resolveNavHref(href: string, pathname: string) {
     return `/${href}`;
   }
   return href;
+}
+
+function isHashNavLink(href: string) {
+  return href.startsWith("#");
 }
 
 export default function Header() {
@@ -36,7 +41,9 @@ export default function Header() {
   });
 
   useEffect(() => {
-    const sectionIds = navLinks.map((link) => link.href.slice(1));
+    const sectionIds = navLinks
+      .filter((link) => isHashNavLink(link.href))
+      .map((link) => link.href.slice(1));
     const visibleSections = new Map<string, number>();
 
     const observer = new IntersectionObserver(
@@ -149,7 +156,9 @@ export default function Header() {
                     <a
                       href={href}
                       onClick={(e) => {
-                        if (!isHirePage) handleSmoothScroll(e, link.href);
+                        if (isHashNavLink(link.href) && !isHirePage) {
+                          handleSmoothScroll(e, link.href);
+                        }
                       }}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
@@ -270,8 +279,11 @@ export default function Header() {
                     key={link.href}
                     href={href}
                     onClick={(e) => {
-                      if (!isHirePage) handleSmoothScroll(e, link.href);
-                      else setMobileMenuOpen(false);
+                      if (isHashNavLink(link.href) && !isHirePage) {
+                        handleSmoothScroll(e, link.href);
+                      } else {
+                        setMobileMenuOpen(false);
+                      }
                     }}
                     aria-current={isActive ? "true" : undefined}
                     className={cn(

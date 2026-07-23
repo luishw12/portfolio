@@ -1,6 +1,7 @@
 import { CAREER_START_YEAR } from "@/lib/utils";
 
-export const SITE_URL = "https://luishw.dev";
+export const SITE_URL =
+  process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.luishw.com.br";
 export const SITE_NAME = "Luís Henrique Wendt — Portfólio";
 
 export const profile = {
@@ -189,6 +190,28 @@ export const recruiterKeywords = [
   "portfólio desenvolvedor",
   "contratação desenvolvedor full stack",
 ] as const;
+
+export const pageMetadata = {
+  title:
+    "Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — Portfólio · Remoto Brasil",
+  description: `${profile.summary} Disponível para contratação remota no Brasil.`,
+  keywords: recruiterKeywords,
+};
+
+export const hirePageMetadata = {
+  title: "Contratar Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — Remoto",
+  description:
+    "Página para recrutadores contratarem Luís Henrique Wendt, Desenvolvedor Full Stack Pleno com experiência em .NET, React, Next.js, Java, Spring Boot, PostgreSQL, AWS e SaaS. Disponível para remoto, CLT ou PJ.",
+  keywords: [
+    ...recruiterKeywords,
+    "contratar desenvolvedor full stack",
+    "hire full stack developer brazil",
+    "contratar desenvolvedor remoto",
+    "desenvolvedor full stack para contratar",
+    "recrutar desenvolvedor react",
+    "recrutar desenvolvedor dotnet",
+  ],
+} as const;
 
 const skillNames = coreSkills.map((s) => s.name);
 
@@ -416,37 +439,63 @@ export const breadcrumbStructuredData = {
   ],
 };
 
+export const homeWebPageStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "@id": `${SITE_URL}/#webpage`,
+  url: SITE_URL,
+  name: pageMetadata.title,
+  description: pageMetadata.description,
+  inLanguage: "pt-BR",
+  isPartOf: { "@id": `${SITE_URL}/#website` },
+  about: { "@id": `${SITE_URL}/#person` },
+  mainEntity: { "@id": `${SITE_URL}/#person` },
+  dateModified: new Date().toISOString().split("T")[0],
+  speakable: {
+    "@type": "SpeakableSpecification",
+    cssSelector: ["#conteudo-principal h1", "#conteudo-principal p"],
+  },
+};
+
+export const professionalServiceStructuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE_URL}/#service`,
+  name: `${profile.name} — Desenvolvimento Full Stack`,
+  description: profile.summary,
+  url: SITE_URL,
+  image: profile.imageUrl,
+  areaServed: {
+    "@type": "Country",
+    name: profile.location.country,
+  },
+  serviceType: [
+    "Desenvolvimento Web",
+    "Desenvolvimento Full Stack",
+    "Desenvolvimento de SaaS",
+    "Consultoria em Software",
+  ],
+  provider: { "@id": `${SITE_URL}/#person` },
+  availableChannel: {
+    "@type": "ServiceChannel",
+    serviceUrl: `${SITE_URL}/#contato`,
+    servicePhone: profile.phone,
+    serviceSmsNumber: profile.phone,
+  },
+};
+
 export const allStructuredData = [
   personStructuredData,
   websiteStructuredData,
   profilePageStructuredData,
+  homeWebPageStructuredData,
+  professionalServiceStructuredData,
   workExperienceStructuredData,
   skillsStructuredData,
   projectsStructuredData,
   faqStructuredData,
   breadcrumbStructuredData,
 ];
-
-export const pageMetadata = {
-  title: "Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — .NET · React · Next.js · AWS",
-  description: profile.summary,
-  keywords: recruiterKeywords,
-};
-
-export const hirePageMetadata = {
-  title: "Contratar Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — Remoto",
-  description:
-    "Página para recrutadores contratarem Luís Henrique Wendt, Desenvolvedor Full Stack Pleno com experiência em .NET, React, Next.js, Java, Spring Boot, PostgreSQL, AWS e SaaS. Disponível para remoto, CLT ou PJ.",
-  keywords: [
-    ...recruiterKeywords,
-    "contratar desenvolvedor full stack",
-    "hire full stack developer brazil",
-    "contratar desenvolvedor remoto",
-    "desenvolvedor full stack para contratar",
-    "recrutar desenvolvedor react",
-    "recrutar desenvolvedor dotnet",
-  ],
-} as const;
 
 export const hireBreadcrumbStructuredData = {
   "@context": "https://schema.org",
