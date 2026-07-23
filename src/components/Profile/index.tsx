@@ -317,8 +317,9 @@ export default function Profile() {
                     className={
                       stack.fill
                         ? "size-full object-cover"
-                        : "object-contain"
+                        : "h-auto w-auto max-h-full max-w-full object-contain"
                     }
+                    style={stack.fill ? undefined : { width: "auto", height: "auto" }}
                     title={stack.name}
                   />
                 ))}
@@ -338,7 +339,8 @@ export default function Profile() {
                     alt={stack.name}
                     width={28}
                     height={28}
-                    className="object-contain"
+                    className="h-auto w-auto max-h-full max-w-full object-contain"
+                    style={{ width: "auto", height: "auto" }}
                     title={stack.name}
                   />
                 ))}

@@ -214,9 +214,12 @@ function TechLogoImage({
       width={size}
       height={size}
       className={cn(
-        tech.fill ? "size-full object-cover rounded-md" : "object-contain",
+        tech.fill
+          ? "size-full object-cover rounded-md"
+          : "h-auto w-auto max-h-full max-w-full object-contain",
         isRemote && "dark:brightness-110"
       )}
+      style={tech.fill ? undefined : { width: "auto", height: "auto" }}
       unoptimized={isRemote}
     />
   );

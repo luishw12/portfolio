@@ -26,6 +26,8 @@ import {
   Github,
   ChevronLeft,
   ChevronRight,
+  ChevronDown,
+  ChevronUp,
   X,
   Maximize2,
   Star,
@@ -164,6 +166,8 @@ const projects: Project[] = [
     gradientTo: "#059669",
   },
 ];
+
+const INITIAL_VISIBLE_COUNT = 3;
 
 function ImageGallery({
   images,
@@ -443,6 +447,14 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 }
 
 export default function Projects() {
+  const [expanded, setExpanded] = useState(false);
+  const hasMoreProjects = projects.length > INITIAL_VISIBLE_COUNT;
+  const hiddenProjects = projects.slice(INITIAL_VISIBLE_COUNT);
+
+  const toggleExpanded = () => {
+    setExpanded((current) => !current);
+  };
+
   return (
     <section id="projetos" aria-labelledby="projetos-titulo" className="relative py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
@@ -469,14 +481,64 @@ export default function Projects() {
             </p>
           </motion.div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                index={index}
-              />
-            ))}
+          <div className="relative overflow-anchor-none">
+            <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
+              {projects.slice(0, INITIAL_VISIBLE_COUNT).map((project, index) => (
+                <ProjectCard
+                  key={project.title}
+                  project={project}
+                  index={index}
+                />
+              ))}
+            </div>
+
+            {hasMoreProjects && (
+              <div
+                className={`grid transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:transition-none ${
+                  expanded ? "grid-rows-[1fr]" : "grid-rows-[0fr]"
+                }`}
+              >
+                <div
+                  className="min-h-0 overflow-hidden"
+                  aria-hidden={!expanded}
+                >
+                  <div className="grid gap-5 pt-5 md:grid-cols-2 lg:grid-cols-3">
+                    {hiddenProjects.map((project, index) => (
+                      <ProjectCard
+                        key={project.title}
+                        project={project}
+                        index={INITIAL_VISIBLE_COUNT + index}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {hasMoreProjects && (
+              <div className="mt-6 flex justify-center">
+                <Button
+                  type="button"
+                  variant="outline"
+                  size="lg"
+                  className="gap-2 rounded-full px-6 shadow-sm backdrop-blur-sm"
+                  aria-expanded={expanded}
+                  onClick={toggleExpanded}
+                >
+                  {expanded ? (
+                    <>
+                      Mostrar menos
+                      <ChevronUp className="h-4 w-4" />
+                    </>
+                  ) : (
+                    <>
+                      Mostrar mais
+                      <ChevronDown className="h-4 w-4" />
+                    </>
+                  )}
+                </Button>
+              </div>
+            )}
           </div>
 
           <BlurFade

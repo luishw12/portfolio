@@ -138,7 +138,7 @@ function GlareHover({
         !playOnce &&
           "before:transition-[background-position] before:duration-[var(--gh-duration)] before:ease-in-out",
         playOnce &&
-          "before:transition-none hover:before:transition-[background-position] hover:before:duration-[var(--gh-duration)]",
+          "before:transition-none hover:before:transition-[background-position] hover:before:[transition-duration:var(--gh-duration)]",
         // HOVER EFFECT
         "hover:before:[background-position:100%_100%,0_0]",
         className
