@@ -61,6 +61,7 @@ const experiences: Experience[] = [
         achievements: [
           "Participação ativa nas decisões técnicas da equipe, colaborando na definição de soluções de arquitetura e evolução contínua dos produtos junto ao Tech Lead.",
           "Desenvolvimento e evolução de módulos de Operação, Gerência, Suprimentos, Custos e Fidelidade, modernizando a plataforma baseada em Next.js e .NET.",
+          "Adoção diária de AI-Assisted Development (Cursor, Claude Code e Trae) para acelerar escrita de código, refatoração, automação e otimização do fluxo da equipe.",
           "Contato frequente com usuários finais e clientes, transformando feedbacks operacionais em melhorias de produto e experiência.",
           "Desenvolvimento de padrões reutilizáveis no frontend, aumentando consistência visual, manutenibilidade e produtividade da equipe.",
           "Investigação de problemas em produção com AWS, análise de logs, consultas em banco e reprodução local dos cenários.",
@@ -71,12 +72,13 @@ const experiences: Experience[] = [
         period: "fev 2026 - mai 2026",
         achievements: [
           "Participação na modernização do ecossistema web, contribuindo para a migração gradual de React para Next.js.",
+          "Uso de ferramentas de IA (Cursor e Claude Code) para acelerar a conversão de componentes React/Next.js e automatizar testes de integração.",
           "Desenvolvimento de funcionalidades para redes de franquias e restaurantes: pedidos, checklists, controle sanitário, etiquetas e fidelidade.",
           "Funcionalidade de descoberta automática de impressoras na rede local, eliminando praticamente todos os chamados de configuração manual.",
         ],
       },
     ],
-    technologies: [".NET", "Next.js", "React", "TypeScript", "PostgreSQL", "AWS"],
+    technologies: [".NET", "Next.js", "React", "TypeScript", "PostgreSQL", "AWS", "Cursor", "Claude Code"],
     logo: q2fLogo,
     logoBg: "bg-[#1e2b58]",
     gradientFrom: "#f97316",
@@ -97,13 +99,13 @@ const experiences: Experience[] = [
         period: "mar 2025 - Presente",
         achievements: [
           "Atuação em todas as etapas do desenvolvimento Full Stack: arquitetura, backend, frontend, banco, autenticação, infraestrutura e deploy.",
+          "Utilização intensiva de IA (Cursor IDE, Claude Code, Antigravity, Trae e Codex) para prototipagem rápida, geração de código, refatoração e otimização arquitetural.",
           "Desenvolvimento de aplicações com Java, Spring Boot, React, Next.js, TypeScript e PostgreSQL.",
           "Gerenciamento de infraestrutura com Linux, Docker, VPS, AWS e Vercel.",
-          "Uso contínuo de ferramentas de IA para acelerar o desenvolvimento, mantendo qualidade e legibilidade.",
         ],
       },
     ],
-    technologies: ["Java", "Spring Boot", ".NET", "Next.js", "PostgreSQL", "Docker"],
+    technologies: ["Java", "Spring Boot", ".NET", "Next.js", "PostgreSQL", "Docker", "Cursor", "Claude Code"],
     logo: refatorizeLogo,
     logoBg: "bg-white",
     gradientFrom: "#3b82f6",
@@ -124,6 +126,7 @@ const experiences: Experience[] = [
         period: "ago 2025 - fev 2026",
         achievements: [
           "Uma das principais referências técnicas da equipe: prioridades, padronização, apoio aos desenvolvedores e arquitetura do novo ERP web.",
+          "Uso de desenvolvimento assistido por IA (Cursor, Antigravity e Codex) para investigação de bugs, refatoração e modernização de rotinas legadas.",
           "Desenvolvimento completo de solução comercializada para importação automatizada de documentos fiscais.",
           "Mecanismos de sincronização incremental entre o legado Delphi e o ERP web em Java.",
           "Otimização de consultas SQL e relatórios JasperReports, reduzindo significativamente o tempo médio de processamento.",
@@ -134,12 +137,13 @@ const experiences: Experience[] = [
         period: "nov 2024 - ago 2025",
         achievements: [
           "Evolução do ERP web em Java Spring Boot, participando da migração gradual do sistema legado em Delphi.",
+          "Uso de ferramentas de IA (Cursor e Codex) para entendimento e refatoração de código legado e escrita de queries SQL mais eficientes.",
           "Componentização de telas e padronização de elementos reutilizáveis.",
           "Integração entre Firebird e PostgreSQL para migração de dados entre legado e novo ERP.",
         ],
       },
     ],
-    technologies: ["Java", "Spring Boot", "Delphi", "PostgreSQL", "Docker", "AWS"],
+    technologies: ["Java", "Spring Boot", "Delphi", "PostgreSQL", "Docker", "AWS", "Cursor", "Codex"],
     logo: triconLogo,
     logoBg: "bg-[#0a1628]",
     gradientFrom: "#22c55e",
@@ -206,22 +210,13 @@ function ExperienceCard({
     <BlurFade delay={0.1 + index * 0.08} inView className="relative pl-8 md:pl-10">
       <div className="absolute left-0 top-6 size-3 rounded-full bg-primary ring-4 ring-background shadow-lg shadow-primary/40 z-10" />
 
+      <div className="relative rounded-2xl">
       <MagicCard
         className="relative rounded-2xl overflow-hidden"
         gradientFrom={exp.gradientFrom}
         gradientTo={exp.gradientTo}
         gradientColor="#0f172a"
       >
-        {exp.current && (
-          <BorderBeam
-            size={80}
-            duration={8}
-            colorFrom={exp.gradientFrom}
-            colorTo={exp.gradientTo}
-            borderWidth={1.5}
-          />
-        )}
-
         <div className="p-4 sm:p-5 flex flex-col gap-3">
           <div className="flex items-start gap-3">
             <div
@@ -359,6 +354,18 @@ function ExperienceCard({
           </AnimatePresence>
         </div>
       </MagicCard>
+      {exp.current && (
+        <BorderBeam
+          className="z-50"
+          size={80}
+          borderRadius={16}
+          duration={8}
+          colorFrom={exp.gradientFrom}
+          colorTo={exp.gradientTo}
+          borderWidth={1.5}
+        />
+      )}
+      </div>
     </BlurFade>
   );
 }
@@ -367,7 +374,7 @@ export default function Experience() {
   const years = getYearsOfExperience();
 
   return (
-    <section id="experiencia" className="py-20 relative overflow-hidden">
+    <section id="experiencia" aria-labelledby="experiencia-titulo" className="py-20 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/20 to-background" />
 
       <div className="container mx-auto px-6 relative">
@@ -377,7 +384,7 @@ export default function Experience() {
               <Briefcase className="size-3 mr-2" />
               Carreira
             </Badge>
-            <h2 className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
+            <h2 id="experiencia-titulo" className="text-3xl lg:text-4xl font-bold text-foreground mb-3">
               Experiência <BrandTextReveal text="Profissional" />
             </h2>
             <p className="text-muted-foreground max-w-xl mx-auto text-sm sm:text-base">

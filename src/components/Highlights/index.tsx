@@ -1,6 +1,6 @@
 "use client";
 
-import { Quote, Rocket, Target, Zap } from "lucide-react";
+import { Quote, Rocket, Target, Zap, Sparkles } from "lucide-react";
 import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
 import { BlurFade } from "@/components/ui/blur-fade";
 import { MagicCard } from "@/components/ui/magic-card";
@@ -32,18 +32,26 @@ const highlights = [
     from: "#f59e0b",
     to: "#f97316",
   },
+  {
+    icon: Sparkles,
+    title: "IA no Fluxo",
+    description:
+      "Desenvolvimento assistido por IA com Cursor, Claude Code e engenharia de contexto para acelerar entregas sem abrir mão da qualidade.",
+    from: "#d946ef",
+    to: "#8b5cf6",
+  },
 ];
 
 export default function Highlights() {
   return (
-    <section className="py-24 relative overflow-hidden">
+    <section id="destaques" aria-labelledby="destaques-titulo" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
       <div className="container mx-auto px-6 relative">
         <div className="max-w-6xl mx-auto flex flex-col gap-16">
           <BlurFade delay={0.1} inView className="text-center">
             <Quote className="size-12 mx-auto mb-6 text-primary/30" />
-            <blockquote className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground leading-relaxed max-w-4xl mx-auto">
+            <blockquote id="destaques-titulo" className="text-2xl md:text-3xl lg:text-4xl font-medium text-foreground leading-relaxed max-w-4xl mx-auto">
               &ldquo;Entender o problema antes da tecnologia — e criar soluções que{" "}
               <Highlighter action="underline" color="#a855f7" isView>
                 <BrandTextReveal text="gerem impacto real" />
@@ -59,7 +67,7 @@ export default function Highlights() {
             </p>
           </BlurFade>
 
-          <div className="grid md:grid-cols-3 gap-6">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-6">
             {highlights.map((highlight, index) => (
               <BlurFade key={highlight.title} delay={0.15 + index * 0.1} inView>
                 <MagicCard

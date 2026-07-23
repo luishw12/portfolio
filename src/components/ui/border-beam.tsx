@@ -49,6 +49,10 @@ interface BorderBeamProps {
    * The border width of the beam.
    */
   borderWidth?: number
+  /**
+   * Corner radius of the path — should match the parent card border-radius.
+   */
+  borderRadius?: number
 }
 
 export const BorderBeam = ({
@@ -63,6 +67,7 @@ export const BorderBeam = ({
   reverse = false,
   initialOffset = 0,
   borderWidth = 1,
+  borderRadius = 16,
 }: BorderBeamProps) => {
   return (
     <div
@@ -82,7 +87,7 @@ export const BorderBeam = ({
         style={
           {
             width: size,
-            offsetPath: `rect(0 auto auto 0 round ${size}px)`,
+            offsetPath: `rect(0 auto auto 0 round ${borderRadius}px)`,
             "--color-from": colorFrom,
             "--color-to": colorTo,
             ...style,

@@ -63,7 +63,7 @@ const certifications = [
 
 export default function Education() {
   return (
-    <section id="formacao" className="py-24 relative overflow-hidden">
+    <section id="formacao" aria-labelledby="formacao-titulo" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/15 to-transparent" />
 
       <div className="container mx-auto px-6 relative">
@@ -72,7 +72,7 @@ export default function Education() {
             <p className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
               Formação
             </p>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
+            <h2 id="formacao-titulo" className="text-4xl lg:text-5xl font-bold text-foreground leading-tight">
               Trajetória <BrandTextReveal text="Acadêmica" />
             </h2>
             <p className="text-muted-foreground text-base lg:text-lg leading-relaxed">

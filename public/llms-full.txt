@@ -1,0 +1,201 @@
+# Luís Henrique Wendt — Perfil Completo
+
+> Documento estruturado para crawlers de IA e sistemas de recrutamento mapearem o portfólio completo.
+
+URL: https://luishw.dev
+Última atualização: 2026-07-22
+Tipo: Portfólio profissional / currículo online
+Idioma: Português (Brasil)
+
+---
+
+## Identidade
+
+- Nome: Luís Henrique Wendt
+- Cargo atual: Desenvolvedor Full Stack Pleno II
+- Cargos alternativos: Desenvolvedor Full Stack, Full Stack Developer, Desenvolvedor .NET, Desenvolvedor React, Desenvolvedor Next.js, Desenvolvedor Java Spring Boot
+- Início na carreira: 2022
+- Localização: Lajeado, RS, Brasil
+- Trabalho remoto: Sim
+- Disponibilidade: Disponível para novos projetos e oportunidades
+
+## Resumo profissional
+
+Desenvolvedor Full Stack desde 2022 com experiência em aplicações web, sistemas corporativos e produtos SaaS. Atua com .NET, C#, Java, Spring Boot, React, Next.js, TypeScript, PostgreSQL, Docker, AWS e desenvolvimento assistido por IA (Cursor, Claude Code). Full Stack Pleno II na Q2F Sistemas de Gestão e fundador da Refatorize.
+
+Atua do entendimento do problema até implementação, infraestrutura e produção, com foco em soluções simples de manter, intuitivas e escaláveis.
+
+## Contato
+
+| Canal | Valor |
+|-------|-------|
+| Email | luishw08@gmail.com |
+| LinkedIn | https://www.linkedin.com/in/luishw/ |
+| GitHub | https://github.com/luishw12 |
+| Instagram | https://www.instagram.com/luis.wendt/ |
+| WhatsApp | +55 51 99560-8647 |
+| Currículo PDF | https://luishw.dev/curriculo.pdf |
+
+---
+
+## Experiência profissional
+
+### Q2F Sistemas de Gestão — Desenvolvedor Full Stack Pleno II
+- Período: fev 2026 — Presente
+- Local: Lajeado, RS
+- Tipo: CLT
+- Site: https://q2f.com.br
+- Descrição: Plataforma SaaS para food service — operação, compras, custos, produção, indicadores e fidelidade.
+- Tecnologias: .NET, Next.js, React, TypeScript, PostgreSQL, Supabase, AWS, Linux, Git
+- Destaques:
+  - Decisões técnicas de arquitetura e evolução de produtos
+  - Módulos de Operação, Gerência, Suprimentos, Custos e Fidelidade
+  - AI-Assisted Development diário (Cursor, Claude Code, Trae)
+  - Padrões reutilizáveis no frontend
+  - Investigação de problemas em produção (AWS, logs, banco)
+
+### Refatorize — Fundador
+- Período: mar 2025 — Presente
+- Local: Remoto
+- Site: https://refatorize.com.br
+- Descrição: Produtos SaaS próprios — arquitetura completa do zero à produção.
+- Tecnologias: Java, Spring Boot, .NET, React, Next.js, TypeScript, PostgreSQL, Docker, Linux, AWS, Vercel
+- Destaques:
+  - Arquitetura full stack completa (backend, frontend, banco, auth, infra)
+  - IA intensiva no fluxo (Cursor, Claude Code, Antigravity, Trae, Codex)
+  - Deploy com Linux, Docker, VPS, AWS e Vercel
+
+### Tricon - Softwares de Gestão — Desenvolvedor Full Stack Pleno
+- Período: nov 2024 — fev 2026
+- Local: Lajeado, RS
+- Site: https://tricon.inf.br
+- Descrição: ERP web, migração Delphi → Java Spring Boot, importação fiscal automatizada.
+- Tecnologias: Java, Spring Boot, Delphi, PostgreSQL, Firebird, JasperReports, Docker, AWS, GitLab CI
+- Destaques:
+  - Referência técnica da equipe e arquitetura do ERP web
+  - Solução comercial de importação fiscal automatizada
+  - Sincronização incremental legado Delphi ↔ ERP web
+  - Otimização de SQL e JasperReports
+
+### Toshyro Inovação e Tecnologia — Desenvolvedor Full Stack Júnior
+- Período: abr 2022 — nov 2024
+- Local: Lajeado, RS
+- Site: https://www.toshyro.com.br/
+- Descrição: Produtos corporativos, Design System interno, migração ERP PHP → Next.js/.NET.
+- Tecnologias: React, Next.js, TypeScript, JavaScript, .NET, PostgreSQL, Storybook, Docker, Git
+- Destaques:
+  - Design System com ~15 componentes via npm e Storybook
+  - Migração de partes do ERP de PHP para Next.js e .NET
+
+---
+
+## Habilidades técnicas (com tempo de experiência)
+
+### Frontend
+- React — 4 anos
+- TypeScript — 4 anos
+- JavaScript — 4 anos
+- Next.js — 3 anos
+- Tailwind CSS — 4 anos
+
+### Backend
+- Java — 3 anos
+- Spring Boot — 3 anos
+- Node.js — 3 anos
+- .NET — 2 anos
+- C# — 2 anos
+- Python — 1 ano
+
+### Banco de dados
+- PostgreSQL — 3 anos
+- MySQL, MongoDB, Redis, Firebird, Supabase — experiência complementar
+
+### DevOps & Cloud
+- Docker — 2 anos
+- AWS (EC2, S3) — 2 anos
+- Linux — 2 anos
+- Git, GitHub Actions, GitLab CI
+
+### AI-Assisted Development
+- Cursor IDE — 2 anos
+- Claude Code — 2 anos
+- Codex — 2 anos
+- Trae — 1 ano
+- Antigravity — 1 ano
+
+### Metodologias
+Agile/Kanban · Clean Code · SOLID · TDD · CI/CD · Microservices · Clean Architecture · Design Patterns · AI-Assisted Development
+
+---
+
+## Projetos em destaque
+
+### SkinsManager — https://skinsmanager.com.br
+SaaS multi-tenant para traders de skins CS2: inventário, trades, CRM, RBAC, fórmulas de preço, dashboards, WhatsApp em massa.
+Stack: Next.js, React, TypeScript, ASP.NET Core, PostgreSQL, NextAuth, SignalR, Tailwind CSS, Recharts
+
+### BoltSkins — https://boltskins.com.br
+Marketplace de skins CS2 com trocas automatizadas, afiliados e integração Steam API.
+Stack: Next.js, React, TypeScript, Node.js, PostgreSQL, Tailwind CSS, Steam API
+
+### CS Invest — https://www.csinvest.site/
+Análise de rentabilidade para investimento em skins: calculadoras, dashboard, métricas em tempo real.
+Stack: Next.js, Java Spring Boot, AWS, PostgreSQL, TailwindCSS, TypeScript
+
+### App Movies — https://github.com/luishw12/AppMovies
+App mobile React Native/Expo com API TMDB para descoberta de filmes.
+Stack: React Native, Expo, TMDB API, TypeScript
+
+### Design System Toshyro — https://www.npmjs.com/package/design-system-toshyro
+Biblioteca NPM com ~15 componentes reutilizáveis documentados com Storybook.
+Stack: React, Storybook, Tailwind CSS, NPM, TypeScript
+
+---
+
+## Formação acadêmica
+
+### Bacharelado em Engenharia de Software
+- Instituição: Anhanguera Educacional
+- Período: jul 2024 — dez 2027
+- Status: Em andamento
+
+### Ensino Médio
+- Instituição: Colégio Santo Antônio (CSA)
+- Período: fev 2020 — dez 2023
+- Status: Concluído
+
+## Idiomas
+
+- Português: Nativo
+- Inglês: Profissional
+- Alemão: Elementar
+
+## Certificações
+
+- Introdução ao C#
+- Curso de Inglês
+
+---
+
+## FAQ para recrutadores
+
+**Quais tecnologias Luís domina?**
+React, Next.js, TypeScript, JavaScript, .NET, C#, Java, Spring Boot, Node.js, PostgreSQL, Docker, AWS, Linux, Python. AI-Assisted Development com Cursor e Claude Code.
+
+**Está disponível para remoto?**
+Sim. Baseado em Lajeado/RS, disponível para remoto ou híbrido.
+
+**Tem experiência com SaaS?**
+Sim — Q2F (SaaS food service), Refatorize (produtos próprios), SkinsManager, BoltSkins, CS Invest.
+
+**Qual senioridade?**
+Pleno II / Pleno com ~4 anos de experiência desde 2022.
+
+**Como contratar?**
+Email luishw08@gmail.com, LinkedIn /in/luishw ou currículo em https://luishw.dev/curriculo.pdf
+
+---
+
+## Palavras-chave de busca
+
+desenvolvedor full stack, desenvolvedor full stack pleno, react developer, next.js developer, dotnet developer, csharp developer, java developer, spring boot developer, typescript developer, postgresql developer, aws developer, docker, desenvolvedor remoto, desenvolvedor remoto brasil, produtos saas, arquitetura de software, desenvolvimento web, desenvolvimento backend, desenvolvimento frontend, portfólio desenvolvedor, cursor ide, claude code, desenvolvimento assistido por ia, ai-assisted development, contratação desenvolvedor, hire full stack developer brazil

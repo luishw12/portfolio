@@ -1,12 +1,13 @@
 {
   "name": "Luís Henrique Wendt - Desenvolvedor Full Stack",
   "short_name": "LHW Portfolio",
-  "description": "Portfólio de Luís Henrique Wendt, Desenvolvedor Full Stack especializado em React, Next.js, Java e Spring Boot.",
+  "description": "Portfólio de Luís Henrique Wendt — Desenvolvedor Full Stack Pleno especializado em .NET, React, Next.js, Java, Spring Boot, PostgreSQL, AWS e AI-Assisted Development.",
   "start_url": "/",
   "display": "standalone",
-  "background_color": "#0f172a",
-  "theme_color": "#0f172a",
+  "background_color": "#030712",
+  "theme_color": "#030712",
   "orientation": "portrait-primary",
+  "lang": "pt-BR",
   "icons": [
     {
       "src": "/favicon-16x16.png",
@@ -34,6 +35,7 @@
       "type": "image/png"
     }
   ],
-  "categories": ["portfolio", "developer", "technology"],
-  "lang": "pt-BR"
+  "categories": ["portfolio", "developer", "technology", "business"],
+  "related_applications": [],
+  "prefer_related_applications": false
 }

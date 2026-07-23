@@ -1,7 +1,7 @@
 "use client";
 
 import { Badge } from "@/components/ui/badge";
-import { Code, Database, Cloud, GitBranch, Heart, Coffee, Lightbulb, Target } from "lucide-react";
+import { Code, Database, Cloud, GitBranch, Heart, Coffee, Lightbulb, Target, Sparkles } from "lucide-react";
 import { getYearsOfExperience } from "@/lib/utils";
 import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -36,6 +36,12 @@ const skills = [
     tech: "PostgreSQL, REST APIs",
     color: "from-orange-500 to-red-500",
   },
+  {
+    icon: Sparkles,
+    title: "IA no dia a dia",
+    tech: "Cursor, Claude Code, Codex",
+    color: "from-violet-500 to-fuchsia-500",
+  },
 ];
 
 const values = [
@@ -47,7 +53,7 @@ const values = [
 
 export default function AboutMe() {
   return (
-    <section id="sobre" className="py-24 relative overflow-hidden">
+    <section id="sobre" aria-labelledby="sobre-titulo" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-background via-muted/30 to-background" />
 
       <div className="container mx-auto px-6 relative">
@@ -57,7 +63,7 @@ export default function AboutMe() {
               <Heart className="size-3 mr-2 text-red-500" />
               Conheça-me melhor
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <h2 id="sobre-titulo" className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Sobre <BrandTextReveal text="Mim" />
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -66,6 +72,7 @@ export default function AboutMe() {
           </BlurFade>
 
           <BlurFade delay={0.2} inView>
+            <div className="relative rounded-2xl">
             <MagicCard
               className="rounded-2xl"
               gradientFrom="#3b82f6"
@@ -73,13 +80,6 @@ export default function AboutMe() {
               gradientColor="#1e293b"
             >
               <div className="relative p-6 md:p-8 flex flex-col gap-6">
-                <BorderBeam
-                  size={120}
-                  duration={10}
-                  colorFrom="#3b82f6"
-                  colorTo="#a855f7"
-                  borderWidth={1.5}
-                />
                 <div>
                   <h3 className="text-xl md:text-2xl font-bold text-foreground mb-4">
                     Olá! Prazer em conhecê-lo
@@ -120,6 +120,19 @@ export default function AboutMe() {
                 </p>
 
                 <p className="text-muted-foreground leading-relaxed">
+                  Sou praticante ativo de{" "}
+                  <Highlighter action="highlight" color="#a855f7" isView>
+                    <span className="text-foreground font-medium">
+                      AI-Assisted Development
+                    </span>
+                  </Highlighter>
+                  , utilizando diariamente Cursor IDE, Claude Code, Trae, Antigravity e Codex no fluxo
+                  de trabalho. A engenharia de contexto e os assistentes de IA me permitem acelerar
+                  entregas, otimizar investigações complexas e manter padrões elevados de arquitetura e
+                  qualidade de código.
+                </p>
+
+                <p className="text-muted-foreground leading-relaxed">
                   Em projetos próprios sou responsável por toda a arquitetura — backend, frontend,
                   banco, autenticação, permissões, Linux, Docker, VPS, AWS, Cloudflare e deploy
                   contínuo. Gosto de entender o problema antes da tecnologia, automatizar processos e
@@ -138,9 +151,19 @@ export default function AboutMe() {
                 </div>
               </div>
             </MagicCard>
+            <BorderBeam
+              className="z-50"
+              size={120}
+              borderRadius={16}
+              duration={10}
+              colorFrom="#3b82f6"
+              colorTo="#a855f7"
+              borderWidth={1.5}
+            />
+            </div>
           </BlurFade>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
             {skills.map((skill, index) => (
               <BlurFade key={skill.title} delay={0.15 + index * 0.08} inView>
                 <MagicCard

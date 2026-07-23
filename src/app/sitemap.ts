@@ -1,44 +1,39 @@
-import { MetadataRoute } from 'next'
+import { MetadataRoute } from "next";
+import { SITE_URL } from "@/lib/seo";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = 'https://luishw.dev'
-  
+  const lastModified = new Date();
+
   return [
     {
-      url: baseUrl,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: SITE_URL,
+      lastModified,
+      changeFrequency: "weekly",
       priority: 1,
     },
     {
-      url: `${baseUrl}/#sobre`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: `${SITE_URL}/hire`,
+      lastModified,
+      changeFrequency: "weekly",
+      priority: 0.95,
+    },
+    {
+      url: `${SITE_URL}/llms.txt`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/llms-full.txt`,
+      lastModified,
+      changeFrequency: "monthly",
+      priority: 0.5,
+    },
+    {
+      url: `${SITE_URL}/curriculo.pdf`,
+      lastModified,
+      changeFrequency: "monthly",
       priority: 0.8,
     },
-    {
-      url: `${baseUrl}/#experiencia`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.8,
-    },
-    {
-      url: `${baseUrl}/#projetos`,
-      lastModified: new Date(),
-      changeFrequency: 'weekly',
-      priority: 0.9,
-    },
-    {
-      url: `${baseUrl}/#habilidades`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.7,
-    },
-    {
-      url: `${baseUrl}/#contato`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 0.6,
-    },
-  ]
+  ];
 }

@@ -12,6 +12,7 @@ import {
   Award,
   Cpu,
   CalendarDays,
+  Sparkles,
 } from "lucide-react";
 import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -99,6 +100,19 @@ const experienceTiers: ExperienceTier[] = [
     ],
   },
   {
+    title: "IA no fluxo",
+    subtitle: "Desenvolvimento assistido por IA no dia a dia",
+    years: 2,
+    accent: "from-fuchsia-500/20 to-violet-500/5",
+    skills: [
+      { name: "Cursor IDE", years: 2, logo: simpleIcon("cursor", "ffffff") },
+      { name: "Claude Code", years: 2, logo: simpleIcon("anthropic", "CC9B7A") },
+      { name: "Codex", years: 2, logo: simpleIcon("openai", "412991") },
+      { name: "Trae", years: 1, logo: simpleIcon("bytedance", "ffffff") },
+      { name: "Antigravity", years: 1, logo: simpleIcon("google", "4285F4") },
+    ],
+  },
+  {
     title: "Em evolução",
     subtitle: "Stack atual e expansões recentes",
     years: 2,
@@ -170,6 +184,13 @@ const methodologies = [
     from: "#6366f1",
     to: "#3b82f6",
   },
+  {
+    name: "AI-Assisted Dev",
+    icon: Sparkles,
+    description: "Cursor, Claude Code e engenharia de contexto no fluxo",
+    from: "#d946ef",
+    to: "#a855f7",
+  },
 ];
 
 const methodNames = methodologies.map((m) => m.name);
@@ -205,7 +226,7 @@ export default function Skills() {
   const careerYears = getYearsOfExperience();
 
   return (
-    <section id="habilidades" className="py-24 relative overflow-hidden">
+    <section id="habilidades" aria-labelledby="habilidades-titulo" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/20 to-transparent" />
 
       <div className="container mx-auto px-6 relative">
@@ -215,7 +236,7 @@ export default function Skills() {
               <CalendarDays className="size-3 mr-2" />
               Tempo de convivência
             </Badge>
-            <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            <h2 id="habilidades-titulo" className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
               Minhas <BrandTextReveal text="Habilidades" />
             </h2>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
@@ -257,7 +278,7 @@ export default function Skills() {
           </BlurFade>
 
           {/* Faixas por tempo */}
-          <div className="grid md:grid-cols-3 gap-5">
+          <div className="grid md:grid-cols-2 xl:grid-cols-4 gap-5">
             {experienceTiers.map((tier, index) => (
               <BlurFade key={tier.title} delay={0.1 + index * 0.08} inView>
                 <div

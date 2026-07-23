@@ -1,0 +1,48 @@
+# Luís Henrique Wendt
+
+> Desenvolvedor Full Stack Pleno — aplicações web, sistemas corporativos e produtos SaaS com .NET, React, Next.js, TypeScript, PostgreSQL, AWS e AI-Assisted Development.
+
+Site: https://luishw.dev
+Idioma: pt-BR
+Disponibilidade: aberto a novos projetos e oportunidades (remoto ou híbrido)
+Localização: Lajeado, RS, Brasil
+
+## Resumo
+
+Luís Henrique Wendt é Desenvolvedor Full Stack desde 2022. Atualmente é Pleno II na Q2F Sistemas de Gestão (plataforma SaaS food service) e fundador da Refatorize (produtos SaaS próprios). Experiência anterior na Tricon (ERP, migração Delphi → Java Spring Boot) e Toshyro (produtos corporativos, Design System).
+
+Praticante ativo de AI-Assisted Development com Cursor IDE, Claude Code, Codex, Trae e Antigravity.
+
+## Contato
+
+- Email: luishw08@gmail.com
+- LinkedIn: https://www.linkedin.com/in/luishw/
+- GitHub: https://github.com/luishw12
+- Currículo PDF: https://luishw.dev/curriculo.pdf
+- WhatsApp: +55 51 99560-8647
+
+## Stack principal
+
+React (4a) · TypeScript (4a) · JavaScript (4a) · Next.js (3a) · Java (3a) · Spring Boot (3a) · Node.js (3a) · PostgreSQL (3a) · .NET (2a) · C# (2a) · Docker (2a) · AWS (2a) · Python (1a) · Cursor IDE (2a) · Claude Code (2a)
+
+## Metodologias
+
+Agile/Kanban · Clean Code · SOLID · TDD · CI/CD · Microservices · Clean Architecture · Design Patterns · AI-Assisted Development
+
+## Seções do site
+
+- [Sobre](https://luishw.dev/#sobre): background profissional e valores
+- [Experiência](https://luishw.dev/#experiencia): histórico em Q2F, Refatorize, Tricon e Toshyro
+- [Projetos](https://luishw.dev/#projetos): SkinsManager, BoltSkins, CS Invest, Design System
+- [Habilidades](https://luishw.dev/#habilidades): stack com tempo de experiência
+- [Formação](https://luishw.dev/#formacao): Engenharia de Software (Anhanguera)
+- [Contato](https://luishw.dev/#contato): canais de comunicação
+- [Contratar / Hire](https://luishw.dev/hire): página dedicada para recrutadores
+
+## Documentação completa para IA
+
+Versão expandida com todo o conteúdo estruturado: https://luishw.dev/llms-full.txt
+
+## Palavras-chave para recrutadores
+
+desenvolvedor full stack pleno, react developer, next.js developer, dotnet developer, csharp developer, java developer, spring boot developer, typescript developer, postgresql developer, aws developer, desenvolvedor remoto brasil, produtos saas, ai-assisted development, cursor ide, claude code

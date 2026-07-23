@@ -7,11 +7,12 @@ import { Dock, DockIcon } from "@/components/ui/dock";
 import { BlurFade } from "@/components/ui/blur-fade";
 
 const quickLinks = [
-  { label: "Sobre", href: "#sobre" },
-  { label: "Experiência", href: "#experiencia" },
-  { label: "Projetos", href: "#projetos" },
-  { label: "Habilidades", href: "#habilidades" },
-  { label: "Contato", href: "#contato" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Experiência", href: "/#experiencia" },
+  { label: "Projetos", href: "/#projetos" },
+  { label: "Habilidades", href: "/#habilidades" },
+  { label: "Contratar", href: "/hire" },
+  { label: "Contato", href: "/#contato" },
 ];
 
 export default function Footer() {
@@ -53,13 +54,13 @@ export default function Footer() {
             <h4 className="font-semibold text-foreground">Navegação</h4>
             <nav className="flex flex-col gap-2">
               {quickLinks.map((link) => (
-                <a
+                <Link
                   key={link.label}
                   href={link.href}
                   className="text-muted-foreground hover:text-primary transition-colors w-fit"
                 >
                   {link.label}
-                </a>
+                </Link>
               ))}
             </nav>
           </BlurFade>

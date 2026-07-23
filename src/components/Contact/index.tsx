@@ -87,7 +87,7 @@ function CopyButton({ text }: { text: string }) {
 
 export default function Contact() {
   return (
-    <section id="contato" className="py-24 relative overflow-hidden">
+    <section id="contato" aria-labelledby="contato-titulo" className="py-24 relative overflow-hidden">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/15 to-transparent" />
 
       <div className="container mx-auto px-6 relative">
@@ -99,7 +99,7 @@ export default function Contact() {
                 <p className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
                   Contato
                 </p>
-                <h2 className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
+                <h2 id="contato-titulo" className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
                   Tem um projeto em mente?{" "}
                   <BrandTextReveal text="Fala comigo." />
                 </h2>
@@ -245,7 +245,9 @@ export default function Contact() {
                 </Terminal>
 
                 <BorderBeam
+                  className="z-50"
                   size={120}
+                  borderRadius={12}
                   duration={10}
                   colorFrom="#3b82f6"
                   colorTo="#06b6d4"

@@ -422,7 +422,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export default function Projects() {
   return (
-    <section id="projetos" className="relative py-16">
+    <section id="projetos" aria-labelledby="projetos-titulo" className="relative py-16">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/5 to-transparent" />
 
       <div className="container relative mx-auto px-6">
@@ -438,7 +438,7 @@ export default function Projects() {
               <Star className="mr-2 h-3 w-3" />
               Portfólio
             </Badge>
-            <h2 className="mb-4 text-4xl font-bold text-foreground lg:text-5xl">
+            <h2 id="projetos-titulo" className="mb-4 text-4xl font-bold text-foreground lg:text-5xl">
               Projetos em <BrandTextReveal text="Destaque" />
             </h2>
             <p className="mx-auto max-w-2xl text-lg text-muted-foreground">

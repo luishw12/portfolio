@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Github, Linkedin, Menu, X, Download } from "lucide-react";
 import { motion, AnimatePresence, useScroll, useMotionValueEvent } from "framer-motion";
@@ -15,7 +16,16 @@ const navLinks = [
   { href: "#contato", label: "Contato" },
 ];
 
+function resolveNavHref(href: string, pathname: string) {
+  if (href.startsWith("#") && pathname !== "/") {
+    return `/${href}`;
+  }
+  return href;
+}
+
 export default function Header() {
+  const pathname = usePathname();
+  const isHirePage = pathname === "/hire";
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
@@ -126,7 +136,8 @@ export default function Header() {
             {/* Desktop Navigation */}
             <nav className="hidden md:flex items-center gap-1 justify-self-center">
               {navLinks.map((link, index) => {
-                const isActive = activeSection === link.href;
+                const isActive = !isHirePage && activeSection === link.href;
+                const href = resolveNavHref(link.href, pathname);
 
                 return (
                   <motion.div
@@ -136,8 +147,10 @@ export default function Header() {
                     transition={{ delay: 0.1 * index }}
                   >
                     <a
-                      href={link.href}
-                      onClick={(e) => handleSmoothScroll(e, link.href)}
+                      href={href}
+                      onClick={(e) => {
+                        if (!isHirePage) handleSmoothScroll(e, link.href);
+                      }}
                       aria-current={isActive ? "true" : undefined}
                       className={cn(
                         "relative px-4 py-2 text-sm transition-colors group",
@@ -249,13 +262,17 @@ export default function Header() {
               transition={{ delay: 0.1 }}
             >
               {navLinks.map((link, index) => {
-                const isActive = activeSection === link.href;
+                const isActive = !isHirePage && activeSection === link.href;
+                const href = resolveNavHref(link.href, pathname);
 
                 return (
                   <motion.a
                     key={link.href}
-                    href={link.href}
-                    onClick={(e) => handleSmoothScroll(e, link.href)}
+                    href={href}
+                    onClick={(e) => {
+                      if (!isHirePage) handleSmoothScroll(e, link.href);
+                      else setMobileMenuOpen(false);
+                    }}
                     aria-current={isActive ? "true" : undefined}
                     className={cn(
                       "text-2xl font-medium py-3 transition-colors",

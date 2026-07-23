@@ -1,6 +1,6 @@
 "use client";
 
-import ProfilePhoto from "@/img/foto-perfil.jpg";
+import ProfilePhoto from "@/img/foto-perfil.png";
 import DotnetLogo from "@/img/stacks/dotnet.png";
 import ReactLogo from "@/img/stacks/react.png";
 import NextjsLogo from "@/img/stacks/nextjs.png";
@@ -9,7 +9,7 @@ import DockerLogo from "@/img/stacks/docker.png";
 import PythonLogo from "@/img/stacks/python.png";
 import Image from "next/image";
 import { motion, useScroll, useTransform } from "motion/react";
-import { ArrowDown, Download, Mail, Sparkles } from "lucide-react";
+import { Download, Mail, Sparkles } from "lucide-react";
 import { useRef, useState, useEffect } from "react";
 import Particles from "@/components/ui/Particles";
 import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
@@ -45,12 +45,65 @@ const orbitLogos: {
   { name: "Python", logo: PythonLogo },
 ];
 
+type HeroScrollRanges = {
+  fadeStart: number;
+  fadeMid: number;
+  fadeEnd: number;
+};
+
+const DEFAULT_SCROLL_RANGES: HeroScrollRanges = {
+  fadeStart: 0,
+  fadeMid: 0.15,
+  fadeEnd: 0.45,
+};
+
+function getHeroScrollRanges(sectionHeight: number, viewportHeight: number): HeroScrollRanges {
+  const scrollRange = sectionHeight - viewportHeight;
+
+  // Hero cabe em ~uma tela: mantém o efeito original de parallax + blur
+  if (scrollRange <= viewportHeight * 0.2) {
+    return DEFAULT_SCROLL_RANGES;
+  }
+
+  // Hero alta (mobile): blur só nos últimos ~55vh de scroll
+  const fadeWindow = viewportHeight * 0.55;
+  const fadeStart = Math.max(0, Math.min(0.82, 1 - fadeWindow / scrollRange));
+  const remaining = 1 - fadeStart;
+
+  return {
+    fadeStart,
+    fadeMid: fadeStart + remaining * 0.28,
+    fadeEnd: fadeStart + remaining * 0.72,
+  };
+}
+
 export default function Profile() {
   const containerRef = useRef<HTMLElement>(null);
   const [pixelRatio, setPixelRatio] = useState(1);
+  const [scrollRanges, setScrollRanges] = useState<HeroScrollRanges>(DEFAULT_SCROLL_RANGES);
 
   useEffect(() => {
     setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  }, []);
+
+  useEffect(() => {
+    const el = containerRef.current;
+    if (!el) return;
+
+    const updateScrollRanges = () => {
+      setScrollRanges(getHeroScrollRanges(el.offsetHeight, window.innerHeight));
+    };
+
+    updateScrollRanges();
+
+    const resizeObserver = new ResizeObserver(updateScrollRanges);
+    resizeObserver.observe(el);
+    window.addEventListener("resize", updateScrollRanges);
+
+    return () => {
+      resizeObserver.disconnect();
+      window.removeEventListener("resize", updateScrollRanges);
+    };
   }, []);
 
   const { scrollYProgress } = useScroll({
@@ -58,15 +111,24 @@ export default function Profile() {
     offset: ["start start", "end start"],
   });
 
-  // Apaga o conteúdo da hero conforme o scroll (volta ao efeito original)
   const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const contentOpacity = useTransform(scrollYProgress, [0, 0.15, 0.45], [1, 0.85, 0]);
-  const contentBlur = useTransform(scrollYProgress, [0, 0.45], [0, 6]);
+  const contentOpacity = useTransform(
+    scrollYProgress,
+    [0, scrollRanges.fadeStart, scrollRanges.fadeMid, scrollRanges.fadeEnd],
+    [1, 1, 0.85, 0]
+  );
+  const contentBlur = useTransform(
+    scrollYProgress,
+    [0, scrollRanges.fadeStart, scrollRanges.fadeEnd],
+    [0, 0, 6]
+  );
   const contentFilter = useTransform(contentBlur, (b) => `blur(${b}px)`);
 
   return (
     <section
       ref={containerRef}
+      id="inicio"
+      aria-label="Apresentação"
       className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
     >
       <div className="absolute inset-0 z-0 bg-background pointer-events-none">
@@ -118,11 +180,14 @@ export default function Profile() {
             </BlurFade>
 
             <BlurFade delay={0.2}>
-              <h1 className="text-5xl lg:text-7xl font-bold tracking-tight">
+              <p className="text-5xl lg:text-7xl font-bold tracking-tight" role="doc-subtitle">
                 <span className="text-foreground">Olá, eu sou</span>
                 <br />
                 <BrandTextReveal text="Luís Henrique" delay={0.35} duration={1.8} />
-              </h1>
+              </p>
+              <p className="mt-3 text-lg lg:text-xl text-muted-foreground font-medium">
+                Desenvolvedor Full Stack Pleno · .NET · React · Next.js · AWS
+              </p>
             </BlurFade>
 
             <BlurFade delay={0.35}>
@@ -131,6 +196,7 @@ export default function Profile() {
                 words={[
                   "Desenvolvedor Full Stack",
                   "C# · .NET · React · Next.js",
+                  "Cursor · Claude Code · IA",
                   "Node.js · AWS · Docker · Python",
                   "Produtos SaaS & Arquitetura",
                 ]}
@@ -142,11 +208,12 @@ export default function Profile() {
             <BlurFade delay={0.45}>
               <p className="text-lg text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
                 Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e
-                produtos SaaS. Atuo do entendimento do problema até{" "}
+                produtos SaaS. Praticante de{" "}
                 <span className="text-foreground font-medium">
-                  implementação, infraestrutura e produção
+                  AI-Assisted Development com Cursor e Claude Code
                 </span>
-                , com foco em soluções simples de manter, intuitivas e escaláveis.
+                , atuo do entendimento do problema até implementação, infraestrutura e produção,
+                com foco em soluções simples de manter, intuitivas e escaláveis.
               </p>
             </BlurFade>
 
@@ -215,10 +282,11 @@ export default function Profile() {
               <div className="relative z-10 size-52 lg:size-64 rounded-full overflow-hidden border-4 border-background shadow-2xl">
                 <Image
                   src={ProfilePhoto}
-                  alt="Luís Henrique Wendt"
+                  alt="Luís Henrique Wendt — Desenvolvedor Full Stack Pleno especializado em .NET, React, Next.js e AWS"
                   fill
                   priority
-                  className="object-cover"
+                  sizes="(max-width: 1024px) 208px, 256px"
+                  className="object-cover object-center"
                 />
               </div>
 
@@ -267,29 +335,6 @@ export default function Profile() {
             </div>
           </BlurFade>
         </div>
-      </motion.div>
-
-      <motion.div
-        className="absolute bottom-10 left-1/2 -translate-x-1/2 z-10 pointer-events-auto will-change-[opacity]"
-        style={{ opacity: contentOpacity }}
-      >
-        <motion.div
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.5 }}
-        >
-          <motion.div
-            animate={{ y: [0, 10, 0] }}
-            transition={{ duration: 2, repeat: Infinity }}
-            className="flex flex-col items-center gap-2 text-muted-foreground cursor-pointer hover:text-foreground transition-colors"
-            onClick={() =>
-              document.getElementById("sobre")?.scrollIntoView({ behavior: "smooth" })
-            }
-          >
-            <span className="text-sm">Scroll para explorar</span>
-            <ArrowDown className="size-5" />
-          </motion.div>
-        </motion.div>
       </motion.div>
     </section>
   );
