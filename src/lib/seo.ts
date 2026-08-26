@@ -190,12 +190,14 @@ export const recruiterKeywords = [
   "claude code",
   "portfólio desenvolvedor",
   "contratação desenvolvedor full stack",
+  "Luís Henrique Wendt",
 ] as const;
 
 export const pageMetadata = {
   title:
-    "Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — Portfólio · Remoto Brasil",
-  description: `${profile.summary} Disponível para contratação remota no Brasil.`,
+    "Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — .NET, React, Next.js",
+  description:
+    "Luís Henrique Wendt, Desenvolvedor Full Stack Pleno desde 2022. Experiência em .NET, C#, React, Next.js, Java, Spring Boot, PostgreSQL e AWS. Produtos SaaS em produção. Lajeado/RS — remoto e híbrido. Disponível para novas oportunidades.",
   keywords: recruiterKeywords,
 };
 
@@ -285,12 +287,6 @@ export const personStructuredData = {
     occupationalCategory: "15-1252.00",
     skills: skillNames.join(", "),
     experienceRequirements: `Desde ${profile.careerStartYear}`,
-    estimatedSalary: {
-      "@type": "MonetaryAmountDistribution",
-      name: "base",
-      currency: "BRL",
-      duration: "P1Y",
-    },
   },
 };
 

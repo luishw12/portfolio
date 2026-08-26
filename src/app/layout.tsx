@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Lexend } from "next/font/google";
+import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import StructuredData from "@/components/StructuredData";
@@ -7,7 +7,26 @@ import { pageMetadata, profile, recruiterKeywords, SITE_URL } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SiteAnalytics from "@/components/Analytics/SiteAnalytics";
 
-const inter = Lexend({ subsets: ["latin"] });
+const newsreader = Newsreader({
+  subsets: ["latin"],
+  variable: "--font-newsreader",
+  weight: ["400", "600"],
+  display: "swap",
+});
+
+const plexSans = IBM_Plex_Sans({
+  subsets: ["latin"],
+  variable: "--font-plex-sans",
+  weight: ["400", "500"],
+  display: "swap",
+});
+
+const plexMono = IBM_Plex_Mono({
+  subsets: ["latin"],
+  variable: "--font-plex-mono",
+  weight: ["400"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: {
@@ -87,7 +106,7 @@ export default function RootLayout({
   children: ReactNode;
 }>) {
   return (
-    <html lang="pt-BR" className="dark" suppressHydrationWarning>
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <link rel="icon" href="/favicon.ico" />
         <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
@@ -97,14 +116,16 @@ export default function RootLayout({
         <link rel="author" href="/llms.txt" type="text/plain" title="LLM-readable profile" />
         <link rel="me" href={profile.github} />
         <link rel="me" href={profile.linkedin} />
-        <meta name="theme-color" content="#030712" />
+        <meta name="theme-color" content="#F3EEE6" />
         <meta name="geo.region" content="BR-RS" />
         <meta name="geo.placename" content="Lajeado" />
         <meta name="geo.position" content="-29.4669;-51.9614" />
         <meta name="ICBM" content="-29.4669, -51.9614" />
         <StructuredData />
       </head>
-      <body className={`${inter.className} overflow-x-hidden`}>
+      <body
+        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} overflow-x-hidden bg-papel`}
+      >
         {children}
         <SiteAnalytics />
         <GoogleAnalytics gaId="G-60MG1VH0EB" />

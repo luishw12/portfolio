@@ -3,26 +3,18 @@
 import Link from "next/link";
 import { useState } from "react";
 import {
-  Mail,
-  MapPin,
-  Linkedin,
+  ArrowUpRight,
+  Check,
+  Copy,
+  Download,
   Github,
   Instagram,
+  Linkedin,
+  Mail,
+  MapPin,
   MessageCircle,
-  Download,
-  ArrowUpRight,
-  Copy,
-  Check,
 } from "lucide-react";
-import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
-import { BlurFade } from "@/components/ui/blur-fade";
-import { InteractiveHoverButton } from "@/components/ui/interactive-hover-button";
-import {
-  AnimatedSpan,
-  Terminal,
-  TypingAnimation,
-} from "@/components/ui/terminal";
-import { BorderBeam } from "@/components/ui/border-beam";
+import { CONTACT } from "@/lib/content";
 import {
   trackContactClick,
   trackContactCopy,
@@ -30,37 +22,33 @@ import {
   trackSocialClick,
 } from "@/lib/analytics";
 
-const EMAIL = "luishw08@gmail.com";
-const WHATSAPP_DISPLAY = "+55 51 99560-8647";
-const WHATSAPP_LINK = "https://wa.me/5551995608647";
-const LINKEDIN = "https://www.linkedin.com/in/luishw/";
-const GITHUB = "https://github.com/luishw12";
-const INSTAGRAM = "https://www.instagram.com/luis.wendt/";
-
 const channels = [
   {
     label: "Email",
-    value: EMAIL,
-    copyValue: EMAIL,
-    href: `mailto:${EMAIL}`,
+    value: CONTACT.email,
+    copyValue: CONTACT.email,
+    href: `mailto:${CONTACT.email}`,
     icon: Mail,
     hint: "Propostas e oportunidades",
+    analyticsKey: "email" as const,
   },
   {
     label: "WhatsApp",
-    value: WHATSAPP_DISPLAY,
+    value: CONTACT.whatsappDisplay,
     copyValue: "5551995608647",
-    href: WHATSAPP_LINK,
+    href: CONTACT.whatsappLink,
     icon: MessageCircle,
     hint: "Resposta mais rápida",
+    analyticsKey: "whatsapp" as const,
   },
   {
     label: "LinkedIn",
     value: "linkedin.com/in/luishw",
-    copyValue: LINKEDIN,
-    href: LINKEDIN,
+    copyValue: CONTACT.linkedin,
+    href: CONTACT.linkedin,
     icon: Linkedin,
     hint: "Networking",
+    analyticsKey: "linkedin" as const,
   },
 ];
 
@@ -73,26 +61,24 @@ function CopyButton({
 }) {
   const [copied, setCopied] = useState(false);
 
-  const handleCopy = async (e: React.MouseEvent) => {
-    e.preventDefault();
-    e.stopPropagation();
-    await navigator.clipboard.writeText(text);
-    trackContactCopy(channel, "contact_section");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
-  };
-
   return (
     <button
-      onClick={handleCopy}
-      className="rounded-md p-1.5 text-muted-foreground hover:text-foreground hover:bg-muted/60 transition-colors"
       type="button"
-      aria-label="Copiar"
+      onClick={async (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        await navigator.clipboard.writeText(text);
+        trackContactCopy(channel, "contact_section");
+        setCopied(true);
+        setTimeout(() => setCopied(false), 2000);
+      }}
+      className="p-2 text-muted-foreground transition-colors hover:text-foreground"
+      aria-label={copied ? "Copiado" : "Copiar"}
     >
       {copied ? (
-        <Check className="size-3.5 text-emerald-500" />
+        <Check className="size-4 text-primary" aria-hidden />
       ) : (
-        <Copy className="size-3.5" />
+        <Copy className="size-4" aria-hidden />
       )}
     </button>
   );
@@ -100,193 +86,110 @@ function CopyButton({
 
 export default function Contact() {
   return (
-    <section id="contato" aria-labelledby="contato-titulo" className="py-24 relative overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-muted/15 to-transparent" />
+    <section id="contato" aria-labelledby="contato-titulo">
+      <div className="container mx-auto px-6 py-20 md:py-24">
+        <div className="mx-auto grid max-w-5xl gap-12 lg:grid-cols-2 lg:gap-16">
+          <header>
+            <p className="section-label mb-3">Contato</p>
+            <h2
+              id="contato-titulo"
+              className="font-display text-[clamp(1.75rem,3.5vw,2.5rem)] font-medium leading-tight tracking-tight"
+            >
+              Vamos conversar sobre a próxima oportunidade
+            </h2>
+            <p className="mt-4 text-muted-foreground">
+              Prefiro conversa direta. WhatsApp costuma ser o caminho mais rápido — email e
+              LinkedIn também funcionam bem.
+            </p>
 
-      <div className="container mx-auto px-6 relative">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-start">
-            {/* Coluna editorial */}
-            <BlurFade delay={0.1} inView className="flex flex-col gap-8">
-              <div className="flex flex-col gap-4">
-                <p className="text-sm font-medium tracking-wide text-muted-foreground uppercase">
-                  Contato
-                </p>
-                <h2 id="contato-titulo" className="text-4xl lg:text-5xl font-bold text-foreground leading-tight text-balance">
-                  Tem um projeto em mente?{" "}
-                  <BrandTextReveal text="Fala comigo." />
-                </h2>
-                <p className="text-muted-foreground text-base lg:text-lg max-w-md leading-relaxed">
-                  Prefiro conversa direta. WhatsApp costuma ser o caminho mais
-                  rápido — email e LinkedIn também funcionam bem.
-                </p>
-              </div>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a
+                href={CONTACT.whatsappLink}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-[hsl(14,63%,38%)]"
+                onClick={() => trackContactClick("whatsapp", "contact_section")}
+              >
+                <MessageCircle className="size-4" aria-hidden />
+                WhatsApp
+              </a>
+              <a
+                href="/curriculo.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary"
+                onClick={() => trackResumeDownload("contact_section")}
+              >
+                <Download className="size-4" aria-hidden />
+                Currículo PDF
+              </a>
+            </div>
 
-              <div className="flex flex-wrap items-center gap-3">
-                <InteractiveHoverButton
-                  onClick={() => {
-                    trackContactClick("whatsapp", "contact_section");
-                    window.open(WHATSAPP_LINK, "_blank", "noopener,noreferrer");
-                  }}
-                >
-                  Falar no WhatsApp
-                </InteractiveHoverButton>
+            <p className="mt-6 flex items-center gap-2 text-sm text-muted-foreground">
+              <MapPin className="size-4 shrink-0" aria-hidden />
+              {CONTACT.location} · remoto ou híbrido ·{" "}
+              <span className="font-medium text-primary">disponível</span>
+            </p>
+          </header>
 
-                <a
-                  href="/curriculo.pdf"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium text-foreground hover:bg-muted/50 transition-colors"
-                  onClick={() => trackResumeDownload("contact_section")}
-                >
-                  <Download className="size-4" />
-                  Currículo
-                </a>
-              </div>
-
-              <div className="flex flex-col border-y border-border/70">
-                {channels.map((channel) => (
+          <div>
+            <ul className="border border-border bg-card">
+              {channels.map((channel) => (
+                <li key={channel.label} className="border-b border-border last:border-b-0">
                   <a
-                    key={channel.label}
                     href={channel.href}
                     target={channel.href.startsWith("http") ? "_blank" : undefined}
                     rel={
-                      channel.href.startsWith("http")
-                        ? "noopener noreferrer"
-                        : undefined
+                      channel.href.startsWith("http") ? "noopener noreferrer" : undefined
                     }
-                    className="group flex items-center gap-4 py-4 hover:bg-muted/30 -mx-2 px-2 rounded-lg transition-colors"
+                    className="group flex items-center gap-4 p-4 transition-colors hover:bg-[hsl(var(--paper-deep))]/50"
                     onClick={() =>
-                      trackContactClick(
-                        channel.label.toLowerCase() as "email" | "whatsapp" | "linkedin",
-                        "contact_section"
-                      )
+                      trackContactClick(channel.analyticsKey, "contact_section")
                     }
                   >
-                    <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-muted/50 text-foreground">
-                      <channel.icon className="size-4" />
-                    </div>
+                    <channel.icon className="size-5 shrink-0 text-foreground" aria-hidden />
                     <div className="min-w-0 flex-1">
                       <div className="flex items-center gap-2">
-                        <span className="text-sm font-semibold text-foreground">
-                          {channel.label}
-                        </span>
-                        <span className="text-xs text-muted-foreground hidden sm:inline">
+                        <span className="font-medium text-foreground">{channel.label}</span>
+                        <span className="hidden text-xs text-muted-foreground sm:inline">
                           {channel.hint}
                         </span>
                       </div>
-                      <p className="text-sm text-muted-foreground truncate">
-                        {channel.value}
-                      </p>
+                      <p className="truncate text-sm text-muted-foreground">{channel.value}</p>
                     </div>
-                    <CopyButton
-                      text={channel.copyValue}
-                      channel={
-                        channel.label.toLowerCase() as
-                          | "email"
-                          | "whatsapp"
-                          | "linkedin"
-                      }
+                    <CopyButton text={channel.copyValue} channel={channel.analyticsKey} />
+                    <ArrowUpRight
+                      className="size-4 shrink-0 text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100"
+                      aria-hidden
                     />
-                    <ArrowUpRight className="size-4 text-muted-foreground opacity-0 group-hover:opacity-100 transition-opacity shrink-0" />
                   </a>
-                ))}
-              </div>
+                </li>
+              ))}
+            </ul>
 
-              <div className="flex flex-wrap items-center gap-x-5 gap-y-3 text-sm text-muted-foreground">
-                <span className="inline-flex items-center gap-2">
-                  <MapPin className="size-3.5" />
-                  Lajeado, RS · remoto
-                </span>
-                <span className="inline-flex items-center gap-1.5">
-                  <span className="relative flex size-2">
-                    <span className="absolute inline-flex size-full animate-ping rounded-full bg-emerald-400 opacity-60" />
-                    <span className="relative inline-flex size-2 rounded-full bg-emerald-500" />
-                  </span>
-                  Disponível para novos projetos
-                </span>
-              </div>
-
-              <div className="flex items-center gap-4 pt-1">
-                {[
-                  { href: GITHUB, label: "GitHub", icon: Github, platform: "github" as const },
-                  { href: LINKEDIN, label: "LinkedIn", icon: Linkedin, platform: "linkedin" as const },
-                  { href: INSTAGRAM, label: "Instagram", icon: Instagram, platform: "instagram" as const },
-                  { href: `mailto:${EMAIL}`, label: "Email", icon: Mail, platform: "email" as const },
-                ].map((social) => (
-                  <Link
-                    key={social.label}
-                    href={social.href}
-                    target={social.href.startsWith("http") ? "_blank" : undefined}
-                    aria-label={social.label}
-                    className="text-muted-foreground hover:text-foreground transition-colors"
-                    onClick={() =>
-                      trackSocialClick(social.platform, "contact_section")
-                    }
-                  >
-                    <social.icon className="size-5" />
-                  </Link>
-                ))}
-              </div>
-            </BlurFade>
-
-            {/* Terminal — identidade de dev */}
-            <BlurFade delay={0.2} inView className="relative lg:pt-4">
-              <div className="relative overflow-hidden rounded-xl border border-border bg-background">
-                <Terminal className="max-w-none w-full h-auto max-h-none border-0 rounded-xl">
-                  <TypingAnimation className="text-muted-foreground">
-                    {"> whoami"}
-                  </TypingAnimation>
-
-                  <AnimatedSpan className="text-foreground">
-                    Luís Henrique Wendt — Full Stack
-                  </AnimatedSpan>
-
-                  <TypingAnimation className="text-muted-foreground">
-                    {"> cat ./contact.md"}
-                  </TypingAnimation>
-
-                  <AnimatedSpan className="text-emerald-500">
-                    email: {EMAIL}
-                  </AnimatedSpan>
-                  <AnimatedSpan className="text-emerald-500">
-                    whatsapp: {WHATSAPP_DISPLAY}
-                  </AnimatedSpan>
-                  <AnimatedSpan className="text-emerald-500">
-                    linkedin: /in/luishw
-                  </AnimatedSpan>
-
-                  <TypingAnimation className="text-muted-foreground">
-                    {"> status --availability"}
-                  </TypingAnimation>
-
-                  <AnimatedSpan className="text-sky-400">
-                    open_to_work: true
-                  </AnimatedSpan>
-                  <AnimatedSpan className="text-sky-400">
-                    location: Lajeado/RS · remote worldwide
-                  </AnimatedSpan>
-
-                  <TypingAnimation className="text-muted-foreground">
-                    {"> echo $NEXT_STEP"}
-                  </TypingAnimation>
-
-                  <AnimatedSpan className="text-amber-400">
-                    &quot;Manda uma mensagem. Vamos conversar.&quot;
-                  </AnimatedSpan>
-                </Terminal>
-
-                <BorderBeam
-                  className="z-50"
-                  size={120}
-                  borderRadius={12}
-                  duration={10}
-                  colorFrom="#3b82f6"
-                  colorTo="#06b6d4"
-                  borderWidth={1.5}
-                />
-              </div>
-            </BlurFade>
+            <nav
+              className="mt-6 flex gap-5"
+              aria-label="Redes sociais"
+            >
+              {[
+                { href: CONTACT.github, label: "GitHub", icon: Github, platform: "github" as const },
+                { href: CONTACT.linkedin, label: "LinkedIn", icon: Linkedin, platform: "linkedin" as const },
+                { href: CONTACT.instagram, label: "Instagram", icon: Instagram, platform: "instagram" as const },
+                { href: `mailto:${CONTACT.email}`, label: "Email", icon: Mail, platform: "email" as const },
+              ].map((social) => (
+                <Link
+                  key={social.label}
+                  href={social.href}
+                  target={social.href.startsWith("http") ? "_blank" : undefined}
+                  rel={social.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                  aria-label={social.label}
+                  className="text-muted-foreground transition-colors hover:text-primary"
+                  onClick={() => trackSocialClick(social.platform, "contact_section")}
+                >
+                  <social.icon className="size-5" />
+                </Link>
+              ))}
+            </nav>
           </div>
         </div>
       </div>
