@@ -35,6 +35,14 @@ export default function Colophon() {
             LinkedIn
           </Link>
           <Link
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-text text-base"
+          >
+            GitHub
+          </Link>
+          <Link
             href="/hire"
             className="link-text text-base"
           >
@@ -46,7 +54,15 @@ export default function Colophon() {
         </nav>
 
         <p className="mt-10 font-mono-meta text-[0.8125rem] text-mudo">
-          © {currentYear} Luís Henrique Wendt · Lajeado, RS · github.com/luishw12
+          © {currentYear} Luís Henrique Wendt · Lajeado, RS ·{" "}
+          <Link
+            href={CONTACT.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="link-text"
+          >
+            github.com/luishw12
+          </Link>
         </p>
       </div>
     </footer>
