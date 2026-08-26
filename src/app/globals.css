@@ -9,8 +9,8 @@
     --mudo: 30 5% 35%;
     --linha: 35 14% 81%;
     --elevado: 38 24% 89%;
-    --cobre: 20 67% 46%;
-    --cobre-hover: 18 68% 38%;
+    --cobre: 20 72% 35%;
+    --cobre-hover: 20 72% 28%;
 
     --background: var(--papel);
     --foreground: var(--tinta);
@@ -52,7 +52,7 @@
   }
 
   ::selection {
-    background: #c45c2629;
+    background: #9a451929;
     color: #161513;
   }
 }
@@ -76,7 +76,7 @@
   }
 
   .text-cobre {
-    color: #c45c26;
+    color: #9a4519;
   }
 
   .bg-papel {
@@ -92,16 +92,16 @@
   }
 
   .link-cobre {
-    color: #c45c26;
+    color: #9a4519;
     text-decoration: underline;
     text-underline-offset: 3px;
-    text-decoration-color: #c45c2640;
+    text-decoration-color: #9a451940;
     transition: color 0.15s ease, text-decoration-color 0.15s ease;
   }
 
   .link-cobre:hover {
-    color: #a34b1f;
-    text-decoration-color: #a34b1f;
+    color: #7a3514;
+    text-decoration-color: #7a3514;
   }
 
   .link-text {
@@ -124,11 +124,11 @@
 
   .skip-to-content {
     @apply fixed left-4 top-4 z-[100] -translate-y-[200%] bg-papel px-4 py-2 text-sm font-medium text-tinta underline underline-offset-4 transition-transform;
-    text-decoration-color: #c45c26;
+    text-decoration-color: #9a4519;
   }
 
   .skip-to-content:focus {
     @apply translate-y-0 outline outline-2 outline-offset-2;
-    outline-color: #c45c26;
+    outline-color: #9a4519;
   }
 }

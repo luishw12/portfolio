@@ -1,4 +1,5 @@
 import { CAREER_START_YEAR } from "@/lib/utils";
+import { hireFaq } from "./hire-faq";
 
 export const SITE_URL =
   process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.luishw.com.br";
@@ -475,32 +476,14 @@ export const hireFaqStructuredData = {
   "@context": "https://schema.org",
   "@type": "FAQPage",
   "@id": `${SITE_URL}/hire#faq`,
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Qual o modelo de contratação aceito?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "CLT, PJ e projetos pontuais. Aberto a conversar sobre o formato que fizer mais sentido para a empresa e o escopo.",
-      },
+  mainEntity: hireFaq.map((item) => ({
+    "@type": "Question",
+    name: item.question,
+    acceptedAnswer: {
+      "@type": "Answer",
+      text: item.answer,
     },
-    {
-      "@type": "Question",
-      name: "Luís Henrique trabalha remoto?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sim. Atua remotamente e aceita oportunidades de qualquer lugar do Brasil. Híbrido na região de Lajeado/RS também é viável.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Como contratar Luís Henrique Wendt?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `Entre em contato por email (${profile.email}), LinkedIn (${profile.linkedin}) ou WhatsApp. Envie contexto da vaga, stack do time e modelo de contratação.`,
-      },
-    },
-  ],
+  })),
 };
 
 export const hireStructuredData = [

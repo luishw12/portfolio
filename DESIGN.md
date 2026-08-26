@@ -7,8 +7,8 @@ colors:
   mudo: "#5E5953"
   linha: "#D6D0C6"
   elevado: "#EBE6DC"
-  cobre: "#C45C26"
-  cobre-hover: "#A34B1F"
+  cobre: "#9A4519"
+  cobre-hover: "#7A3514"
 typography:
   display:
     fontFamily: "Newsreader, Georgia, serif"
@@ -48,7 +48,7 @@ Portfólio como página de espécime tipográfico: papel quente, tinta densa, re
 
 **Key Characteristics:**
 - Fundo papel #F3EEE6 sempre
-- Um acento cobre #C45C26 (links, um CTA, focus)
+- Um acento cobre #9A4519 (links, um CTA, focus) — AA 4.5:1+ em papel
 - Newsreader só em nome e títulos de projeto
 - IBM Plex Sans para corpo e UI
 - IBM Plex Mono para datas, stack, paths — nunca headlines
@@ -58,8 +58,8 @@ Portfólio como página de espécime tipográfico: papel quente, tinta densa, re
 ## Colors
 
 ### Primary (Accent)
-- **Cobre** (#C45C26): link "Ver", CTA email, focus, LinkedIn no colophon.
-- **Cobre Hover** (#A34B1F): hover de links cobre.
+- **Cobre** (#9A4519): link "Ver", CTA email, focus, LinkedIn no colophon. Contraste AA em #F3EEE6.
+- **Cobre Hover** (#7A3514): hover de links cobre.
 
 ### Neutral
 - **Papel** (#F3EEE6): fundo da página.
