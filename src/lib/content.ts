@@ -366,14 +366,6 @@ export const certifications = [
   { name: "Curso de Inglês" },
 ] as const;
 
-export const CONTACT = {
-  email: "luishw08@gmail.com",
-  whatsappDisplay: "+55 51 99560-8647",
-  whatsappLink: "https://wa.me/5551995608647",
-  linkedin: "https://www.linkedin.com/in/luishw/",
-  github: "https://github.com/luishw12",
-  instagram: "https://www.instagram.com/luis.wendt/",
-  location: "Lajeado, RS",
-} as const;
+export { CONTACT } from "./contact";
 
 export const CAREER_SINCE = CAREER_START_YEAR;

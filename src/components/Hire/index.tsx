@@ -1,7 +1,4 @@
-"use client";
-
 import Link from "next/link";
-import { CONTACT } from "@/lib/content";
 import {
   coreSkills,
   featuredProjects,
@@ -10,37 +7,7 @@ import {
   workExperience,
 } from "@/lib/seo";
 import { getYearsOfExperience } from "@/lib/utils";
-import {
-  trackContactClick,
-  trackNavigation,
-  trackProjectClick,
-  trackRecruiterCta,
-  trackResumeDownload,
-  trackSocialClick,
-} from "@/lib/analytics";
-
-const quickFacts = [
-  {
-    label: "Senioridade",
-    value: "Pleno II",
-    detail: `${getYearsOfExperience()}+ anos desde ${profile.careerStartYear}`,
-  },
-  {
-    label: "Modalidade",
-    value: "Remoto",
-    detail: "Híbrido também aceito",
-  },
-  {
-    label: "Localização",
-    value: "Lajeado, RS",
-    detail: "Brasil · UTC-3",
-  },
-  {
-    label: "Contratação",
-    value: "CLT ou PJ",
-    detail: "Projetos pontuais",
-  },
-];
+import { HireContactNav, HireTrackedLink } from "./HireTrackedLinks";
 
 const idealRoles = [
   {
@@ -124,6 +91,29 @@ export default function Hire() {
   const careerYears = getYearsOfExperience();
   const sortedSkills = [...coreSkills].sort((a, b) => b.years - a.years);
 
+  const quickFacts = [
+    {
+      label: "Senioridade",
+      value: "Pleno II",
+      detail: `${careerYears}+ anos desde ${profile.careerStartYear}`,
+    },
+    {
+      label: "Modalidade",
+      value: "Remoto",
+      detail: "Híbrido também aceito",
+    },
+    {
+      label: "Localização",
+      value: "Lajeado, RS",
+      detail: "Brasil · UTC-3",
+    },
+    {
+      label: "Contratação",
+      value: "CLT ou PJ",
+      detail: "Projetos pontuais",
+    },
+  ];
+
   return (
     <div className="pb-8">
       <header className="page-wrap pb-8 pt-12 md:pt-16">
@@ -144,45 +134,7 @@ export default function Hire() {
           Histórico em SaaS, ERP e produtos digitais de ponta a ponta — remoto no Brasil,
           CLT ou PJ.
         </p>
-        <nav
-          aria-label="Contato para recrutadores"
-          className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2"
-        >
-          <a
-            href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}
-            className="link-cobre text-base font-medium"
-            onClick={() => trackRecruiterCta("email_proposal", "hire_page")}
-          >
-            {profile.email}
-          </a>
-          <Link
-            href={CONTACT.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-text text-base"
-            onClick={() => trackSocialClick("linkedin", "hire_page")}
-          >
-            LinkedIn
-          </Link>
-          <Link
-            href={CONTACT.whatsappLink}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-text text-base"
-            onClick={() => trackContactClick("whatsapp", "hire_page")}
-          >
-            WhatsApp
-          </Link>
-          <a
-            href={profile.resumeUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="link-text text-base"
-            onClick={() => trackResumeDownload("hire_page")}
-          >
-            Currículo PDF
-          </a>
-        </nav>
+        <HireContactNav variant="header" />
         <div className="section-rule mt-8" aria-hidden />
       </header>
 
@@ -277,13 +229,13 @@ export default function Hire() {
             >
               Experiência relevante
             </h2>
-            <Link
+            <HireTrackedLink
               href="/#experiencia"
               className="link-text shrink-0 text-sm"
-              onClick={() => trackNavigation("experiencia", "hire_page")}
+              event={{ type: "nav", target: "experiencia" }}
             >
               Ver detalhes no portfólio →
-            </Link>
+            </HireTrackedLink>
           </div>
           <ul className="mt-8 flex flex-col">
             {workExperience.map((job) => (
@@ -349,17 +301,14 @@ export default function Hire() {
                       {project.technologies.join(" · ")}
                     </p>
                   </div>
-                  <a
+                  <HireTrackedLink
                     href={project.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
                     className="link-cobre shrink-0 text-sm font-medium"
-                    onClick={() =>
-                      trackProjectClick("visit_site", project.name, "hire_page")
-                    }
+                    event={{ type: "project", name: project.name }}
+                    external
                   >
                     Ver
-                  </a>
+                  </HireTrackedLink>
                 </div>
               </li>
             ))}
@@ -428,34 +377,7 @@ export default function Hire() {
             Respondo em até 24h. Envie contexto da vaga, stack do time e modelo de
             contratação.
           </p>
-          <nav
-            aria-label="Contato final"
-            className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2"
-          >
-            <a
-              href={`mailto:${profile.email}?subject=Oportunidade%20-%20Desenvolvedor%20Full%20Stack`}
-              className="link-cobre text-base font-medium"
-              onClick={() => trackRecruiterCta("email_proposal", "hire_page")}
-            >
-              {profile.email}
-            </a>
-            <Link
-              href={CONTACT.whatsappLink}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="link-text text-base"
-              onClick={() => trackContactClick("whatsapp", "hire_page")}
-            >
-              WhatsApp
-            </Link>
-            <Link
-              href="/"
-              className="link-text text-base"
-              onClick={() => trackNavigation("home", "hire_page")}
-            >
-              Portfólio completo
-            </Link>
-          </nav>
+          <HireContactNav variant="cta" />
         </div>
       </section>
     </div>
