@@ -121,4 +121,14 @@
   .section-rule {
     @apply border-t border-linha;
   }
+
+  .skip-to-content {
+    @apply fixed left-4 top-4 z-[100] -translate-y-[200%] bg-papel px-4 py-2 text-sm font-medium text-tinta underline underline-offset-4 transition-transform;
+    text-decoration-color: #c45c26;
+  }
+
+  .skip-to-content:focus {
+    @apply translate-y-0 outline outline-2 outline-offset-2;
+    outline-color: #c45c26;
+  }
 }

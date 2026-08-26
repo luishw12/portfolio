@@ -7,22 +7,22 @@ export default function Masthead() {
 
   return (
     <header className="page-wrap pb-8 pt-12 md:pt-16">
-      <div className="flex items-start justify-between gap-6">
-        <h1
-          id="hero-title"
-          className="font-display text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[1.05] tracking-tight text-tinta"
-        >
-          Luís Henrique Wendt — Desenvolvedor Full Stack Pleno
-        </h1>
+      <div className="flex justify-end">
         <Link
           href="/curriculo.pdf"
           target="_blank"
           rel="noopener noreferrer"
-          className="link-text shrink-0 pt-2 text-sm font-medium"
+          className="link-text text-sm font-medium"
         >
           CV
         </Link>
       </div>
+      <h1
+        id="hero-title"
+        className="mt-2 font-display text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[1.05] tracking-tight text-tinta"
+      >
+        Luís Henrique Wendt — Desenvolvedor Full Stack Pleno
+      </h1>
       <p className="mt-3 text-base text-mudo md:text-[1.0625rem]">
         Desenvolvedor Full Stack · {CONTACT.location}
       </p>

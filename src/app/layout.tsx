@@ -3,6 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import StructuredData from "@/components/StructuredData";
+import SkipToContent from "@/components/SkipToContent";
 import { pageMetadata, profile, SITE_URL } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SiteAnalytics from "@/components/Analytics/SiteAnalytics";
@@ -120,9 +121,10 @@ export default function RootLayout({
         <StructuredData />
       </head>
       <body
-        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} overflow-x-hidden bg-papel`}
+        className={`${newsreader.variable} ${plexSans.variable} ${plexMono.variable} bg-papel`}
       >
-        {children}
+        <SkipToContent />
+        <div className="overflow-x-hidden">{children}</div>
         <SiteAnalytics />
         <GoogleAnalytics gaId="G-60MG1VH0EB" />
       </body>
