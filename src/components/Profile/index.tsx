@@ -1,354 +1,139 @@
 "use client";
 
 import ProfilePhoto from "@/img/foto-perfil.png";
-import DotnetLogo from "@/img/stacks/dotnet.png";
-import ReactLogo from "@/img/stacks/react.png";
-import NextjsLogo from "@/img/stacks/nextjs.png";
-import NodejsLogo from "@/img/stacks/nodejs.png";
-import DockerLogo from "@/img/stacks/docker.png";
-import PythonLogo from "@/img/stacks/python.png";
 import Image from "next/image";
-import { motion, useScroll, useTransform } from "motion/react";
-import { Download, Mail, Sparkles } from "lucide-react";
-import { useRef, useState, useEffect } from "react";
-import Particles from "@/components/ui/Particles";
-import { BrandTextReveal } from "@/components/ui/brand-text-reveal";
-import { getYearsOfExperience } from "@/lib/utils";
-import { BlurFade } from "@/components/ui/blur-fade";
-import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
-import { Text3DFlipLoop } from "@/components/ui/text-3d-flip-loop";
-import { ShimmerButton } from "@/components/ui/shimmer-button";
-import { NumberTicker } from "@/components/ui/number-ticker";
-import { OrbitingCircles } from "@/components/ui/orbiting-circles";
-import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
+import { ArrowDown, Download, Mail } from "lucide-react";
+import { HERO_STATS, PHILOSOPHY, CAREER_SINCE } from "@/lib/content";
 import { trackRecruiterCta, trackResumeDownload } from "@/lib/analytics";
 
-const HERO_PARTICLE_COLORS = [
-  "#60a5fa",
-  "#a855f7",
-  "#ec4899",
-  "#22d3ee",
-  "#38bdf8",
-];
-
-const orbitLogos: {
-  name: string;
-  logo: typeof DotnetLogo;
-  fill?: boolean;
-  wide?: boolean;
-}[] = [
-  { name: ".NET", logo: DotnetLogo, fill: true },
-  { name: "React", logo: ReactLogo },
-  { name: "Next.js", logo: NextjsLogo, wide: true },
-  { name: "Node.js", logo: NodejsLogo },
-  { name: "Docker", logo: DockerLogo },
-  { name: "Python", logo: PythonLogo },
-];
-
-type HeroScrollRanges = {
-  fadeStart: number;
-  fadeMid: number;
-  fadeEnd: number;
-};
-
-const DEFAULT_SCROLL_RANGES: HeroScrollRanges = {
-  fadeStart: 0,
-  fadeMid: 0.15,
-  fadeEnd: 0.45,
-};
-
-function getHeroScrollRanges(sectionHeight: number, viewportHeight: number): HeroScrollRanges {
-  const scrollRange = sectionHeight - viewportHeight;
-
-  // Hero cabe em ~uma tela: mantém o efeito original de parallax + blur
-  if (scrollRange <= viewportHeight * 0.2) {
-    return DEFAULT_SCROLL_RANGES;
-  }
-
-  // Hero alta (mobile): blur só nos últimos ~55vh de scroll
-  const fadeWindow = viewportHeight * 0.55;
-  const fadeStart = Math.max(0, Math.min(0.82, 1 - fadeWindow / scrollRange));
-  const remaining = 1 - fadeStart;
-
-  return {
-    fadeStart,
-    fadeMid: fadeStart + remaining * 0.28,
-    fadeEnd: fadeStart + remaining * 0.72,
-  };
-}
-
 export default function Profile() {
-  const containerRef = useRef<HTMLElement>(null);
-  const [pixelRatio, setPixelRatio] = useState(1);
-  const [scrollRanges, setScrollRanges] = useState<HeroScrollRanges>(DEFAULT_SCROLL_RANGES);
-
-  useEffect(() => {
-    setPixelRatio(Math.min(window.devicePixelRatio, 2));
-  }, []);
-
-  useEffect(() => {
-    const el = containerRef.current;
-    if (!el) return;
-
-    const updateScrollRanges = () => {
-      setScrollRanges(getHeroScrollRanges(el.offsetHeight, window.innerHeight));
-    };
-
-    updateScrollRanges();
-
-    const resizeObserver = new ResizeObserver(updateScrollRanges);
-    resizeObserver.observe(el);
-    window.addEventListener("resize", updateScrollRanges);
-
-    return () => {
-      resizeObserver.disconnect();
-      window.removeEventListener("resize", updateScrollRanges);
-    };
-  }, []);
-
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end start"],
-  });
-
-  const contentY = useTransform(scrollYProgress, [0, 1], [0, 120]);
-  const contentOpacity = useTransform(
-    scrollYProgress,
-    [0, scrollRanges.fadeStart, scrollRanges.fadeMid, scrollRanges.fadeEnd],
-    [1, 1, 0.85, 0]
-  );
-  const contentBlur = useTransform(
-    scrollYProgress,
-    [0, scrollRanges.fadeStart, scrollRanges.fadeEnd],
-    [0, 0, 6]
-  );
-  const contentFilter = useTransform(contentBlur, (b) => `blur(${b}px)`);
-
   return (
     <section
-      ref={containerRef}
       id="inicio"
-      aria-label="Apresentação"
-      className="relative min-h-screen flex items-center justify-center pt-20 overflow-hidden"
+      aria-labelledby="hero-title"
+      className="border-b border-border pt-[4.5rem]"
     >
-      <div className="absolute inset-0 z-0 bg-background pointer-events-none">
-        <Particles
-          particleColors={HERO_PARTICLE_COLORS}
-          particleCount={140}
-          particleSpread={8}
-          speed={0.08}
-          particleBaseSize={80}
-          moveParticlesOnHover
-          particleHoverFactor={0.6}
-          alphaParticles
-          sizeRandomness={0.8}
-          pixelRatio={pixelRatio}
-          interactionRef={containerRef}
-        />
-        <div
-          className="absolute inset-0 pointer-events-none"
-          style={{
-            background:
-              "radial-gradient(ellipse at center, transparent 0%, hsl(var(--background) / 0.4) 60%, hsl(var(--background) / 0.85) 100%)",
-          }}
-        />
-      </div>
+      <div className="container mx-auto px-6 py-16 md:py-24">
+        <div className="grid items-start gap-12 lg:grid-cols-12 lg:gap-16">
+          <div className="flex flex-col gap-8 lg:col-span-7">
+            <div className="flex flex-wrap items-center gap-3">
+              <span className="inline-flex items-center gap-2 border border-primary/30 bg-[hsl(var(--accent-soft))] px-3 py-1 text-xs font-semibold uppercase tracking-wide text-primary">
+                <span className="size-1.5 rounded-full bg-primary" aria-hidden />
+                Disponível — remoto ou híbrido
+              </span>
+              <span className="section-label">Desde {CAREER_SINCE}</span>
+            </div>
 
-      <motion.div
-        className="container mx-auto px-6 py-20 relative z-10 pointer-events-none will-change-[opacity,transform,filter]"
-        style={{
-          y: contentY,
-          opacity: contentOpacity,
-          filter: contentFilter,
-        }}
-      >
-        <div className="flex flex-col lg:flex-row items-center gap-16 lg:gap-24">
-          <div className="flex-1 text-center lg:text-left flex flex-col gap-8">
-            <BlurFade delay={0.1}>
-              <div className="flex justify-center lg:justify-start">
-                <div
-                  className={cn(
-                    "group rounded-full border border-primary/20 bg-primary/5 text-base transition-all ease-in hover:cursor-pointer hover:bg-primary/10"
-                  )}
-                >
-                  <AnimatedShinyText className="inline-flex items-center justify-center px-4 py-1.5 transition ease-out hover:text-foreground text-sm">
-                    <Sparkles className="mr-2 size-3.5 text-primary" />
-                    Disponível para novos projetos
-                  </AnimatedShinyText>
-                </div>
-              </div>
-            </BlurFade>
-
-            <BlurFade delay={0.2}>
-              <p className="text-5xl lg:text-7xl font-bold tracking-tight" role="doc-subtitle">
-                <span className="text-foreground">Olá, eu sou</span>
-                <br />
-                <BrandTextReveal text="Luís Henrique" delay={0.35} duration={1.8} />
+            <div className="flex flex-col gap-4">
+              <h1
+                id="hero-title"
+                className="font-display text-[clamp(2.5rem,6vw,4rem)] font-medium leading-[1.05] tracking-tight text-foreground"
+              >
+                Luís Henrique Wendt
+              </h1>
+              <p className="max-w-xl text-xl font-medium text-foreground md:text-2xl">
+                Desenvolvedor Full Stack Pleno
               </p>
-              <p className="mt-3 text-lg lg:text-xl text-muted-foreground font-medium">
-                Desenvolvedor Full Stack Pleno · .NET · React · Next.js · AWS
+              <p className="max-w-xl text-base text-muted-foreground md:text-lg">
+                .NET · React · Next.js · Java · Spring Boot · PostgreSQL · AWS
               </p>
-            </BlurFade>
+            </div>
 
-            <BlurFade delay={0.35}>
-              <Text3DFlipLoop
-                className="text-2xl lg:text-3xl font-medium text-muted-foreground"
-                words={[
-                  "Desenvolvedor Full Stack",
-                  "C# · .NET · React · Next.js",
-                  "Cursor · Claude Code · IA",
-                  "Node.js · AWS · Docker · Python",
-                  "Produtos SaaS & Arquitetura",
-                ]}
-                interval={3200}
-                staggerDuration={0.03}
-              />
-            </BlurFade>
+            <p className="max-w-2xl text-base leading-relaxed text-muted-foreground md:text-[1.0625rem]">
+              Construo aplicações web, sistemas corporativos e produtos SaaS — do
+              entendimento do problema até implementação, infraestrutura e produção.
+              Praticante de{" "}
+              <span className="font-medium text-foreground">
+                desenvolvimento assistido por IA
+              </span>{" "}
+              com Cursor, Claude Code e Codex no fluxo diário.
+            </p>
 
-            <BlurFade delay={0.45}>
-              <p className="text-lg text-muted-foreground max-w-xl leading-relaxed mx-auto lg:mx-0">
-                Desenvolvedor Full Stack desde 2022 — aplicações web, sistemas corporativos e
-                produtos SaaS. Praticante de{" "}
-                <span className="text-foreground font-medium">
-                  AI-Assisted Development com Cursor e Claude Code
-                </span>
-                , atuo do entendimento do problema até implementação, infraestrutura e produção,
-                com foco em soluções simples de manter, intuitivas e escaláveis.
-              </p>
-            </BlurFade>
+            <div className="flex flex-wrap gap-3">
+              <a
+                href="#contato"
+                className="inline-flex items-center gap-2 bg-primary px-5 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-[hsl(14,63%,38%)]"
+                onClick={() => trackRecruiterCta("contact", "hero_section")}
+              >
+                <Mail className="size-4" aria-hidden />
+                Entrar em contato
+              </a>
+              <a
+                href="/curriculo.pdf"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 border border-border bg-card px-5 py-3 text-sm font-semibold text-foreground transition-colors hover:border-primary"
+                onClick={() => trackResumeDownload("hero_section")}
+              >
+                <Download className="size-4" aria-hidden />
+                Download CV
+              </a>
+            </div>
 
-            <BlurFade delay={0.55}>
-              <div className="flex flex-wrap gap-4 justify-center lg:justify-start pt-2 pointer-events-auto">
-                <a
-                  href="#contato"
-                  onClick={() =>
-                    trackRecruiterCta("contact", "hero_section")
-                  }
-                >
-                  <ShimmerButton
-                    className="shadow-lg"
-                    background="linear-gradient(135deg, #3b82f6, #9333ea)"
-                    shimmerColor="#ffffff"
-                  >
-                    <span className="flex items-center gap-2 text-sm font-medium">
-                      <Mail className="size-4" />
-                      Entrar em Contato
-                    </span>
-                  </ShimmerButton>
-                </a>
-
-                <Button
-                  size="lg"
-                  variant="outline"
-                  className="group border-primary/30 hover:border-primary hover:bg-primary/10 rounded-full"
-                  asChild
-                >
-                  <a
-                    href="/curriculo.pdf"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    onClick={() => trackResumeDownload("hero_section")}
-                  >
-                    <Download className="size-4 mr-2 group-hover:animate-bounce" />
-                    Download CV
-                  </a>
-                </Button>
+            <dl className="grid max-w-lg grid-cols-3 gap-6 border-t border-border pt-8">
+              <div>
+                <dt className="section-label mb-1">Experiência</dt>
+                <dd className="font-display text-3xl font-medium tabular-nums text-foreground">
+                  {HERO_STATS.years}+
+                  <span className="sr-only"> anos</span>
+                </dd>
+                <dd className="mt-0.5 text-xs text-muted-foreground" aria-hidden>
+                  anos
+                </dd>
               </div>
-            </BlurFade>
-
-            <BlurFade delay={0.65}>
-              <div className="grid grid-cols-3 gap-8 pt-8 border-t border-border/50">
-                <div className="text-center lg:text-left">
-                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
-                    <NumberTicker
-                      value={getYearsOfExperience()}
-                      className="text-3xl font-bold text-foreground"
-                    />
-                    <span className="text-3xl font-bold text-foreground">+</span>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Anos de Experiência</span>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
-                    <NumberTicker value={15} className="text-3xl font-bold text-foreground" />
-                    <span className="text-3xl font-bold text-foreground">+</span>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Projetos Entregues</span>
-                </div>
-                <div className="text-center lg:text-left">
-                  <div className="flex items-baseline gap-1 justify-center lg:justify-start mb-1">
-                    <NumberTicker value={100} className="text-3xl font-bold text-foreground" />
-                    <span className="text-3xl font-bold text-foreground">%</span>
-                  </div>
-                  <span className="text-sm text-muted-foreground">Dedicação</span>
-                </div>
+              <div>
+                <dt className="section-label mb-1">Projetos</dt>
+                <dd className="font-display text-3xl font-medium tabular-nums text-foreground">
+                  {HERO_STATS.projects}
+                </dd>
+                <dd className="mt-0.5 text-xs text-muted-foreground" aria-hidden>
+                  em produção
+                </dd>
               </div>
-            </BlurFade>
+              <div>
+                <dt className="section-label mb-1">Empresas</dt>
+                <dd className="font-display text-3xl font-medium tabular-nums text-foreground">
+                  {HERO_STATS.companies}
+                </dd>
+                <dd className="mt-0.5 text-xs text-muted-foreground" aria-hidden>
+                  CLT + fundador
+                </dd>
+              </div>
+            </dl>
           </div>
 
-          {/* Profile image with orbiting stacks */}
-          <BlurFade delay={0.3} className="flex-shrink-0 relative">
-            <div className="relative flex size-[320px] lg:size-[420px] items-center justify-center">
-              <div className="relative z-10 size-52 lg:size-64 rounded-full overflow-hidden border-4 border-background shadow-2xl">
+          <div className="lg:col-span-5">
+            <figure className="relative">
+              <div className="absolute -left-3 top-6 hidden h-[calc(100%-3rem)] w-px bg-primary md:block" aria-hidden />
+              <div className="relative aspect-[4/5] max-w-md overflow-hidden border border-border bg-[hsl(var(--paper-deep))]">
                 <Image
                   src={ProfilePhoto}
-                  alt="Luís Henrique Wendt — Desenvolvedor Full Stack Pleno especializado em .NET, React, Next.js e AWS"
+                  alt="Luís Henrique Wendt — Desenvolvedor Full Stack Pleno"
                   fill
                   priority
-                  sizes="(max-width: 1024px) 208px, 256px"
+                  sizes="(max-width: 1024px) 100vw, 420px"
                   className="object-cover object-center"
                 />
               </div>
-
-              <OrbitingCircles
-                radius={150}
-                iconSize={44}
-                duration={28}
-                className="hidden sm:flex border border-border/60 bg-background/90 backdrop-blur-sm shadow-lg"
-              >
-                {orbitLogos.slice(0, 3).map((stack) => (
-                  <Image
-                    key={stack.name}
-                    src={stack.logo}
-                    alt={stack.name}
-                    width={stack.fill ? 44 : stack.wide ? 40 : 28}
-                    height={stack.fill ? 44 : 28}
-                    className={
-                      stack.fill
-                        ? "size-full object-cover"
-                        : "h-auto w-auto max-h-full max-w-full object-contain"
-                    }
-                    style={stack.fill ? undefined : { width: "auto", height: "auto" }}
-                    title={stack.name}
-                  />
-                ))}
-              </OrbitingCircles>
-
-              <OrbitingCircles
-                radius={200}
-                iconSize={40}
-                duration={36}
-                reverse
-                className="hidden lg:flex border border-border/60 bg-background/90 backdrop-blur-sm shadow-lg"
-              >
-                {orbitLogos.slice(3).map((stack) => (
-                  <Image
-                    key={stack.name}
-                    src={stack.logo}
-                    alt={stack.name}
-                    width={28}
-                    height={28}
-                    className="h-auto w-auto max-h-full max-w-full object-contain"
-                    style={{ width: "auto", height: "auto" }}
-                    title={stack.name}
-                  />
-                ))}
-              </OrbitingCircles>
-            </div>
-          </BlurFade>
+              <figcaption className="mt-4 max-w-md text-sm leading-relaxed text-muted-foreground">
+                {PHILOSOPHY}
+              </figcaption>
+            </figure>
+          </div>
         </div>
-      </motion.div>
+
+        <div className="mt-16 hidden justify-center md:flex">
+          <Link
+            href="#sobre"
+            className="section-label inline-flex items-center gap-2 text-muted-foreground transition-colors hover:text-primary"
+            aria-label="Rolar para a seção Sobre"
+          >
+            Sobre mim
+            <ArrowDown className="size-3.5" aria-hidden />
+          </Link>
+        </div>
+      </div>
     </section>
   );
 }

@@ -23,7 +23,35 @@ export default function SiteAnalytics() {
   useEffect(() => {
     const page = pathname || "/";
     const sections =
-      pathname === "/hire" ? [...HIRE_SECTIONS] : [...HOME_SECTIONS];
+      pathname === "/hire"
+        ? [...HIRE_SECTIONS]
+        : pathname === "/"
+          ? [...HOME_SECTIONS]
+          : [];
+
+    if (sections.length === 0) {
+      const onScrollOnly = () => {
+        const scrollHeight =
+          document.documentElement.scrollHeight - window.innerHeight;
+        if (scrollHeight <= 0) return;
+
+        const percent = Math.round((window.scrollY / scrollHeight) * 100);
+
+        SCROLL_DEPTH_MILESTONES.forEach((milestone) => {
+          if (percent < milestone) return;
+
+          const key = `${page}:${milestone}`;
+          if (reachedDepths.current.has(milestone)) return;
+
+          reachedDepths.current.add(milestone);
+          trackScrollDepth(milestone, page);
+        });
+      };
+
+      onScrollOnly();
+      window.addEventListener("scroll", onScrollOnly, { passive: true });
+      return () => window.removeEventListener("scroll", onScrollOnly);
+    }
 
     const sectionObserver = new IntersectionObserver(
       (entries) => {
