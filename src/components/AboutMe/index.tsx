@@ -17,8 +17,9 @@ export default function AboutMe() {
 
         <div className="mt-6 max-w-2xl space-y-4 text-base leading-relaxed text-mudo">
           <p>
-            Sou desenvolvedor Full Stack desde {CAREER_SINCE} — {years} anos construindo
-            aplicações web, sistemas corporativos e produtos SaaS. Hoje sou Pleno II na{" "}
+            Sou desenvolvedor full stack pleno desde {CAREER_SINCE} — {years} anos
+            construindo aplicações web, sistemas corporativos e produtos SaaS no Brasil.
+            Hoje sou Pleno II na{" "}
             <span className="text-tinta">Q2F Sistemas de Gestão</span> e fundador da{" "}
             <Link
               href="https://refatorize.com.br"
@@ -31,9 +32,9 @@ export default function AboutMe() {
             .
           </p>
           <p>
-            Trabalho com .NET, Java Spring Boot, React, Next.js, TypeScript e PostgreSQL —
-            do desenho da solução ao deploy em AWS. Uso Cursor, Claude Code e Codex no dia a
-            dia para acelerar entregas sem abrir mão de arquitetura.
+            Trabalho com .NET, C#, Java, Spring Boot, React, Next.js, TypeScript, PostgreSQL
+            e AWS — do desenho da solução ao deploy. Uso Cursor e Claude Code no dia a dia
+            para acelerar entregas sem abrir mão de arquitetura. Aberto a remoto ou híbrido.
           </p>
           <p className="font-display text-lg italic text-tinta">{PHILOSOPHY}</p>
         </div>

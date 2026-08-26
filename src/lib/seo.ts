@@ -195,41 +195,38 @@ export const recruiterKeywords = [
 
 export const pageMetadata = {
   title:
-    "Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — .NET, React, Next.js",
+    "Luís Henrique Wendt | Full Stack Pleno · .NET · React · Next.js · AWS · Remoto",
   description:
-    "Luís Henrique Wendt, Desenvolvedor Full Stack Pleno desde 2022. Experiência em .NET, C#, React, Next.js, Java, Spring Boot, PostgreSQL e AWS. Produtos SaaS em produção. Lajeado/RS — remoto e híbrido. Disponível para novas oportunidades.",
-  keywords: recruiterKeywords,
+    "Full Stack Pleno (.NET, React, Next.js, AWS). Desde 2022. Pleno II na Q2F, fundador da Refatorize. Remoto/híbrido, Brasil.",
 };
 
 export const hirePageMetadata = {
-  title: "Contratar Luís Henrique Wendt | Desenvolvedor Full Stack Pleno — Remoto",
+  title:
+    "Contratar Luís Henrique Wendt | Full Stack Pleno · .NET · React · Remoto",
   description:
-    "Página para recrutadores contratarem Luís Henrique Wendt, Desenvolvedor Full Stack Pleno com experiência em .NET, React, Next.js, Java, Spring Boot, PostgreSQL, AWS e SaaS. Disponível para remoto, CLT ou PJ.",
-  keywords: [
-    ...recruiterKeywords,
-    "contratar desenvolvedor full stack",
-    "hire full stack developer brazil",
-    "contratar desenvolvedor remoto",
-    "desenvolvedor full stack para contratar",
-    "recrutar desenvolvedor react",
-    "recrutar desenvolvedor dotnet",
-  ],
+    "Recrutadores: Full Stack Pleno, .NET/React/Next/Java/AWS. Remoto, CLT ou PJ. Lajeado/RS.",
 } as const;
 
 export const privacyPageMetadata = {
-  title: "Política de Privacidade | Luís Henrique Wendt",
+  title: "Política de Privacidade",
   description:
     "Como este portfólio coleta, usa e protege dados pessoais — cookies, Google Analytics 4, eventos de navegação e seus direitos sob a LGPD.",
-  keywords: [
-    "política de privacidade",
-    "LGPD",
-    "cookies",
-    "Google Analytics",
-    "portfólio desenvolvedor",
-  ],
 } as const;
 
-const skillNames = coreSkills.map((s) => s.name);
+const personKnowsAbout = [
+  ".NET",
+  "C#",
+  "React",
+  "Next.js",
+  "AWS",
+  "Java",
+  "Spring Boot",
+  "TypeScript",
+  "PostgreSQL",
+  "SaaS",
+  "Cursor",
+  "Claude Code",
+] as const;
 
 export const personStructuredData = {
   "@context": "https://schema.org",
@@ -239,29 +236,25 @@ export const personStructuredData = {
   givenName: profile.givenName,
   familyName: profile.familyName,
   jobTitle: profile.jobTitle,
-  description: profile.summary,
+  description: pageMetadata.description,
   url: SITE_URL,
   image: profile.imageUrl,
   email: profile.email,
   telephone: profile.phone,
-  sameAs: [profile.linkedin, profile.github, profile.instagram],
-  knowsAbout: [
-    ...skillNames,
-    ...methodologies,
-    "Desenvolvimento Web",
-    "Arquitetura de Software",
-    "Produtos SaaS",
-    "Migração de Sistemas Legados",
-    "APIs REST",
-    "Microserviços",
-  ],
-  worksFor: workExperience
-    .filter((job) => job.endDate === null)
-    .map((job) => ({
+  sameAs: [profile.linkedin, profile.github],
+  knowsAbout: [...personKnowsAbout],
+  worksFor: [
+    {
       "@type": "Organization",
-      name: job.company,
-      ...(job.url ? { url: job.url } : {}),
-    })),
+      name: "Q2F Sistemas de Gestão",
+      url: "https://q2f.com.br",
+    },
+    {
+      "@type": "Organization",
+      name: "Refatorize",
+      url: "https://refatorize.com.br",
+    },
+  ],
   alumniOf: education.map((edu) => ({
     "@type": "EducationalOrganization",
     name: edu.institution,
@@ -274,8 +267,8 @@ export const personStructuredData = {
   },
   seeks: {
     "@type": "Demand",
-    name: "Oportunidades como Desenvolvedor Full Stack",
-    description: profile.availability,
+    name: "Oportunidades como Desenvolvedor Full Stack Pleno",
+    description: "Remoto ou híbrido no Brasil",
     areaServed: {
       "@type": "Country",
       name: profile.location.country,
@@ -285,7 +278,7 @@ export const personStructuredData = {
     "@type": "Occupation",
     name: profile.jobTitle,
     occupationalCategory: "15-1252.00",
-    skills: skillNames.join(", "),
+    skills: personKnowsAbout.join(", "),
     experienceRequirements: `Desde ${profile.careerStartYear}`,
   },
 };
@@ -295,7 +288,7 @@ export const websiteStructuredData = {
   "@type": "WebSite",
   "@id": `${SITE_URL}/#website`,
   name: SITE_NAME,
-  description: profile.summary,
+  description: pageMetadata.description,
   url: SITE_URL,
   inLanguage: "pt-BR",
   copyrightYear: new Date().getFullYear(),
@@ -308,8 +301,8 @@ export const profilePageStructuredData = {
   "@type": "ProfilePage",
   "@id": `${SITE_URL}/#profilepage`,
   url: SITE_URL,
-  name: SITE_NAME,
-  description: profile.summary,
+  name: pageMetadata.title,
+  description: pageMetadata.description,
   inLanguage: "pt-BR",
   dateModified: new Date().toISOString().split("T")[0],
   mainEntity: { "@id": `${SITE_URL}/#person` },
@@ -388,64 +381,12 @@ export const projectsStructuredData = {
   })),
 };
 
-export const faqStructuredData = {
-  "@context": "https://schema.org",
-  "@type": "FAQPage",
-  "@id": `${SITE_URL}/#faq`,
-  mainEntity: [
-    {
-      "@type": "Question",
-      name: "Quais tecnologias Luís Henrique Wendt domina?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `Luís Henrique domina React, Next.js, TypeScript, JavaScript, .NET, C#, Java, Spring Boot, Node.js, PostgreSQL, Docker, AWS, Linux e Python. Também utiliza diariamente ferramentas de AI-Assisted Development como Cursor IDE e Claude Code.`,
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Luís Henrique está disponível para trabalho remoto?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sim. Luís Henrique está disponível para novos projetos e oportunidades, incluindo trabalho remoto. Está baseado em Lajeado, RS, Brasil.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Qual a experiência profissional de Luís Henrique Wendt?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `Desenvolvedor Full Stack desde ${profile.careerStartYear}. Atualmente é Pleno II na Q2F Sistemas de Gestão e fundador da Refatorize. Passou por Tricon (ERP e migração de legado) e Toshyro (produtos corporativos e Design System).`,
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Luís Henrique tem experiência com produtos SaaS?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: "Sim. Atua em plataforma SaaS na Q2F, fundou a Refatorize para produtos próprios e desenvolveu SkinsManager, BoltSkins e CS Invest — aplicações SaaS completas com autenticação, RBAC, dashboards e deploy em produção.",
-      },
-    },
-    {
-      "@type": "Question",
-      name: "Como entrar em contato com Luís Henrique Wendt?",
-      acceptedAnswer: {
-        "@type": "Answer",
-        text: `Email: ${profile.email} | LinkedIn: ${profile.linkedin} | GitHub: ${profile.github} | Currículo PDF: ${profile.resumeUrl}`,
-      },
-    },
-  ],
-};
-
 export const breadcrumbStructuredData = {
   "@context": "https://schema.org",
   "@type": "BreadcrumbList",
+  "@id": `${SITE_URL}/#breadcrumb`,
   itemListElement: [
     { "@type": "ListItem", position: 1, name: "Início", item: SITE_URL },
-    { "@type": "ListItem", position: 2, name: "Sobre", item: `${SITE_URL}/#sobre` },
-    { "@type": "ListItem", position: 3, name: "Experiência", item: `${SITE_URL}/#experiencia` },
-    { "@type": "ListItem", position: 4, name: "Projetos", item: `${SITE_URL}/#projetos` },
-    { "@type": "ListItem", position: 5, name: "Habilidades", item: `${SITE_URL}/#habilidades` },
-    { "@type": "ListItem", position: 6, name: "Contato", item: `${SITE_URL}/#contato` },
   ],
 };
 
@@ -472,7 +413,7 @@ export const professionalServiceStructuredData = {
   "@type": "ProfessionalService",
   "@id": `${SITE_URL}/#service`,
   name: `${profile.name} — Desenvolvimento Full Stack`,
-  description: profile.summary,
+  description: pageMetadata.description,
   url: SITE_URL,
   image: profile.imageUrl,
   areaServed: {
@@ -483,12 +424,11 @@ export const professionalServiceStructuredData = {
     "Desenvolvimento Web",
     "Desenvolvimento Full Stack",
     "Desenvolvimento de SaaS",
-    "Consultoria em Software",
   ],
   provider: { "@id": `${SITE_URL}/#person` },
   availableChannel: {
     "@type": "ServiceChannel",
-    serviceUrl: `${SITE_URL}/#contato`,
+    serviceUrl: `mailto:${profile.email}`,
     servicePhone: profile.phone,
     serviceSmsNumber: profile.phone,
   },
@@ -503,7 +443,6 @@ export const allStructuredData = [
   workExperienceStructuredData,
   skillsStructuredData,
   projectsStructuredData,
-  faqStructuredData,
   breadcrumbStructuredData,
 ];
 

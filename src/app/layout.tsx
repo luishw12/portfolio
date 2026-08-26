@@ -3,7 +3,7 @@ import { IBM_Plex_Mono, IBM_Plex_Sans, Newsreader } from "next/font/google";
 import "./globals.css";
 import { ReactNode } from "react";
 import StructuredData from "@/components/StructuredData";
-import { pageMetadata, profile, recruiterKeywords, SITE_URL } from "@/lib/seo";
+import { pageMetadata, profile, SITE_URL } from "@/lib/seo";
 import { GoogleAnalytics } from "@next/third-parties/google";
 import SiteAnalytics from "@/components/Analytics/SiteAnalytics";
 
@@ -29,12 +29,8 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: {
-    default: pageMetadata.title,
-    template: "%s | Luís Henrique Wendt",
-  },
+  title: pageMetadata.title,
   description: pageMetadata.description,
-  keywords: [...recruiterKeywords],
   authors: [{ name: profile.name, url: SITE_URL }],
   creator: profile.name,
   publisher: profile.name,

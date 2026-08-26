@@ -12,7 +12,7 @@ export default function Masthead() {
           id="hero-title"
           className="font-display text-[clamp(2.5rem,5vw,5rem)] font-semibold leading-[1.05] tracking-tight text-tinta"
         >
-          Luís Henrique Wendt
+          Luís Henrique Wendt — Desenvolvedor Full Stack Pleno
         </h1>
         <Link
           href="/curriculo.pdf"

@@ -11,7 +11,6 @@ import { privacyPageMetadata, profile, SITE_URL } from "@/lib/seo";
 export const metadata: Metadata = {
   title: privacyPageMetadata.title,
   description: privacyPageMetadata.description,
-  keywords: [...privacyPageMetadata.keywords],
   alternates: {
     canonical: "/privacidade",
   },

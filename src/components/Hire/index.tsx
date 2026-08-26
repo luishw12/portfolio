@@ -11,7 +11,6 @@ import { MagicCard } from "@/components/ui/magic-card";
 import { ShimmerButton } from "@/components/ui/shimmer-button";
 import { AnimatedShinyText } from "@/components/ui/animated-shiny-text";
 import { BorderBeam } from "@/components/ui/border-beam";
-import { NumberTicker } from "@/components/ui/number-ticker";
 import { Highlighter } from "@/components/ui/highlighter";
 import { getYearsOfExperience } from "@/lib/utils";
 import {
@@ -163,8 +162,7 @@ export default function Hire() {
 
               <BlurFade delay={0.15}>
                 <h1 id="hire-hero" className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight leading-tight">
-                  Contrate um{" "}
-                  <BrandTextReveal text="Desenvolvedor Full Stack Pleno" delay={0.2} duration={1.6} />
+                  Contratar Luís Henrique Wendt — Desenvolvedor Full Stack Pleno
                 </h1>
               </BlurFade>
 
@@ -245,8 +243,7 @@ export default function Hire() {
                     </div>
                     <div className="grid grid-cols-2 gap-3 w-full pt-2">
                       <div className="rounded-xl bg-muted/30 px-3 py-2">
-                        <NumberTicker value={careerYears} className="text-2xl font-bold" />
-                        <span className="text-2xl font-bold">+</span>
+                        <p className="text-2xl font-bold">{careerYears}+</p>
                         <p className="text-[10px] text-muted-foreground mt-0.5">anos de experiência</p>
                       </div>
                       <div className="rounded-xl bg-muted/30 px-3 py-2">

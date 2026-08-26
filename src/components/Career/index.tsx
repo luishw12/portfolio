@@ -9,7 +9,7 @@ export default function Career() {
           id="experiencia-titulo"
           className="font-display text-2xl font-semibold text-tinta"
         >
-          Carreira
+          Experiência
         </h2>
 
         <ul className="mt-8 flex flex-col">

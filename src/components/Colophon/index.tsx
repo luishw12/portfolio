@@ -7,11 +7,14 @@ export default function Colophon() {
   return (
     <footer id="contato" aria-labelledby="contato-titulo" className="section-rule">
       <div className="page-wrap py-10 md:py-14">
-        <h2 id="contato-titulo" className="sr-only">
+        <h2
+          id="contato-titulo"
+          className="font-display text-2xl font-semibold text-tinta"
+        >
           Contato
         </h2>
 
-        <nav aria-label="Contato" className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2">
+        <nav aria-label="Contato" className="mt-6 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-x-8 sm:gap-y-2">
           <a href={`mailto:${CONTACT.email}`} className="link-cobre text-base font-medium">
             {CONTACT.email}
           </a>

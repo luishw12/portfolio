@@ -11,11 +11,14 @@ export default function Work() {
 
   return (
     <section id="projetos" aria-labelledby="projetos-titulo" className="page-wrap py-10 md:py-12">
-      <h2 id="projetos-titulo" className="sr-only">
+      <h2
+        id="projetos-titulo"
+        className="font-display text-2xl font-semibold text-tinta"
+      >
         Projetos
       </h2>
 
-      <article className="flex flex-col gap-5">
+      <article className="mt-8 flex flex-col gap-5">
         <div className="relative aspect-[16/9] w-full overflow-hidden bg-elevado">
           <Image
             src={featured.images[0]}

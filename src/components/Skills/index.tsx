@@ -10,10 +10,11 @@ export default function Skills() {
           id="habilidades-titulo"
           className="font-display text-2xl font-semibold text-tinta"
         >
-          Stack
+          Habilidades
         </h2>
         <p className="mt-2 max-w-xl text-sm text-mudo">
-          Tempo de convivência com cada tecnologia — sem porcentagens inventadas.
+          Tempo com .NET, React, Next.js, AWS, TypeScript, PostgreSQL, Java, Spring Boot,
+          Cursor e Claude Code — sem porcentagens inventadas.
         </p>
 
         <ul className="mt-8 flex flex-col">
